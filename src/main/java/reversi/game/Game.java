@@ -126,20 +126,21 @@ public class Game {
          * If the move does not reverse any pieces of the opposing color,
          * the move is not legal.
          */
-        if (ReverseHelper.reverseUp(board, turn, x, y) ||
-                ReverseHelper.reverseDown(board, turn, x, y) ||
-                ReverseHelper.reverseLeft(board, turn, x, y) ||
-                ReverseHelper.reverseRight(board, turn, x, y) ||
-                ReverseHelper.reverseDownRight(board, turn, x, y) ||
-                ReverseHelper.reverseUpRight(board, turn, x, y) ||
-                ReverseHelper.reverseDownLeft(board, turn, x, y) ||
-                ReverseHelper.reverseUpLeft(board, turn, x, y) ) {
+        boolean legal = false;
+        if (!ReverseHelper.reverseUp(board, turn, x, y) &&
+                !ReverseHelper.reverseDown(board, turn, x, y) &&
+                !ReverseHelper.reverseLeft(board, turn, x, y) &&
+                !ReverseHelper.reverseRight(board, turn, x, y) &&
+                !ReverseHelper.reverseDownRight(board, turn, x, y) &&
+                !ReverseHelper.reverseUpRight(board, turn, x, y) &&
+                !ReverseHelper.reverseDownLeft(board, turn, x, y) &&
+                !ReverseHelper.reverseUpLeft(board, turn, x, y) ) {
+            return false;
+        } else {
             board.setBoardXY(x, y, turn);
             turnNumber++;
             turn = turn*(-1);
             return true;
-        } else {
-            return false;
         }   
     }
     
