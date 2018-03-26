@@ -13,10 +13,12 @@ public class Game {
     
     private Board board;
     private int turn; //black = 1, white = -1
+    private int turnNumber;
     
     public Game() {
         board = new Board();
         turn = 1;
+        turnNumber = 0;
     }
     
     public void setBoard(Board board) {
@@ -70,7 +72,8 @@ public class Game {
          * If the move does not reverse any pieces of the opposing color,
          * the move is not legal.
          */
-        if (ReverseHelper.reverseUp(board, turn, x, y) ||
+        if (turnNumber < 4 ||
+                ReverseHelper.reverseUp(board, turn, x, y) ||
                 ReverseHelper.reverseDown(board, turn, x, y) ||
                 ReverseHelper.reverseLeft(board, turn, x, y) ||
                 ReverseHelper.reverseRight(board, turn, x, y) ||
@@ -79,6 +82,7 @@ public class Game {
                 ReverseHelper.reverseDownLeft(board, turn, x, y) ||
                 ReverseHelper.reverseUpLeft(board, turn, x, y) ) {
             board.setBoardXY(x, y, turn);
+            turnNumber++;
             turn = turn*(-1);
             return true;
         } else {
