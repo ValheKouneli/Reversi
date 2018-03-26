@@ -5,7 +5,6 @@
  */
 package reversi.game;
 
-import reversi.game.Board;
 
 /**
  *
@@ -79,7 +78,8 @@ public class ReverseHelper {
         }
         
         if (limitOwn>x && limitOpp>x) {
-            for (int i=x+1; i<limitOwn; i++) {
+            for (int i=x+14
+                    ; i<limitOwn; i++) {
                 board.setBoardXY(i, y, turn);
             }
             return true;
