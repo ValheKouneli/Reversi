@@ -14,7 +14,7 @@ import reversi.game.Board;
 public class ReverseHelper {
     
     
-    public ReverseHelper() {}
+    private ReverseHelper() {}
     
     public static boolean reverseUp(Board board, int turn, int x, int y) {
         int limitOpp = x;

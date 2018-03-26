@@ -5,6 +5,10 @@
  */
 package reversi.game;
 
+import java.util.ArrayList;
+import java.util.List;
+import reversi.AI.Point;
+
 /**
  *
  * @author Valhe Kouneli
@@ -29,8 +33,16 @@ public class Game {
         return turn;
     }
     
+    public int getTurnNumber() {
+        return turnNumber;
+    }
+    
     public void setTurn(int turn) {
         this.turn = turn;
+    }
+    
+    public void setTurnNumber(int turnNumber) {
+        this.turnNumber = turnNumber;
     }
     
     /**
@@ -46,6 +58,41 @@ public class Game {
             }
         }
         return score;
+    }
+    
+    public Game getCopy() {
+        Game copy = new Game();
+        Board boardCopy = board.getCopy();
+        copy.setBoard(boardCopy);
+        copy.setTurn(turn);
+        copy.setTurnNumber(turnNumber);
+        return copy;
+    }
+    
+    public List<Point> getAvailableMoves() {
+        List<Point> availableMoves = new ArrayList<>();
+        for (int i=0; i<8; i++) {
+            for (int j=0; j<8; j++) {
+                if (moveIsLegal(getBoardCopy(), turn, i, j)) {
+                    availableMoves.add(new Point(i, j));
+                }
+            }
+        }
+        return availableMoves;
+    }
+    
+    public boolean moveIsLegal(Board board, int turn, int x, int y) {
+        if (board.getBoardXY(x, y) != 0) {
+            return false;
+        }
+        return ReverseHelper.reverseUp(board, turn, x, y) ||
+                ReverseHelper.reverseDown(board, turn, x, y) ||
+                ReverseHelper.reverseLeft(board, turn, x, y) ||
+                ReverseHelper.reverseRight(board, turn, x, y) ||
+                ReverseHelper.reverseDownRight(board, turn, x, y) ||
+                ReverseHelper.reverseUpRight(board, turn, x, y) ||
+                ReverseHelper.reverseDownLeft(board, turn, x, y) ||
+                ReverseHelper.reverseUpLeft(board, turn, x, y);
     }
     
     @Override
@@ -86,11 +133,11 @@ public class Game {
             return true;
         } else {
             return false;
-        }
-        
-        
-        
-        
+        }   
+    }
+    
+    public Board getBoardCopy() {
+        return board.getCopy();
     }
     
  

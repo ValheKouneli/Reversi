@@ -56,5 +56,14 @@ public class Board {
         return string;
     }
     
+    public Board getCopy() {
+        Board copy = new Board();
+        for (int i=0; i<8; i++) {
+            for (int j=0; j<8; j++) {
+                copy.setBoardXY(i, j, board[i][j]);
+            }
+        }
+        return copy;
+    }
     
 }
