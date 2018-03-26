@@ -15,6 +15,10 @@ public class Board {
     
     public Board() {
         board = new int[8][8];
+        board[3][3] = 1;
+        board[4][4] = 1;
+        board[3][4] = -1;
+        board[4][3] = -1;
     }
     
     public int getBoardXY(int x, int y) {

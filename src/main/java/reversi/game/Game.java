@@ -72,8 +72,7 @@ public class Game {
          * If the move does not reverse any pieces of the opposing color,
          * the move is not legal.
          */
-        if (turnNumber < 4 ||
-                ReverseHelper.reverseUp(board, turn, x, y) ||
+        if (ReverseHelper.reverseUp(board, turn, x, y) ||
                 ReverseHelper.reverseDown(board, turn, x, y) ||
                 ReverseHelper.reverseLeft(board, turn, x, y) ||
                 ReverseHelper.reverseRight(board, turn, x, y) ||
