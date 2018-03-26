@@ -20,8 +20,6 @@ public class ReverseHelper {
         int limitOpp = x;
         int limitOwn = x;
         for (int i=x-1; i>=0; i--) {
-            System.out.println("Käydään kohtaa " + i + "," + y + " läpi.");
-            System.out.println("Siellä on: " + board.getBoardXY(i, y));
             if (board.getBoardXY(i, y) == turn*(-1)) {
                 limitOpp = i;
             } else if (board.getBoardXY(i, y) == turn) {

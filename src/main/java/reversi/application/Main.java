@@ -7,6 +7,7 @@ package reversi.application;
 
 import static java.lang.Integer.parseInt;
 import java.util.Scanner;
+import reversi.AI.AI;
 import reversi.game.Game;
 
 /**
@@ -28,6 +29,7 @@ public class Main {
             int x;
             int y;
             do {
+                AI.makeNextMove(game);
                 System.out.println(game.toString());
                 System.out.println("It's " + getPlayer(game.getTurn()) + "'s turn.");
                 String input = null;

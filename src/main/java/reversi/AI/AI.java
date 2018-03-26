@@ -5,11 +5,9 @@
  */
 package reversi.AI;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import reversi.game.Board;
 import reversi.game.Game;
-import reversi.game.ReverseHelper;
 
 /**
  *
@@ -17,13 +15,15 @@ import reversi.game.ReverseHelper;
  */
 public class AI {
     
-    public final int MAX_DEPTH = 5;
+    private AI() {}
     
-    public void makeNextMove(Game game) {
+    public final static int MAX_DEPTH = 3;
+    
+    public static void makeNextMove(Game game) {
         minmax(0, game);
     }
     
-    private int minmax(int depth, Game game) {
+    private static int minmax(int depth, Game game) {
         List<Point> availableMoves = game.getAvailableMoves();
         
         if (game.getTurn() == 8*8 || availableMoves.isEmpty()) {
@@ -81,7 +81,7 @@ public class AI {
         return turn == 1 ? max : min;
     }
 
-    private int evaluateSituation(Game game) {
+    private static int evaluateSituation(Game game) {
         return game.getScore();
     }
     
