@@ -18,6 +18,8 @@ public class Game {
     private Board board;
     private int turn; //black = 1, white = -1
     private int turnNumber;
+    private List<Point> availableMoves;
+    private int lastTurnNumberToAskAvailableMoves;
     
     public Game() {
         board = new Board();
@@ -70,7 +72,11 @@ public class Game {
     }
     
     public List<Point> getAvailableMoves() {
-        List<Point> availableMoves = new ArrayList<>();
+        if (lastTurnNumberToAskAvailableMoves == turnNumber) {
+            return availableMoves;
+        }
+        lastTurnNumberToAskAvailableMoves = turnNumber;
+        availableMoves = new ArrayList<>();
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
                 if (moveIsLegal(getBoardCopy(), turn, i, j)) {
