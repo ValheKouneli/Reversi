@@ -29,6 +29,7 @@ public class Main {
             int x;
             int y;
             do {
+                System.out.println(game.toString());
                 AI.makeNextMove(game);
                 System.out.println(game.toString());
                 System.out.println("It's " + getPlayer(game.getTurn()) + "'s turn.");
