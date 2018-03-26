@@ -25,6 +25,7 @@ public class Game {
         board = new Board();
         turn = 1;
         turnNumber = 0;
+        lastTurnNumberToAskAvailableMoves = 100;
     }
     
     public void setBoard(Board board) {
