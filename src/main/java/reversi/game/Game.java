@@ -81,18 +81,18 @@ public class Game {
         return availableMoves;
     }
     
-    public boolean moveIsLegal(Board board, int turn, int x, int y) {
-        if (board.getBoardXY(x, y) != 0) {
+    public boolean moveIsLegal(Board boardCopy, int turn, int x, int y) {
+        if (boardCopy.getBoardXY(x, y) != 0) {
             return false;
         }
-        return ReverseHelper.reverseUp(board, turn, x, y) ||
-                ReverseHelper.reverseDown(board, turn, x, y) ||
-                ReverseHelper.reverseLeft(board, turn, x, y) ||
-                ReverseHelper.reverseRight(board, turn, x, y) ||
-                ReverseHelper.reverseDownRight(board, turn, x, y) ||
-                ReverseHelper.reverseUpRight(board, turn, x, y) ||
-                ReverseHelper.reverseDownLeft(board, turn, x, y) ||
-                ReverseHelper.reverseUpLeft(board, turn, x, y);
+        return ReverseHelper.reverseUp(boardCopy, turn, x, y) ||
+                ReverseHelper.reverseDown(boardCopy, turn, x, y) ||
+                ReverseHelper.reverseLeft(boardCopy, turn, x, y) ||
+                ReverseHelper.reverseRight(boardCopy, turn, x, y) ||
+                ReverseHelper.reverseDownRight(boardCopy, turn, x, y) ||
+                ReverseHelper.reverseUpRight(boardCopy, turn, x, y) ||
+                ReverseHelper.reverseDownLeft(boardCopy, turn, x, y) ||
+                ReverseHelper.reverseUpLeft(boardCopy, turn, x, y);
     }
     
     @Override

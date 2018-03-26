@@ -35,16 +35,18 @@ public class Main {
                 System.out.println("It's " + getPlayer(game.getTurn()) + "'s turn.");
                 String input = null;
                 do {
-                    System.out.println("Give row.");
-                    input = reader.nextLine();
-                } while (isCoordinate(input));
-                x = parseInt(input);
-                do {
-                    System.out.println("Give column.");
-                    input = reader.nextLine();
-                } while (isCoordinate(input));
-                y = parseInt(input);
-            } while (game.move(x, y));
+                    do {
+                        System.out.println("Give row.");
+                        input = reader.nextLine();
+                    } while (isCoordinate(input));
+                    x = parseInt(input);
+                    do {
+                        System.out.println("Give column.");
+                        input = reader.nextLine();
+                    } while (isCoordinate(input));
+                    y = parseInt(input);
+                } while (game.move(x, y));
+            } while (game.getAvailableMoves().isEmpty());
         }
         
         int score = game.getScore();
