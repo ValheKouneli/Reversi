@@ -1,4 +1,5 @@
 ![travis](https://travis-ci.org/ValheKouneli/Reversi.svg?branch=master)
+[![Code Coverage](https://img.shields.io/codecov/c/github/ValheKouneli/Reversi/master.svg)](https://codecov.io/github/ValheKouneli/Reversi/)
 
 Reversi
 =======
