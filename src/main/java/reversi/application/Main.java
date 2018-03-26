@@ -45,7 +45,7 @@ public class Main {
                         input = reader.nextLine();
                     } while (isCoordinate(input));
                     y = parseInt(input);
-                } while (game.move(x, y));
+                } while (!game.move(x, y));
             } while (game.getAvailableMoves().isEmpty());
         }
         
