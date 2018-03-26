@@ -79,7 +79,7 @@ public class ReverseHelper {
         }
         
         if (limitOwn>x && limitOpp>x) {
-            for (int i=x; i<limitOwn; i++) {
+            for (int i=x+1; i<limitOwn; i++) {
                 board.setBoardXY(i, y, turn);
             }
             return true;
@@ -204,8 +204,8 @@ public class ReverseHelper {
         }
         
         if (limitOwnX>x && limitOppX>x) {
-            i=x;
-            j=y;
+            i=x+1;
+            j=y-1;
             
             while (i<limitOwnX) {
                 board.setBoardXY(i, j, turn);
@@ -239,8 +239,8 @@ public class ReverseHelper {
         }
         
         if (limitOwnX<x && limitOppX<x) {
-            i=x;
-            j=y;
+            i=x-1;
+            j=y+1;
             
             while (i>limitOwnX) {
                 board.setBoardXY(i, j, turn);
