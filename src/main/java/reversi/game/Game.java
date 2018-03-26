@@ -126,7 +126,7 @@ public class Game {
          * If the move does not reverse any pieces of the opposing color,
          * the move is not legal.
          */
-        boolean legal = false;
+        
         if (!ReverseHelper.reverseUp(board, turn, x, y) &&
                 !ReverseHelper.reverseDown(board, turn, x, y) &&
                 !ReverseHelper.reverseLeft(board, turn, x, y) &&
