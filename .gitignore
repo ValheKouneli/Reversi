@@ -1,5 +1,3 @@
-/Reversi/.gradle/
-/Reversi/.nb-gradle/
-/Reversi/build/
-
+.gradle/
+.nb-gradle/
 /build/
