@@ -15,14 +15,51 @@ public class ReverseHelper {
     
     private ReverseHelper() {}
     
+    /**
+     * Goes through pieces on the given board from the given point x,y to the
+     * direction specified by xDiff, yDiff.
+     * @param board
+     * @param turn  who played the piece on (x,y)
+     * @param x
+     * @param y
+     * @param xDiff 1 for down, -1 for up, else 0
+     * @param yDiff 1 for right, -1 for left, else 0
+     * @return 
+     */
     private static boolean generalReverse(Board board, int turn, int x, int y,
             int xDiff, int yDiff) {
         
-        int limitOpp;
+        /*
+        * A coordinate of the furthest to-be-flipped opposing piece
+        * x or y, depending on which coordinate is changing when we go
+        * through the pieces in a certain direction.
+        */
+        int limitOpp; 
+        /*
+        * A coordinate of the own piece that is on the other side of
+        * the to-be-flipped opposing pieces
+        * x or y, depending on which coordinate is changing when we go
+        * through the pieces in a certain direction.
+        */
         int limitOwn;
+        /*
+        * A coordinate of the move just played.
+        * x or y, depending on which coordinate is changing when we go
+        * through the pieces in a certain direction.
+        */
         int orig;
+        /*
+        * A coordinate of the first piece to-be-flipped.
+        * x or y depending on which coordinate is changing when we go
+        * trough the pieces in a certain direction.
+        */
         int iterator;
+        /*
+        * How much the coordinate that changes, changes, when we go through
+        * the pieces in a certain direction. Either -1 or 1.
+        */
         int iteratorDiff;
+        
         if (xDiff != 0) {
             limitOpp = x;
             limitOwn = x;
@@ -37,6 +74,12 @@ public class ReverseHelper {
             iteratorDiff = yDiff;
         }
         
+        /*
+        * Go trough all the places the the direction determined by
+        * xDiff and yDiff until reaching the board's end or finding a piece of
+        * your own color or an empty place. Save the coordinate when finding
+        * opposing pieces or your own piece.
+        */
         int i = x+xDiff;
         int j = y+yDiff;
         
@@ -62,6 +105,11 @@ public class ReverseHelper {
             j+=yDiff;
         }
         
+        /*
+        * When going through the chosen direction, if there were first opposing
+        * pieces and then your own and no empty between, flip the opposing
+        * pieces before your own. Return true. Else, return false.
+        */
         if (limitOpp!=orig && limitOwn!=orig) {
             i = x+xDiff;
             j = y+yDiff;
