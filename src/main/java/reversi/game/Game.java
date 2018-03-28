@@ -80,7 +80,7 @@ public class Game {
         availableMoves = new ArrayList<>();
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
-                if (moveIsLegal(getBoardCopy(), turn, i, j)) {
+                if (moveIsLegal(board, turn, i, j)) {
                     availableMoves.add(new Point(i, j));
                 }
             }
@@ -88,18 +88,18 @@ public class Game {
         return availableMoves;
     }
     
-    public boolean moveIsLegal(Board boardCopy, int turn, int x, int y) {
-        if (boardCopy.getBoardXY(x, y) != 0) {
+    public boolean moveIsLegal(Board board, int turn, int x, int y) {
+        if (board.getBoardXY(x, y) != 0) {
             return false;
         }
-        return ReverseHelper.reverseUp(boardCopy, turn, x, y) ||
-                ReverseHelper.reverseDown(boardCopy, turn, x, y) ||
-                ReverseHelper.reverseLeft(boardCopy, turn, x, y) ||
-                ReverseHelper.reverseRight(boardCopy, turn, x, y) ||
-                ReverseHelper.reverseDownRight(boardCopy, turn, x, y) ||
-                ReverseHelper.reverseUpRight(boardCopy, turn, x, y) ||
-                ReverseHelper.reverseDownLeft(boardCopy, turn, x, y) ||
-                ReverseHelper.reverseUpLeft(boardCopy, turn, x, y);
+        return ReverseHelper.reverseUp(board, turn, x, y, true) ||
+                ReverseHelper.reverseDown(board, turn, x, y, true) ||
+                ReverseHelper.reverseLeft(board, turn, x, y, true) ||
+                ReverseHelper.reverseRight(board, turn, x, y, true) ||
+                ReverseHelper.reverseDownRight(board, turn, x, y, true) ||
+                ReverseHelper.reverseUpRight(board, turn, x, y, true) ||
+                ReverseHelper.reverseDownLeft(board, turn, x, y, true) ||
+                ReverseHelper.reverseUpLeft(board, turn, x, y, true);
     }
     
     @Override
@@ -128,28 +128,28 @@ public class Game {
          */
         
         boolean moveFlips = false;
-        if (ReverseHelper.reverseUp(board, turn, x, y)) {
+        if (ReverseHelper.reverseUp(board, turn, x, y, false)) {
             moveFlips = true;
         }
-        if (ReverseHelper.reverseDown(board, turn, x, y)) {
+        if (ReverseHelper.reverseDown(board, turn, x, y, false)) {
             moveFlips = true;
         }
-        if (ReverseHelper.reverseLeft(board, turn, x, y)) {
+        if (ReverseHelper.reverseLeft(board, turn, x, y, false)) {
             moveFlips = true;
         }
-        if (ReverseHelper.reverseRight(board, turn, x, y)) {
+        if (ReverseHelper.reverseRight(board, turn, x, y, false)) {
             moveFlips = true;
         }
-        if (ReverseHelper.reverseDownRight(board, turn, x, y)) {
+        if (ReverseHelper.reverseDownRight(board, turn, x, y, false)) {
             moveFlips = true;
         }
-        if (ReverseHelper.reverseUpRight(board, turn, x, y)) {
+        if (ReverseHelper.reverseUpRight(board, turn, x, y, false)) {
             moveFlips = true;
         }
-        if (ReverseHelper.reverseDownLeft(board, turn, x, y)) {
+        if (ReverseHelper.reverseDownLeft(board, turn, x, y, false)) {
             moveFlips = true;
         }
-        if (ReverseHelper.reverseUpLeft(board, turn, x, y) ) {
+        if (ReverseHelper.reverseUpLeft(board, turn, x, y, false)) {
             moveFlips = true;
         }
         if (moveFlips) {

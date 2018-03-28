@@ -27,7 +27,7 @@ public class ReverseHelper {
      * @return 
      */
     private static boolean generalReverse(Board board, int turn, int x, int y,
-            int xDiff, int yDiff) {
+            int xDiff, int yDiff, boolean onlyLegalityCheck) {
         
         /*
         * A coordinate of the furthest to-be-flipped opposing piece
@@ -107,10 +107,14 @@ public class ReverseHelper {
         
         /*
         * When going through the chosen direction, if there were first opposing
-        * pieces and then your own and no empty between, flip the opposing
-        * pieces before your own. Return true. Else, return false.
+        * pieces and then your own and no empty between, there were pieces to be
+        * flipped. If onlyLegalityCheck is chosen, return true, else false.
+        * If onlyLegalityCheck is false, flip the pieces and return true.
         */
         if (limitOpp!=orig && limitOwn!=orig) {
+            if (onlyLegalityCheck) {
+                return true;
+            }
             i = x+xDiff;
             j = y+yDiff;
             while (iterator != limitOwn) {
@@ -126,36 +130,44 @@ public class ReverseHelper {
 
     }
     
-    public static boolean reverseUp(Board board, int turn, int x, int y) {
-        return generalReverse(board, turn, x, y, -1, 0);
+    public static boolean reverseUp(Board board, int turn, int x, int y,
+            boolean onlyLegalityCheck) {
+        return generalReverse(board, turn, x, y, -1, 0, onlyLegalityCheck);
     }
     
-    public static boolean reverseLeft(Board board, int turn, int x, int y) {
-        return generalReverse(board, turn, x, y, 0, -1);
+    public static boolean reverseLeft(Board board, int turn, int x, int y,
+            boolean onlyLegalityCheck) {
+        return generalReverse(board, turn, x, y, 0, -1, onlyLegalityCheck);
     }
     
-    public static boolean reverseDown(Board board, int turn, int x, int y) {
-        return generalReverse(board, turn, x, y, 1, 0);
+    public static boolean reverseDown(Board board, int turn, int x, int y,
+            boolean onlyLegalityCheck) {
+        return generalReverse(board, turn, x, y, 1, 0, onlyLegalityCheck);
     }
     
-    public static boolean reverseRight(Board board, int turn, int x, int y) {
-        return generalReverse(board, turn, x, y, 0, 1);
+    public static boolean reverseRight(Board board, int turn, int x, int y,
+            boolean onlyLegalityCheck) {
+        return generalReverse(board, turn, x, y, 0, 1, onlyLegalityCheck);
     }
     
-    public static boolean reverseDownRight(Board board, int turn, int x, int y) {
-        return generalReverse(board, turn, x, y, 1, 1);
+    public static boolean reverseDownRight(Board board, int turn, int x, int y,
+            boolean onlyLegalityCheck) {
+        return generalReverse(board, turn, x, y, 1, 1, onlyLegalityCheck);
     }
     
-    public static boolean reverseUpLeft(Board board, int turn, int x, int y) {
-        return generalReverse(board, turn, x, y, -1, -1);
+    public static boolean reverseUpLeft(Board board, int turn, int x, int y,
+            boolean onlyLegalityCheck) {
+        return generalReverse(board, turn, x, y, -1, -1, onlyLegalityCheck);
     }
     
-    public static boolean reverseDownLeft(Board board, int turn, int x, int y) {
-        return generalReverse(board, turn, x, y, 1, -1);
+    public static boolean reverseDownLeft(Board board, int turn, int x, int y,
+            boolean onlyLegalityCheck) {
+        return generalReverse(board, turn, x, y, 1, -1, onlyLegalityCheck);
     }
     
-    public static boolean reverseUpRight(Board board, int turn, int x, int y) {
-        return generalReverse(board, turn, x, y, -1, 1);
+    public static boolean reverseUpRight(Board board, int turn, int x, int y,
+            boolean onlyLegalityCheck) {
+        return generalReverse(board, turn, x, y, -1, 1, onlyLegalityCheck);
     }
     
 }
