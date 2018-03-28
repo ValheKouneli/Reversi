@@ -171,7 +171,7 @@ public class ReverseHelper {
             i=x-1;
             j=y-1;
             
-            while (i<limitOwnX) {
+            while (i>limitOwnX) {
                 board.setBoardXY(i, j, turn);
                 i--;
                 j--;

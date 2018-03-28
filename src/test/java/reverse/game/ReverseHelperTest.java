@@ -16,17 +16,176 @@ import reversi.game.ReverseHelper;
  */
 public class ReverseHelperTest {
     
-    Board board;
+    Board boardSingleFlips;
+    Board boardDoubleFlips;
+    Board boardComboFlips;
     
     @Before
     public void setUp() {
-        board = new Board();
-        board.setBoardXY(3, 3, 1);
-        board.setBoardXY(4, 3, -1);
+        boardSingleFlips = new Board();
+        boardSingleFlips.setBoardXY(2, 2, -1);
+        boardSingleFlips.setBoardXY(1, 1, 1);
+        boardSingleFlips.setBoardXY(1, 2, 1);
+        boardSingleFlips.setBoardXY(1, 3, 1);
+        boardSingleFlips.setBoardXY(2, 1, 1);
+        boardSingleFlips.setBoardXY(2, 3, 1);
+        boardSingleFlips.setBoardXY(3, 1, 1);
+        boardSingleFlips.setBoardXY(3, 2, 1);
+        boardSingleFlips.setBoardXY(3, 3, 1);
+        
+        boardDoubleFlips = new Board();
+        boardDoubleFlips.setBoardXY(3, 3, -1);
+        boardDoubleFlips.setBoardXY(1, 1, 1);
+        boardDoubleFlips.setBoardXY(1, 3, 1);
+        boardDoubleFlips.setBoardXY(1, 5, 1);
+        boardDoubleFlips.setBoardXY(2, 2, 1);
+        boardDoubleFlips.setBoardXY(2, 3, 1);
+        boardDoubleFlips.setBoardXY(2, 4, 1);
+        boardDoubleFlips.setBoardXY(3, 1, 1);
+        boardDoubleFlips.setBoardXY(3, 2, 1);
+        boardDoubleFlips.setBoardXY(3, 4, 1);
+        boardDoubleFlips.setBoardXY(3, 5, 1);
+        boardDoubleFlips.setBoardXY(4, 2, 1);
+        boardDoubleFlips.setBoardXY(4, 3, 1);
+        boardDoubleFlips.setBoardXY(4, 4, 1);
+        boardDoubleFlips.setBoardXY(5, 1, 1);
+        boardDoubleFlips.setBoardXY(5, 3, 1);
+        boardDoubleFlips.setBoardXY(5, 5, 1);
+        
+        boardComboFlips = new Board();
+        boardComboFlips.setBoardXY(2, 0, -1);
+        boardComboFlips.setBoardXY(2, 2, -1);
+        boardComboFlips.setBoardXY(1, 5, -1);
+        boardComboFlips.setBoardXY(3, 5, -1);
+        boardComboFlips.setBoardXY(4, 3, -1);
+        boardComboFlips.setBoardXY(6, 1, -1);
+        boardComboFlips.setBoardXY(6, 5, -1);
+        boardComboFlips.setBoardXY(1, 0, 1);
+        boardComboFlips.setBoardXY(1, 1, 1);
+        boardComboFlips.setBoardXY(1, 2, 1);
+        boardComboFlips.setBoardXY(1, 4, 1);
+        boardComboFlips.setBoardXY(1, 6, 1);
+        boardComboFlips.setBoardXY(2, 4, 1);
+        boardComboFlips.setBoardXY(2, 6, 1);
+        boardComboFlips.setBoardXY(3, 0, 1);
+        boardComboFlips.setBoardXY(3, 1, 1);
+        boardComboFlips.setBoardXY(3, 2, 1);
+        boardComboFlips.setBoardXY(3, 4, 1);
+        boardComboFlips.setBoardXY(3, 6, 1);
+        boardComboFlips.setBoardXY(5, 3, 1);
+        boardComboFlips.setBoardXY(6, 2, 1);
+        boardComboFlips.setBoardXY(6, 4, 1);  
+    }
+    
+    /**
+     * Testing flipping only one piece.
+     */
+    
+    @Test
+    public void reverseUpOneWorks() {
+        ReverseHelper.reverseUp(boardSingleFlips, -1, 4, 2);
+        assertEquals(-1, boardSingleFlips.getBoardXY(3, 2));
     }
     
     @Test
-    public void reverseUpWorks() {
-        assertEquals(true, ReverseHelper.reverseUp(board, 1, 5, 3));
+    public void reverseDownOneWorks() {
+        ReverseHelper.reverseDown(boardSingleFlips, -1, 0, 2);
+        assertEquals(-1, boardSingleFlips.getBoardXY(1, 2));
+    }
+    
+    @Test
+    public void reverseLeftOneWorks() {
+        ReverseHelper.reverseLeft(boardSingleFlips, -1, 2, 4);
+        assertEquals(-1, boardSingleFlips.getBoardXY(2, 3));
+    }
+    
+    @Test
+    public void reverseRightOneWorks() {
+        ReverseHelper.reverseRight(boardSingleFlips, -1, 2, 0);
+        assertEquals(-1, boardSingleFlips.getBoardXY(2, 1));
+    }
+    
+    @Test
+    public void reverseDownRightOneWorks() {
+        ReverseHelper.reverseDownRight(boardSingleFlips, -1, 0, 0);
+        assertEquals(-1, boardSingleFlips.getBoardXY(1, 1));
+    }
+    
+    @Test
+    public void reverseDownLeftOneWorks() {
+        ReverseHelper.reverseDownLeft(boardSingleFlips, -1, 0, 4);
+        assertEquals(-1, boardSingleFlips.getBoardXY(1, 3));
+    }
+    
+    @Test
+    public void reverseUpRightOneWorks() {
+        ReverseHelper.reverseUpRight(boardSingleFlips, -1, 4, 0);
+        assertEquals(-1, boardSingleFlips.getBoardXY(3, 1));
+    }
+    
+    @Test
+    public void reverseUpLeftOneWorks() {
+        ReverseHelper.reverseUpLeft(boardSingleFlips, -1, 4, 4);
+        assertEquals(-1, boardSingleFlips.getBoardXY(3, 3));
+    }
+    
+    /**
+     * Testing flipping two pieces at once.
+     */
+    
+    @Test
+    public void reverseUpTwoWorks() {
+        ReverseHelper.reverseUp(boardDoubleFlips, -1, 6, 3);
+        assertEquals(-1, boardDoubleFlips.getBoardXY(5, 3));
+        assertEquals(-1, boardDoubleFlips.getBoardXY(4, 3));
+    }
+    
+    @Test
+    public void reverseDownTwoWorks() {
+        ReverseHelper.reverseDown(boardDoubleFlips, -1, 0, 3);
+        assertEquals(-1, boardDoubleFlips.getBoardXY(1, 3));
+        assertEquals(-1, boardDoubleFlips.getBoardXY(2, 3));
+    }
+    
+    @Test
+    public void reverseLeftTwoWorks() {
+        ReverseHelper.reverseLeft(boardDoubleFlips, -1, 3, 6);
+        assertEquals(-1, boardDoubleFlips.getBoardXY(3, 5));
+        assertEquals(-1, boardDoubleFlips.getBoardXY(3, 4));
+    }
+    
+    @Test
+    public void reverseRightTwoWorks() {
+        ReverseHelper.reverseRight(boardDoubleFlips, -1, 3, 0);
+        assertEquals(-1, boardDoubleFlips.getBoardXY(3, 1));
+        assertEquals(-1, boardDoubleFlips.getBoardXY(3, 2));
+    }
+    
+    @Test
+    public void reverseUpRightTwoWorks() {
+        ReverseHelper.reverseUpRight(boardDoubleFlips, -1, 6, 0);
+        assertEquals(-1, boardDoubleFlips.getBoardXY(5, 1));
+        assertEquals(-1, boardDoubleFlips.getBoardXY(4, 2));
+    }
+    
+    @Test
+    public void reverseUpLeftTwoWorks() {
+        ReverseHelper.reverseUpLeft(boardDoubleFlips, -1, 6, 6);
+        assertEquals(-1, boardDoubleFlips.getBoardXY(5, 5));
+        assertEquals(-1, boardDoubleFlips.getBoardXY(4, 4));
+    }
+    
+    @Test
+    public void reverseDownRightTwoWorks() {
+        ReverseHelper.reverseDownRight(boardDoubleFlips, -1, 0, 0);
+        assertEquals(-1, boardDoubleFlips.getBoardXY(1, 1));
+        assertEquals(-1, boardDoubleFlips.getBoardXY(2, 2));
+    }
+    
+    @Test
+    public void reverseDownLeftTwoWorks() {
+        ReverseHelper.reverseDownLeft(boardDoubleFlips, -1, 0, 6);
+        assertEquals(-1, boardDoubleFlips.getBoardXY(1, 5));
+        assertEquals(-1, boardDoubleFlips.getBoardXY(2, 4));
     }
 }
