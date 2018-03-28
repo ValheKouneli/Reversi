@@ -127,20 +127,38 @@ public class Game {
          * the move is not legal.
          */
         
-        if (!ReverseHelper.reverseUp(board, turn, x, y) &&
-                !ReverseHelper.reverseDown(board, turn, x, y) &&
-                !ReverseHelper.reverseLeft(board, turn, x, y) &&
-                !ReverseHelper.reverseRight(board, turn, x, y) &&
-                !ReverseHelper.reverseDownRight(board, turn, x, y) &&
-                !ReverseHelper.reverseUpRight(board, turn, x, y) &&
-                !ReverseHelper.reverseDownLeft(board, turn, x, y) &&
-                !ReverseHelper.reverseUpLeft(board, turn, x, y) ) {
-            return false;
-        } else {
+        boolean moveFlips = false;
+        if (ReverseHelper.reverseUp(board, turn, x, y)) {
+            moveFlips = true;
+        }
+        if (ReverseHelper.reverseDown(board, turn, x, y)) {
+            moveFlips = true;
+        }
+        if (ReverseHelper.reverseLeft(board, turn, x, y)) {
+            moveFlips = true;
+        }
+        if (ReverseHelper.reverseRight(board, turn, x, y)) {
+            moveFlips = true;
+        }
+        if (ReverseHelper.reverseDownRight(board, turn, x, y)) {
+            moveFlips = true;
+        }
+        if (ReverseHelper.reverseUpRight(board, turn, x, y)) {
+            moveFlips = true;
+        }
+        if (ReverseHelper.reverseDownLeft(board, turn, x, y)) {
+            moveFlips = true;
+        }
+        if (ReverseHelper.reverseUpLeft(board, turn, x, y) ) {
+            moveFlips = true;
+        }
+        if (moveFlips) {
             board.setBoardXY(x, y, turn);
             turnNumber++;
             turn = turn*(-1);
             return true;
+        } else {
+            return false;
         }   
     }
     

@@ -103,7 +103,7 @@ public class ReverseHelper {
         }
         
         if (limitOwn>y && limitOpp>y) {
-            for (int j=y; j<limitOwn; j++) {
+            for (int j=y+1; j<limitOwn; j++) {
                 board.setBoardXY(x, j, turn);
             }
             return true;

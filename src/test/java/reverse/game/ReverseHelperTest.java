@@ -19,6 +19,7 @@ public class ReverseHelperTest {
     Board boardSingleFlips;
     Board boardDoubleFlips;
     Board boardComboFlips;
+    Game gameComboFlips;
     
     @Before
     public void setUp() {
@@ -75,6 +76,10 @@ public class ReverseHelperTest {
         boardComboFlips.setBoardXY(5, 3, 1);
         boardComboFlips.setBoardXY(6, 2, 1);
         boardComboFlips.setBoardXY(6, 4, 1);  
+        
+        gameComboFlips = new Game();
+        gameComboFlips.setTurn(-1);
+        gameComboFlips.setBoard(boardComboFlips);
     }
     
     /**
@@ -187,5 +192,24 @@ public class ReverseHelperTest {
         ReverseHelper.reverseDownLeft(boardDoubleFlips, -1, 0, 6);
         assertEquals(-1, boardDoubleFlips.getBoardXY(1, 5));
         assertEquals(-1, boardDoubleFlips.getBoardXY(2, 4));
+    }
+    
+    /**
+     * Testing flipping pieces to multiple directions at once.
+     * TODO: Move this to GameTest ??
+     */
+    
+    @Test
+    public void reverseDownAndDownRightWorks() {
+        gameComboFlips.move(0, 0);
+        assertEquals(-1, boardComboFlips.getBoardXY(1, 0));
+        //assertEquals(-1, boardComboFlips.getBoardXY(1, 1));
+    }
+    
+    @Test
+    public void reverseDownAndDownLeftWorks() {
+        gameComboFlips.move(0, 2);
+        assertEquals(-1, boardComboFlips.getBoardXY(1, 2));
+       //assertEquals(-1, boardComboFlips.getBoardXY(1, 1));
     }
 }
