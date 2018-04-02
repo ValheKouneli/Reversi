@@ -5,6 +5,7 @@
  */
 package reverse.game;
 
+import java.io.IOException;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,8 +26,24 @@ public class BoardTest {
     
     @Test
     public void setBoardWorks() {
-        board.setBoardXY(3, 3, -1);
-        assertEquals(-1, board.getBoardXY(3, 3));
+        board.setBoard("   0 1 2 3 4 5 6 7 \n" +
+                       "0 | | | | | | | | |\n" +
+                       "1 | | | | | | | | |\n" +
+                       "2 | | |●| |○| | | |\n" +
+                       "3 |○| |●|○|○| | | |\n" +
+                       "4 | |○|●|○|○|○|○| |\n" +
+                       "5 |○| |●| | | | | |\n" +
+                       "6 |○|○|●|●| | | | |\n" +
+                       "7 |○| |○| | | | | |\n");
+        assertEquals("   0 1 2 3 4 5 6 7 \n" +
+                     "0 | | | | | | | | |\n" +
+                     "1 | | | | | | | | |\n" +
+                     "2 | | |●| |○| | | |\n" +
+                     "3 |○| |●|○|○| | | |\n" +
+                     "4 | |○|●|○|○|○|○| |\n" +
+                     "5 |○| |●| | | | | |\n" +
+                     "6 |○|○|●|●| | | | |\n" +
+                     "7 |○| |○| | | | | |\n", board.toString());
     }
     
 }

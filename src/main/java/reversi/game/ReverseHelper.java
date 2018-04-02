@@ -16,14 +16,17 @@ public class ReverseHelper {
     private ReverseHelper() {}
     
     /**
-     * Goes through pieces on the given board from the given point x,y to the
-     * direction specified by xDiff, yDiff.
-     * @param board
+     * Checks if there are Reversi pieces to be flipped the specified board
+     * in the direction specified by xDiff, yDiff. If onlyLegalityCheck is
+     * true, does not flip them, but return if some were found or not. If
+     * onlyLegalityCheck is false, also flips them.
+     * @param board board of interest
      * @param turn  who played the piece on (x,y)
-     * @param x
-     * @param y
+     * @param x x coordinate of the latest move
+     * @param y y coordinate of the latest move
      * @param xDiff 1 for down, -1 for up, else 0
      * @param yDiff 1 for right, -1 for left, else 0
+     * @param onlyLegalityCheck if true, do not change board
      * @return 
      */
     private static boolean generalReverse(Board board, int turn, int x, int y,

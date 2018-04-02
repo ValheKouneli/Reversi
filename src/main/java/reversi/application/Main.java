@@ -22,35 +22,42 @@ public class Main {
     public static void main(String[] args) {
         
         Game game = new Game();
-        int moveNumber = 0;
+ 
         Scanner reader = new Scanner(System.in);
         
-        while (moveNumber<8*8) {
-            int x;
-            int y;
-            do {
-                System.out.println(game.toString());
+
+        do {
+            System.out.println(game.toString());
+            System.out.println("It's " + getPlayer(game.getTurn()) + "'s turn.");
+            if (game.getTurn() == 1) {
                 AI.makeNextMove(game);
-                System.out.println(game.toString());
-                System.out.println("It's " + getPlayer(game.getTurn()) + "'s turn.");
-                String input = null;
-                do {
-                    do {
-                        System.out.println("Give row.");
-                        input = reader.nextLine();
-                    } while (isCoordinate(input));
-                    x = parseInt(input);
-                    do {
-                        System.out.println("Give column.");
-                        input = reader.nextLine();
-                    } while (isCoordinate(input));
-                    y = parseInt(input);
-                } while (!game.move(x, y));
-            } while (game.getAvailableMoves().isEmpty());
-        }
+            } else {
+                AI.makeNextMove(game);
+            }
+        } while (!game.getAvailableMoves().isEmpty());
+        
         
         int score = game.getScore();
         System.out.println("Winner is " + getPlayer(score) + " with " + score + " points.");
+    }
+    
+    private static void humanGetMove(Game game, Scanner reader) {
+        String input = null;
+        int x;
+        int y;
+        
+        do {
+            do {
+                System.out.println("Give row.");
+                input = reader.nextLine();
+            } while (isCoordinate(input));
+            x = parseInt(input);
+            do {
+                System.out.println("Give column.");
+                input = reader.nextLine();
+            } while (isCoordinate(input));
+            y = parseInt(input);
+        } while (!game.move(x, y));
     }
     
     private static String getPlayer(int i) {
