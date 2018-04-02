@@ -24,7 +24,7 @@ public class GameTest {
     }
     
     @Test
-    public void availableMovesWorks() {
+    public void availableMovesWorks1() {
         Board board = new Board();
         board.setBoard("   0 1 2 3 4 5 6 7 \n" +
                        "0 | | | | | | | | |\n" +
@@ -38,6 +38,11 @@ public class GameTest {
         game.setBoard(board);
         game.setTurn(1);
         assertEquals(9, game.getAvailableMoves().size());
+    }
+    
+    @Test
+    public void availableMovesWorks2() {
+        assertEquals(4, game.getAvailableMoves().size());
     }
    
     

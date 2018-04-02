@@ -48,6 +48,14 @@ public class Game {
         this.turnNumber = turnNumber;
     }
     
+    public void setLastTurnNumberToAskAvailableMoves(int turnNumber) {
+        this.lastTurnNumberToAskAvailableMoves = turnNumber;
+    }
+    
+    public int getLastTurnNumberToAskAvailableMoves() {
+        return this.lastTurnNumberToAskAvailableMoves;
+    }
+    
     /**
      * Returns a negative number if black is winning
      * and positive if white is winning.

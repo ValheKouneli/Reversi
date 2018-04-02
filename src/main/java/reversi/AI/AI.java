@@ -15,15 +15,22 @@ import reversi.game.Game;
  */
 public class AI {
     
+    private static Point move;
+    
     private AI() {}
     
     public final static int MAX_DEPTH = 3;
     
-    public static void makeNextMove(Game game) {
+    public static Point makeNextMove(Game game) {
+        move = null;
         minmax(0, game);
+        return move;
     }
     
     private static int minmax(int depth, Game game) {
+        if (move != null) {
+            System.out.println("pointX: " + move.getX());
+        }
         List<Point> availableMoves = game.getAvailableMoves();
         
         if (game.getTurn() == 8*8 || availableMoves.isEmpty()) {
@@ -75,7 +82,7 @@ public class AI {
         }
         
         if (depth == 0) {
-            game.move(computerMove.getX(), computerMove.getY());
+            move = computerMove;
         }
         
         return turn == 1 ? max : min;
