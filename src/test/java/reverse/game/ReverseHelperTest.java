@@ -24,58 +24,37 @@ public class ReverseHelperTest {
     @Before
     public void setUp() {
         boardSingleFlips = new Board();
-        boardSingleFlips.setBoardXY(2, 2, -1);
-        boardSingleFlips.setBoardXY(1, 1, 1);
-        boardSingleFlips.setBoardXY(1, 2, 1);
-        boardSingleFlips.setBoardXY(1, 3, 1);
-        boardSingleFlips.setBoardXY(2, 1, 1);
-        boardSingleFlips.setBoardXY(2, 3, 1);
-        boardSingleFlips.setBoardXY(3, 1, 1);
-        boardSingleFlips.setBoardXY(3, 2, 1);
-        boardSingleFlips.setBoardXY(3, 3, 1);
+        boardSingleFlips.setBoard("   0 1 2 3 4 5 6 7 \n" +
+                                  "0 | | | | | | | | |\n" +
+                                  "1 | |○|○|○| | | | |\n" +
+                                  "2 | |○|●|○| | | | |\n" +
+                                  "3 | |○|○|○| | | | |\n" +
+                                  "4 | | | | | | | | |\n" +
+                                  "5 | | | | | | | | |\n" +
+                                  "6 | | | | | | | | |\n" +
+                                  "7 | | | | | | | | |\n");
         
         boardDoubleFlips = new Board();
-        boardDoubleFlips.setBoardXY(3, 3, -1);
-        boardDoubleFlips.setBoardXY(1, 1, 1);
-        boardDoubleFlips.setBoardXY(1, 3, 1);
-        boardDoubleFlips.setBoardXY(1, 5, 1);
-        boardDoubleFlips.setBoardXY(2, 2, 1);
-        boardDoubleFlips.setBoardXY(2, 3, 1);
-        boardDoubleFlips.setBoardXY(2, 4, 1);
-        boardDoubleFlips.setBoardXY(3, 1, 1);
-        boardDoubleFlips.setBoardXY(3, 2, 1);
-        boardDoubleFlips.setBoardXY(3, 4, 1);
-        boardDoubleFlips.setBoardXY(3, 5, 1);
-        boardDoubleFlips.setBoardXY(4, 2, 1);
-        boardDoubleFlips.setBoardXY(4, 3, 1);
-        boardDoubleFlips.setBoardXY(4, 4, 1);
-        boardDoubleFlips.setBoardXY(5, 1, 1);
-        boardDoubleFlips.setBoardXY(5, 3, 1);
-        boardDoubleFlips.setBoardXY(5, 5, 1);
+        boardDoubleFlips.setBoard("   0 1 2 3 4 5 6 7 \n" +
+                                  "0 | | | | | | | | |\n" +
+                                  "1 | |○| |○| |○| | |\n" +
+                                  "2 | | |○|○|○| | | |\n" +
+                                  "3 | |○|○|●|○|○| | |\n" +
+                                  "4 | | |○|○|○| | | |\n" +
+                                  "5 | |○| |○| |○| | |\n" +
+                                  "6 | | | | | | | | |\n" +
+                                  "7 | | | | | | | | |\n");
         
         boardComboFlips = new Board();
-        boardComboFlips.setBoardXY(2, 0, -1);
-        boardComboFlips.setBoardXY(2, 2, -1);
-        boardComboFlips.setBoardXY(1, 5, -1);
-        boardComboFlips.setBoardXY(3, 5, -1);
-        boardComboFlips.setBoardXY(4, 3, -1);
-        boardComboFlips.setBoardXY(6, 1, -1);
-        boardComboFlips.setBoardXY(6, 5, -1);
-        boardComboFlips.setBoardXY(1, 0, 1);
-        boardComboFlips.setBoardXY(1, 1, 1);
-        boardComboFlips.setBoardXY(1, 2, 1);
-        boardComboFlips.setBoardXY(1, 4, 1);
-        boardComboFlips.setBoardXY(1, 6, 1);
-        boardComboFlips.setBoardXY(2, 4, 1);
-        boardComboFlips.setBoardXY(2, 6, 1);
-        boardComboFlips.setBoardXY(3, 0, 1);
-        boardComboFlips.setBoardXY(3, 1, 1);
-        boardComboFlips.setBoardXY(3, 2, 1);
-        boardComboFlips.setBoardXY(3, 4, 1);
-        boardComboFlips.setBoardXY(3, 6, 1);
-        boardComboFlips.setBoardXY(5, 3, 1);
-        boardComboFlips.setBoardXY(6, 2, 1);
-        boardComboFlips.setBoardXY(6, 4, 1);  
+        boardComboFlips.setBoard("   0 1 2 3 4 5 6 7 \n" +
+                                  "0 | | | | | | | | |\n" +
+                                  "1 |○|○|○| |○|●|○| |\n" +
+                                  "2 |●| |●| |○| |○| |\n" +
+                                  "3 |○|○|○| |○|●|○| |\n" +
+                                  "4 | | | |●| | | | |\n" +
+                                  "5 | | | |○| | | | |\n" +
+                                  "6 | |●|○| |○|●| | |\n" +
+                                  "7 | | | | | | | | |\n"); 
         
         gameComboFlips = new Game();
         gameComboFlips.setTurn(-1);
