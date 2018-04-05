@@ -3,13 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reverse.game;
+package reversi.game;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import reversi.game.Board;
-import reversi.game.Game;
-import reversi.game.ReverseHelper;
 /**
  *
  * @author Valhe Kouneli
