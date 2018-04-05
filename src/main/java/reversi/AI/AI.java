@@ -19,7 +19,7 @@ public class AI {
     
     private AI() {}
     
-    public final static int MAX_DEPTH = 5;
+    public final static int MAX_DEPTH = 7;
     
     public static Point makeNextMove(Game game) {
         move = null;
