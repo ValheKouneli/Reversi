@@ -6,8 +6,8 @@
 package reversi.AI;
 
 
-import java.util.List;
 import reversi.game.Game;
+import reversi.data_structures.List;
 
 /**
  *
@@ -56,7 +56,7 @@ public class AI {
         //minmaxilta rekursiivisesti ja ota niistä maksimi, jos vuoro on 1
         //tai minimi, jos vuoro on -1
         for (int i=0; i<availableMoves.size(); i++) {
-            Point point = availableMoves.get(i);
+            Point point = availableMoves.next();
             gameCopy = game.getCopy();
             gameCopy.move(point.getX(), point.getY());
             int value = minmax(depth+1, gameCopy);

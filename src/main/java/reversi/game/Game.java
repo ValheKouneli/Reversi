@@ -5,9 +5,8 @@
  */
 package reversi.game;
 
-import java.util.ArrayList;
-import java.util.List;
 import reversi.AI.Point;
+import reversi.data_structures.List;
 
 /**
  *
@@ -85,7 +84,7 @@ public class Game {
             return availableMoves;
         }
         lastTurnNumberToAskAvailableMoves = turnNumber;
-        availableMoves = new ArrayList<>();
+        availableMoves = new List<>();
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
                 if (moveIsLegal(board, turn, i, j)) {
