@@ -18,3 +18,9 @@ Made tests. Fixed bugs.
 Fixed bugs. Made minor changes. Made tests.
 
 **Time spent: 3h**
+
+## Thursday
+
+Made my own List class and tests for it. Made my older code use it.
+
+**Time spent: 1h**
