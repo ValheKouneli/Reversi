@@ -5,6 +5,7 @@
  */
 package reversi.data_structures;
 
+
 /**
  *
  * @author Valhe Kouneli
@@ -51,5 +52,7 @@ public class List<E> {
     public boolean isEmpty() {
         return size == 0;
     }
+
+  
     
 }

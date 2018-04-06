@@ -29,9 +29,9 @@ public class AI {
     }
     
     private static int minmax(int depth, Game game) {
-        if (move != null) {
-            System.out.println("pointX: " + move.getX());
-        }
+//        if (move != null) {
+//            System.out.println("pointX: " + move.getX());
+//        }
         List<Pair> availableMoves = game.getAvailableMoves();
         
         if (game.getTurn() == 8*8 || availableMoves.isEmpty()) {
