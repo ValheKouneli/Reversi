@@ -4,7 +4,7 @@
 Reversi
 =======
 
-Command line Java application that let's you play the game of Reversi (also known as Othello) against computer.
+Command line Java application, Reversi AI.
 
 ## Current known bugs (6.4.2018)
 
@@ -12,7 +12,7 @@ Command line Java application that let's you play the game of Reversi (also know
 
 ## TODO (at least)
 
-* Refactor minmax (in progress).
 * UI
 * More unit tests
 * Better heuristic for analyzing the current board situation
+* Even more refactoring??
