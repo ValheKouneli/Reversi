@@ -24,3 +24,9 @@ Fixed bugs. Made minor changes. Made tests.
 Made my own List class and tests for it. Made my older code use it.
 
 **Time spent: 1h**
+
+## Friday
+
+Refactoring. Made some improvements as per teacher's suggestions: BoardFactory and better List structure.
+
+**Time spent: 4h**
