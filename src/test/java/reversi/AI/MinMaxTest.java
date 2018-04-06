@@ -16,6 +16,14 @@ import reversi.data_structures.List;
  */
 public class MinMaxTest {
     
+    /**
+     * This implementation of Game is created for test purposes.
+     * Nim is a game for two players.
+     * There is a heap of tokens.
+     * Players take turns removing 1-3 tokens from the heap.
+     * The player who is forced to take the last token loses.
+     * The other player wins.
+     */
     public class Nim implements Game <Integer> {
         private int heap;
         private int turn;
