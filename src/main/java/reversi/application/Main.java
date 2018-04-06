@@ -9,7 +9,7 @@ import static java.lang.Integer.parseInt;
 import java.util.Scanner;
 import reversi.AI.AI;
 import reversi.data_structures.Pair;
-import reversi.game.Game;
+import reversi.game.Reversi;
 
 /**
  *
@@ -23,7 +23,7 @@ public class Main {
     public static void main(String[] args) {
         
 
-        Game game = new Game();
+        Reversi game = new Reversi();
  
         Scanner reader = new Scanner(System.in);
         int i = 0;
@@ -51,7 +51,7 @@ public class Main {
         System.out.println("Winner is " + getPlayer(score) + " with " + score + " points.");
     }
     
-    private static void humanGetMove(Game game, Scanner reader) {
+    private static void humanGetMove(Reversi game, Scanner reader) {
         String input = null;
         int x;
         int y;

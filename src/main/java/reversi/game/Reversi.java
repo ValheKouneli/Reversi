@@ -12,7 +12,7 @@ import reversi.data_structures.List;
  *
  * @author Valhe Kouneli
  */
-public class Game {
+public class Reversi {
     
  
     
@@ -22,7 +22,7 @@ public class Game {
     private List<Pair> availableMoves;
     private int lastTurnNumberToAskAvailableMoves;
     
-    public Game() {
+    public Reversi() {
         board = new Board();
         turn = 1;
         turnNumber = 0;
@@ -74,8 +74,8 @@ public class Game {
         return score;
     }
     
-    public Game getCopy() {
-        Game copy = new Game();
+    public Reversi getCopy() {
+        Reversi copy = new Reversi();
         Board boardCopy = board.getCopy();
         copy.setBoard(boardCopy);
         copy.setTurn(turn);

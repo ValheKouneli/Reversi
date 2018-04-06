@@ -8,7 +8,7 @@ package reversi.AI;
 import reversi.data_structures.List;
 import reversi.data_structures.Pair;
 import reversi.data_structures.MoveAndValue;
-import reversi.game.Game;
+import reversi.game.Reversi;
 
 /**
  *
@@ -20,7 +20,7 @@ public class MinMax {
     
    
     public int minmax(Game game, int depth, int max_depth) {
-        List<Pair> moves = game.getAvailableMoves();
+        List<Pair> moves = game.getMoves();
 
         
         if (moves.isEmpty()) {
@@ -33,7 +33,7 @@ public class MinMax {
                 findBestMove(game, moves, depth, game.getTurn(), max_depth);
         
         if (depth == 0) {
-            game.move(bestMoveAndValue.getX(), bestMoveAndValue.getY());
+            game.move(bestMoveAndValue.getMove());
         }
         return bestMoveAndValue.getValue();
     }
@@ -62,7 +62,7 @@ public class MinMax {
         for (int i=0; i<moves.size(); i++) {
             /* copy game and play on copy */
             Game gameCopy = game.getCopy();
-            gameCopy.move(moves.get(i).getX(), moves.get(i).getY());
+            gameCopy.move(moves.get(i));
             
             /* recursion ! */
             int value = minmax(game, depth+1, max_depth);
@@ -81,9 +81,9 @@ public class MinMax {
     }
     
     private int scoreFinal(Game game) {
-        if (game.getScore() > 0) {
+        if (((Reversi)game).getScore() > 0) {
             return Integer.MAX_VALUE;
-        } else if (game.getScore() < 0) {
+        } else if (((Reversi)game).getScore() < 0) {
             return Integer.MIN_VALUE;
         } else {
             return 0;
@@ -92,7 +92,7 @@ public class MinMax {
     
     private int evaluateSituation(Game game) {
         //should never return Integer.MIN_VALUE or Integer.MAX_VALUE
-        return game.getScore();
+        return ((Reversi)game).getScore();
     }
     
 }

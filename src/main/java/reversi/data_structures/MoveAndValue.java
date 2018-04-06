@@ -27,12 +27,8 @@ public class MoveAndValue {
         this.move = move;
     }
     
-    public int getX() {
-        return move.getX();
-    }
-    
-    public int getY() {
-        return move.getY();
+    public Pair getMove() {
+        return move;
     }
     
     public int getValue() {
