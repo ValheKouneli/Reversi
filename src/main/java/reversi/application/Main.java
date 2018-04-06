@@ -44,7 +44,7 @@ public class Main {
                 break;
             }
             i++;
-        } while (!game.getAvailableMoves().isEmpty());
+        } while (!game.getMoves().isEmpty());
         
         System.out.println(game.toString());
         int score = game.getScore();

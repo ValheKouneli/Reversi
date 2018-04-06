@@ -34,12 +34,12 @@ public class ReversiTest {
                        "7 |○| |○| | | | | |\n");
         game.setBoard(board);
         game.setTurn(1);
-        assertEquals(9, game.getAvailableMoves().size());
+        assertEquals(9, game.getMoves().size());
     }
     
     @Test
     public void availableMovesWorks2() {
-        assertEquals(4, game.getAvailableMoves().size());
+        assertEquals(4, game.getMoves().size());
     }
     
 

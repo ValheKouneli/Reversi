@@ -19,5 +19,6 @@ public interface Game <MoveType> {
     public List<MoveType> getMoves();
     public int getTurn();
     public Game getCopy();
+    public boolean gameIsOver();
     
 }

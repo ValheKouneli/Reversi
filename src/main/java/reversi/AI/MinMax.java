@@ -6,9 +6,7 @@
 package reversi.AI;
 
 import reversi.data_structures.List;
-import reversi.data_structures.Pair;
-import reversi.data_structures.MoveAndValue;
-import reversi.game.Reversi;
+
 
 /**
  *
@@ -16,83 +14,38 @@ import reversi.game.Reversi;
  */
 public class MinMax {
     
+    private Evaluator eval;
     private MinMax() {}
     
    
-    public int minmax(Game game, int depth, int max_depth) {
-        List<Pair> moves = game.getMoves();
+    public static int minmax(Game game, int depth, int max_depth) {
+        List<Object> moves = game.getMoves();
 
         
-        if (moves.isEmpty()) {
-            return scoreFinal(game);
-        } else if (depth == max_depth) {
-            return evaluateSituation(game);
-        }
-
-        MoveAndValue bestMoveAndValue =
-                findBestMove(game, moves, depth, game.getTurn(), max_depth);
-        
-        if (depth == 0) {
-            game.move(bestMoveAndValue.getMove());
-        }
-        return bestMoveAndValue.getValue();
-    }
-    
-    /**
-     * Go through given moves and return the best move with its value.
-     * @param game game in question
-     * @param moves moves to choose from
-     * @param depth how deep we are in the search tree
-     * @param turn whose turn it is
-     * @param max_depth how many moves deep we should count
-     * @return best move and its value
-     */
-    private MoveAndValue findBestMove(Game game, List<Pair> moves,
-            int depth, int turn, int max_depth) {
-        //go through all possible moves and
-        //and find out which move brings the best result
-       
-        /* save best move here */
-        MoveAndValue bestMoveAndValue = new MoveAndValue(null, 0);
-        
-        int bestScoreSoFar =
-                (turn == 1 ? Integer.MIN_VALUE : Integer.MAX_VALUE);
-        
-        /* go through moves */
-        for (int i=0; i<moves.size(); i++) {
-            /* copy game and play on copy */
-            Game gameCopy = game.getCopy();
-            gameCopy.move(moves.get(i));
-            
-            /* recursion ! */
-            int value = minmax(game, depth+1, max_depth);
-            
-            boolean betterValueFound =
-                (turn == 1 ? value > bestScoreSoFar : value < bestScoreSoFar);
-            
-            if (betterValueFound) {
-                bestScoreSoFar = value;
-                    bestMoveAndValue.setMove(moves.get(i));
-                    bestMoveAndValue.setValue(value);
-            }
-        }
-        
-        return bestMoveAndValue;
-    }
-    
-    private int scoreFinal(Game game) {
-        if (((Reversi)game).getScore() > 0) {
-            return Integer.MAX_VALUE;
-        } else if (((Reversi)game).getScore() < 0) {
-            return Integer.MIN_VALUE;
+        if (game.gameIsOver()) {
+            return (game.winner() == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE);
         } else {
-            return 0;
+            int bestSoFar =
+                    (game.getTurn() == 1 ? Integer.MIN_VALUE : Integer.MAX_VALUE);
+            Object bestMoveSoFar = null;
+            for (int i=0; i<moves.size(); i++) {
+                Game copy = game.getCopy();
+                copy.move(moves.get(i));
+                int value = minmax(copy, depth+1, max_depth);
+                if (game.getTurn() == 1 ? value>bestSoFar : value<bestSoFar) {
+                    bestSoFar = value;
+                    bestMoveSoFar = moves.get(i);
+                }
+            }
+            if (depth==0) {
+                if (bestMoveSoFar == null) {
+                    bestMoveSoFar = moves.get(0);
+                }
+                game.move(bestMoveSoFar);
+            }
+            return bestSoFar;
         }
     }
     
-    private int evaluateSituation(Game game) {
-        //should never return Integer.MIN_VALUE or Integer.MAX_VALUE
-        return ((Reversi)game).getScore();
-    }
     
 }

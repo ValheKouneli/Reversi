@@ -74,6 +74,20 @@ public class Reversi {
         return score;
     }
     
+    public int getWinner() {
+        if (getScore() > 0) {
+            return 1;
+        } else if (getScore() < 0 ){
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+    
+    public boolean gameIsOver() {
+        return getMoves().isEmpty();
+    }
+    
     public Reversi getCopy() {
         Reversi copy = new Reversi();
         ReversiBoard boardCopy = board.getCopy();
@@ -83,7 +97,7 @@ public class Reversi {
         return copy;
     }
     
-    public List<Pair> getAvailableMoves() {
+    public List<Pair> getMoves() {
         if (lastTurnNumberToAskAvailableMoves == turnNumber) {
             return availableMoves;
         }

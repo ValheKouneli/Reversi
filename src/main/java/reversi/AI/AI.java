@@ -32,7 +32,7 @@ public class AI {
 //        if (move != null) {
 //            System.out.println("pointX: " + move.getX());
 //        }
-        List<Pair> availableMoves = game.getAvailableMoves();
+        List<Pair> availableMoves = game.getMoves();
         
         if (game.getTurn() == 8*8 || availableMoves.isEmpty()) {
             if (game.getScore() > 0) {
