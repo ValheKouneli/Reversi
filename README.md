@@ -6,11 +6,11 @@ Reversi
 
 Command line Java application that let's you play the game of Reversi (also known as Othello) against computer.
 
-##Current known bugs (27.3.2018)
+## Current known bugs (27.3.2018)
 
 * At least AI can somehow play on top of another piece at least in some situations?!?!
 
-##TODO
+## TODO
 
 * Make lots and lots of unit tests especially for ReversiHelper
 * Make ReversiHelper methods all use one general reverse method
