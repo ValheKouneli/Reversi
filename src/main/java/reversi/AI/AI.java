@@ -6,6 +6,7 @@
 package reversi.AI;
 
 
+import reversi.data_structures.Pair;
 import reversi.game.Game;
 import reversi.data_structures.List;
 
@@ -15,13 +16,13 @@ import reversi.data_structures.List;
  */
 public class AI {
     
-    private static Point move;
+    private static Pair move;
     
     private AI() {}
     
     public final static int MAX_DEPTH = 7;
     
-    public static Point makeNextMove(Game game) {
+    public static Pair makeNextMove(Game game) {
         move = null;
         minmax(0, game);
         return move;
@@ -31,7 +32,7 @@ public class AI {
         if (move != null) {
             System.out.println("pointX: " + move.getX());
         }
-        List<Point> availableMoves = game.getAvailableMoves();
+        List<Pair> availableMoves = game.getAvailableMoves();
         
         if (game.getTurn() == 8*8 || availableMoves.isEmpty()) {
             if (game.getScore() > 0) {
@@ -47,7 +48,7 @@ public class AI {
         
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
-        Point computerMove = null;
+        Pair computerMove = null;
         Game gameCopy;
         int turn = game.getTurn();
         
@@ -56,7 +57,7 @@ public class AI {
         //minmaxilta rekursiivisesti ja ota niistä maksimi, jos vuoro on 1
         //tai minimi, jos vuoro on -1
         for (int i=0; i<availableMoves.size(); i++) {
-            Point point = availableMoves.next();
+            Pair point = availableMoves.next();
             gameCopy = game.getCopy();
             gameCopy.move(point.getX(), point.getY());
             int value = minmax(depth+1, gameCopy);

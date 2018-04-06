@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reversi.AI;
+package reversi.data_structures;
 
 /**
  *
  * @author Valhe Kouneli
  */
-public class Point {
-    private int x;
-    private int y;
+public class Pair {
+    private final int x;
+    private final int y;
     
-    public Point(int x, int y) {
+    public Pair(int x, int y) {
         this.x = x;
         this.y = y;
     }

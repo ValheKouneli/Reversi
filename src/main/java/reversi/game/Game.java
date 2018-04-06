@@ -5,7 +5,7 @@
  */
 package reversi.game;
 
-import reversi.AI.Point;
+import reversi.data_structures.Pair;
 import reversi.data_structures.List;
 
 /**
@@ -19,7 +19,7 @@ public class Game {
     private Board board;
     private int turn; //black = 1, white = -1
     private int turnNumber;
-    private List<Point> availableMoves;
+    private List<Pair> availableMoves;
     private int lastTurnNumberToAskAvailableMoves;
     
     public Game() {
@@ -83,7 +83,7 @@ public class Game {
         return copy;
     }
     
-    public List<Point> getAvailableMoves() {
+    public List<Pair> getAvailableMoves() {
         if (lastTurnNumberToAskAvailableMoves == turnNumber) {
             return availableMoves;
         }
@@ -92,7 +92,7 @@ public class Game {
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
                 if (moveIsLegal(board, turn, i, j)) {
-                    availableMoves.add(new Point(i, j));
+                    availableMoves.add(new Pair(i, j));
                 }
             }
         }

@@ -8,7 +8,7 @@ package reversi.application;
 import static java.lang.Integer.parseInt;
 import java.util.Scanner;
 import reversi.AI.AI;
-import reversi.AI.Point;
+import reversi.data_structures.Pair;
 import reversi.game.Game;
 
 /**
@@ -26,7 +26,7 @@ public class Main {
  
         Scanner reader = new Scanner(System.in);
         int i = 0;
-        Point move;
+        Pair move;
 
         do {
             System.out.println(game.toString());
