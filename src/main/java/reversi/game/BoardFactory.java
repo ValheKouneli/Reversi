@@ -13,9 +13,9 @@ public class BoardFactory {
     
     private BoardFactory() {}
     
-    public static Board makeBoard(String boardRepresentation) {
+    public static ReversiBoard makeBoard(String boardRepresentation) {
         
-        Board board = new Board();
+        ReversiBoard board = new ReversiBoard();
         String boardString = board.toString();
         int k = 20;
         int c;

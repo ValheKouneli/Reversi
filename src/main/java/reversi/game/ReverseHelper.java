@@ -37,7 +37,7 @@ public class ReverseHelper {
      * @param onlyLegalityCheck if false, flips pieces on the board as if specified move was played
      * @return true if pieces are to be flipped after specified move, else false
      */
-    public static boolean reverse(Board board, int turn, int x, int y, boolean onlyLegalityCheck) {
+    public static boolean reverse(ReversiBoard board, int turn, int x, int y, boolean onlyLegalityCheck) {
         boolean oneIsTrue = false;
         
         for (Pair p : DIRECTIONS) {
@@ -50,7 +50,7 @@ public class ReverseHelper {
     }
     
     
-    private static boolean generalReverse(Board board, int turn, int x, int y,
+    private static boolean generalReverse(ReversiBoard board, int turn, int x, int y,
             int xDiff, int yDiff, boolean onlyLegalityCheck) {
         
         /*

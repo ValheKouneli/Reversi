@@ -12,18 +12,18 @@ import org.junit.Test;
  *
  * @author Valhe Kouneli
  */
-public class GameTest {
+public class ReversiTest {
     
-    Game game;
+    Reversi game;
     
     @Before
     public void setUp() {
-        this.game = new Game();
+        this.game = new Reversi();
     }
     
     @Test
     public void availableMovesWorks1() {
-        Board board = BoardFactory.makeBoard("   0 1 2 3 4 5 6 7 \n" +
+        ReversiBoard board = BoardFactory.makeBoard("   0 1 2 3 4 5 6 7 \n" +
                        "0 | | | | | | | | |\n" +
                        "1 | | | | | | | | |\n" +
                        "2 | | |●| |○| | | |\n" +

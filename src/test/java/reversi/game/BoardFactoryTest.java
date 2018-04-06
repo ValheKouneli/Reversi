@@ -16,7 +16,7 @@ public class BoardFactoryTest {
     
     @Test
     public void setBoardWorks() {
-        Board board = BoardFactory.makeBoard
+        ReversiBoard board = BoardFactory.makeBoard
                       ("   0 1 2 3 4 5 6 7 \n" +
                        "0 | | | | | | | | |\n" +
                        "1 | | | | | | | | |\n" +

@@ -16,14 +16,14 @@ public class Reversi {
     
  
     
-    private Board board;
+    private ReversiBoard board;
     private int turn; //black = 1, white = -1
     private int turnNumber;
     private List<Pair> availableMoves;
     private int lastTurnNumberToAskAvailableMoves;
     
     public Reversi() {
-        board = new Board();
+        board = new ReversiBoard();
         turn = 1;
         turnNumber = 0;
         lastTurnNumberToAskAvailableMoves = 100;
@@ -31,7 +31,7 @@ public class Reversi {
         
     }
     
-    public void setBoard(Board board) {
+    public void setBoard(ReversiBoard board) {
         this.board = board;
     }
     
@@ -76,7 +76,7 @@ public class Reversi {
     
     public Reversi getCopy() {
         Reversi copy = new Reversi();
-        Board boardCopy = board.getCopy();
+        ReversiBoard boardCopy = board.getCopy();
         copy.setBoard(boardCopy);
         copy.setTurn(turn);
         copy.setTurnNumber(turnNumber);
@@ -99,7 +99,7 @@ public class Reversi {
         return availableMoves;
     }
     
-    public boolean moveIsLegal(Board board, int turn, int x, int y) {
+    public boolean moveIsLegal(ReversiBoard board, int turn, int x, int y) {
         if (board.getBoardXY(x, y) != 0) {
             return false;
         }
@@ -143,7 +143,7 @@ public class Reversi {
         }   
     }
     
-    public Board getBoardCopy() {
+    public ReversiBoard getBoardCopy() {
         return board.getCopy();
     }
     

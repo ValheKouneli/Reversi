@@ -10,11 +10,11 @@ package reversi.game;
  *
  * @author Valhe Kouneli
  */
-public class Board {
+public class ReversiBoard {
     
     private final int[][] board;
     
-    public Board() {
+    public ReversiBoard() {
         board = new int[8][8];
         board[3][3] = 1;
         board[4][4] = 1;
@@ -58,8 +58,8 @@ public class Board {
         return string;
     }
     
-    public Board getCopy() {
-        Board copy = new Board();
+    public ReversiBoard getCopy() {
+        ReversiBoard copy = new ReversiBoard();
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
                 copy.setBoardXY(i, j, board[i][j]);

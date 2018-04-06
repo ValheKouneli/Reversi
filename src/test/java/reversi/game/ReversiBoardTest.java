@@ -14,13 +14,13 @@ import org.junit.Test;
  *
  * @author Valhe Kouneli
  */
-public class BoardTest {
+public class ReversiBoardTest {
     
-    Board board;
+    ReversiBoard board;
     
     @Before
     public void setUp() {
-        this.board = new Board();
+        this.board = new ReversiBoard();
     }
     
 

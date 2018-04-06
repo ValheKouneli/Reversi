@@ -13,10 +13,10 @@ import org.junit.Test;
  */
 public class ReverseHelperTest {
     
-    Board boardSingleFlips;
-    Board boardDoubleFlips;
-    Board boardComboFlips;
-    Game gameComboFlips;
+    ReversiBoard boardSingleFlips;
+    ReversiBoard boardDoubleFlips;
+    ReversiBoard boardComboFlips;
+    Reversi gameComboFlips;
     
     @Before
     public void setUp() {
@@ -53,7 +53,7 @@ public class ReverseHelperTest {
                                   "6 | |●|○| |○|●| | |\n" +
                                   "7 | | | | | | | | |\n"); 
         
-        gameComboFlips = new Game();
+        gameComboFlips = new Reversi();
         gameComboFlips.setTurn(-1);
         gameComboFlips.setBoard(boardComboFlips);
     }
