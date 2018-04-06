@@ -5,6 +5,7 @@
  */
 package reversi.game;
 
+import reversi.AI.Game;
 import reversi.data_structures.Pair;
 import reversi.data_structures.List;
 
@@ -12,7 +13,7 @@ import reversi.data_structures.List;
  *
  * @author Valhe Kouneli
  */
-public class Reversi {
+public class Reversi implements Game {
     
  
     
@@ -84,10 +85,12 @@ public class Reversi {
         }
     }
     
+    @Override
     public boolean gameIsOver() {
         return getMoves().isEmpty();
     }
     
+    @Override
     public Reversi getCopy() {
         Reversi copy = new Reversi();
         ReversiBoard boardCopy = board.getCopy();
@@ -97,6 +100,7 @@ public class Reversi {
         return copy;
     }
     
+    @Override
     public List<Pair> getMoves() {
         if (lastTurnNumberToAskAvailableMoves == turnNumber) {
             return availableMoves;
@@ -127,7 +131,7 @@ public class Reversi {
     
     /**
      * Makes the suggested move and changes turn if it is legal;
-     * returns wheter the move is legal.
+     * returns wheater the move is legal.
      * @param x row number of the move
      * @param y column number of the move
      * @return true if move is legal, false if not
@@ -159,6 +163,17 @@ public class Reversi {
     
     public ReversiBoard getBoardCopy() {
         return board.getCopy();
+    }
+
+    @Override
+    public boolean move(Object move) {
+        Pair pair = (Pair) move;
+        return move(pair.getX(), pair.getY());
+    }
+
+    @Override
+    public int winner() {
+        return getScore() > 0 ? 1 : -1;
     }
     
  

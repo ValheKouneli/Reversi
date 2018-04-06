@@ -8,6 +8,8 @@ package reversi.application;
 import static java.lang.Integer.parseInt;
 import java.util.Scanner;
 import reversi.AI.AI;
+import reversi.AI.Game;
+import reversi.AI.ReversiEvaluator1;
 import reversi.data_structures.Pair;
 import reversi.game.Reversi;
 
@@ -24,6 +26,8 @@ public class Main {
         
 
         Reversi game = new Reversi();
+        AI ai1 = new AI(new ReversiEvaluator1());
+        AI ai2 = new AI(new ReversiEvaluator1());
  
         Scanner reader = new Scanner(System.in);
         int i = 0;
@@ -33,15 +37,9 @@ public class Main {
             System.out.println(game.toString());
             System.out.println("It's " + getPlayer(game.getTurn()) + "'s turn.");
             if (game.getTurn() == 1) {
-                move = AI.makeNextMove(game);
+                ai1.makeNextMove(game);
             } else {
-                move = AI.makeNextMove(game);
-            }
-            if (move != null) {
-                game.move(move.getX(), move.getY());
-            } else {
-                System.out.println("Apua, error");
-                break;
+                ai2.makeNextMove(game);
             }
             i++;
         } while (!game.getMoves().isEmpty());
