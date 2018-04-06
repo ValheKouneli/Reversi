@@ -83,7 +83,7 @@ public class MinMaxTest {
     }
     
     
-    private static Game nim;
+    private Game nim;
     
     @Before
     public void setUp() {
@@ -92,7 +92,7 @@ public class MinMaxTest {
     
     @Test
     public void minMaxWithoutLimitWorks() {
-        int result = MinMax.minmax(nim, 0, Integer.MAX_VALUE);
+        int result = MinMax.minmax(nim);
         assertEquals(Integer.MIN_VALUE, result);
     }
     
