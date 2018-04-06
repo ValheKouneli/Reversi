@@ -8,8 +8,6 @@ package reversi.game;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import reversi.game.Board;
-import reversi.game.Game;
 /**
  *
  * @author Valhe Kouneli
@@ -44,6 +42,8 @@ public class GameTest {
     public void availableMovesWorks2() {
         assertEquals(4, game.getAvailableMoves().size());
     }
+    
+
    
     
     

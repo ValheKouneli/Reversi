@@ -5,6 +5,8 @@
  */
 package reversi.game;
 
+import reversi.AI.Point;
+
 
 /**
  *
@@ -12,8 +14,30 @@ package reversi.game;
  */
 public class ReverseHelper {
     
-    
+    private static final Point[] DIRECTIONS = {
+        new Point(1,1),     //down right
+        new Point(0,1),     //right
+        new Point(1,0),     //down
+        new Point(-1,-1),   //up left
+        new Point(-1,0),    //up
+        new Point(0,-1),    //left
+        new Point(-1,1),    //up right
+        new Point(1,-1)     //down left
+    };
+       
     private ReverseHelper() {}
+    
+    public static boolean reverse(Board board, int turn, int x, int y, boolean onlyLegalityCheck) {
+        boolean oneIsTrue = false;
+        
+        for (Point p : DIRECTIONS) {
+            if (generalReverse(board, turn, x, y, p.getX(), p.getY(), onlyLegalityCheck)) {
+                oneIsTrue = true;
+            }
+        }
+        
+        return oneIsTrue;
+    }
     
     /**
      * Checks if there are Reversi pieces to be flipped the specified board
@@ -132,45 +156,4 @@ public class ReverseHelper {
         }
 
     }
-    
-    public static boolean reverseUp(Board board, int turn, int x, int y,
-            boolean onlyLegalityCheck) {
-        return generalReverse(board, turn, x, y, -1, 0, onlyLegalityCheck);
-    }
-    
-    public static boolean reverseLeft(Board board, int turn, int x, int y,
-            boolean onlyLegalityCheck) {
-        return generalReverse(board, turn, x, y, 0, -1, onlyLegalityCheck);
-    }
-    
-    public static boolean reverseDown(Board board, int turn, int x, int y,
-            boolean onlyLegalityCheck) {
-        return generalReverse(board, turn, x, y, 1, 0, onlyLegalityCheck);
-    }
-    
-    public static boolean reverseRight(Board board, int turn, int x, int y,
-            boolean onlyLegalityCheck) {
-        return generalReverse(board, turn, x, y, 0, 1, onlyLegalityCheck);
-    }
-    
-    public static boolean reverseDownRight(Board board, int turn, int x, int y,
-            boolean onlyLegalityCheck) {
-        return generalReverse(board, turn, x, y, 1, 1, onlyLegalityCheck);
-    }
-    
-    public static boolean reverseUpLeft(Board board, int turn, int x, int y,
-            boolean onlyLegalityCheck) {
-        return generalReverse(board, turn, x, y, -1, -1, onlyLegalityCheck);
-    }
-    
-    public static boolean reverseDownLeft(Board board, int turn, int x, int y,
-            boolean onlyLegalityCheck) {
-        return generalReverse(board, turn, x, y, 1, -1, onlyLegalityCheck);
-    }
-    
-    public static boolean reverseUpRight(Board board, int turn, int x, int y,
-            boolean onlyLegalityCheck) {
-        return generalReverse(board, turn, x, y, -1, 1, onlyLegalityCheck);
-    }
-    
 }

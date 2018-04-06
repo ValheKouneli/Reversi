@@ -14,6 +14,8 @@ import reversi.data_structures.List;
  */
 public class Game {
     
+ 
+    
     private Board board;
     private int turn; //black = 1, white = -1
     private int turnNumber;
@@ -25,6 +27,8 @@ public class Game {
         turn = 1;
         turnNumber = 0;
         lastTurnNumberToAskAvailableMoves = 100;
+
+        
     }
     
     public void setBoard(Board board) {
@@ -99,14 +103,7 @@ public class Game {
         if (board.getBoardXY(x, y) != 0) {
             return false;
         }
-        return ReverseHelper.reverseUp(board, turn, x, y, true) ||
-                ReverseHelper.reverseDown(board, turn, x, y, true) ||
-                ReverseHelper.reverseLeft(board, turn, x, y, true) ||
-                ReverseHelper.reverseRight(board, turn, x, y, true) ||
-                ReverseHelper.reverseDownRight(board, turn, x, y, true) ||
-                ReverseHelper.reverseUpRight(board, turn, x, y, true) ||
-                ReverseHelper.reverseDownLeft(board, turn, x, y, true) ||
-                ReverseHelper.reverseUpLeft(board, turn, x, y, true);
+        return ReverseHelper.reverse(board, turn, x, y, true);
     }
     
     @Override
@@ -130,35 +127,12 @@ public class Game {
         }
         
         /**
-         * If the move does not reverse any pieces of the opposing color,
+         * If the move does not reverse any pieces of the opposing colour,
          * the move is not legal.
          */
-        
-        boolean moveFlips = false;
-        if (ReverseHelper.reverseUp(board, turn, x, y, false)) {
-            moveFlips = true;
-        }
-        if (ReverseHelper.reverseDown(board, turn, x, y, false)) {
-            moveFlips = true;
-        }
-        if (ReverseHelper.reverseLeft(board, turn, x, y, false)) {
-            moveFlips = true;
-        }
-        if (ReverseHelper.reverseRight(board, turn, x, y, false)) {
-            moveFlips = true;
-        }
-        if (ReverseHelper.reverseDownRight(board, turn, x, y, false)) {
-            moveFlips = true;
-        }
-        if (ReverseHelper.reverseUpRight(board, turn, x, y, false)) {
-            moveFlips = true;
-        }
-        if (ReverseHelper.reverseDownLeft(board, turn, x, y, false)) {
-            moveFlips = true;
-        }
-        if (ReverseHelper.reverseUpLeft(board, turn, x, y, false)) {
-            moveFlips = true;
-        }
+
+        boolean moveFlips = ReverseHelper.reverse(board, turn, x, y, false);
+         
         if (moveFlips) {
             board.setBoardXY(x, y, turn);
             turnNumber++;
