@@ -30,34 +30,6 @@ public class Board {
         board[x][y] = value;
     }
     
-    public void setBoard(String boardRepresentation) {
-            int k = 20;
-            int c;
-        
-            for (int i=0; i<8; i++) {
-                k += 3;
-                for (int j=0; j<8; j++) {
-                   c = boardRepresentation.charAt(k);
-                    switch (c) {
-                        case ' ':
-                            board[i][j] = 0;
-                            break;
-                        case '\u25CF':
-                            board[i][j] = -1;
-                            break;
-                        case '\u25CB':
-                            board[i][j] = 1;
-                            break;
-                        default:
-                            //throw something
-                            break;
-                    }
-                    k += 2; 
-                }
-                k += 1;
-            }
-        
-    }
     
     @Override
     public String toString() {

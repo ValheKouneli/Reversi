@@ -33,6 +33,19 @@ public class ListTest {
         assertEquals((Integer) 2, list.get(0));
     }
     
+    @Test
+    public void addingManyItemsWorks() {
+        list.add(0);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        assertEquals((Integer) 0, list.get(0));
+        assertEquals((Integer) 1, list.get(1));
+        assertEquals((Integer) 2, list.get(2));
+        assertEquals((Integer) 3, list.get(3));
+        assertEquals(4, list.size());
+    }
+    
     
     
 }

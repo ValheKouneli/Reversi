@@ -20,8 +20,8 @@ public class ReverseHelperTest {
     
     @Before
     public void setUp() {
-        boardSingleFlips = new Board();
-        boardSingleFlips.setBoard("   0 1 2 3 4 5 6 7 \n" +
+        boardSingleFlips = BoardFactory.makeBoard
+                                 ("   0 1 2 3 4 5 6 7 \n" +
                                   "0 | | | | | | | | |\n" +
                                   "1 | |○|○|○| | | | |\n" +
                                   "2 | |○|●|○| | | | |\n" +
@@ -31,8 +31,8 @@ public class ReverseHelperTest {
                                   "6 | | | | | | | | |\n" +
                                   "7 | | | | | | | | |\n");
         
-        boardDoubleFlips = new Board();
-        boardDoubleFlips.setBoard("   0 1 2 3 4 5 6 7 \n" +
+        boardDoubleFlips = BoardFactory.makeBoard
+                                 ("   0 1 2 3 4 5 6 7 \n" +
                                   "0 | | | | | | | | |\n" +
                                   "1 | |○| |○| |○| | |\n" +
                                   "2 | | |○|○|○| | | |\n" +
@@ -42,8 +42,8 @@ public class ReverseHelperTest {
                                   "6 | | | | | | | | |\n" +
                                   "7 | | | | | | | | |\n");
         
-        boardComboFlips = new Board();
-        boardComboFlips.setBoard("   0 1 2 3 4 5 6 7 \n" +
+        boardComboFlips = BoardFactory.makeBoard
+                                 ("   0 1 2 3 4 5 6 7 \n" +
                                   "0 | | | | | | | | |\n" +
                                   "1 |○|○|○| |○|●|○| |\n" +
                                   "2 |●| |●| |○| |○| |\n" +

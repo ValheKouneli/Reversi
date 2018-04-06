@@ -23,8 +23,7 @@ public class GameTest {
     
     @Test
     public void availableMovesWorks1() {
-        Board board = new Board();
-        board.setBoard("   0 1 2 3 4 5 6 7 \n" +
+        Board board = BoardFactory.makeBoard("   0 1 2 3 4 5 6 7 \n" +
                        "0 | | | | | | | | |\n" +
                        "1 | | | | | | | | |\n" +
                        "2 | | |●| |○| | | |\n" +
