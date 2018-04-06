@@ -13,10 +13,10 @@ package reversi.data_structures;
 public class List<E> {
     private int size;
     private int internalSize;
-    private E[] list;
+    private Object[] list;
     
     public List() {
-        list = (E[]) new Object[2];
+        list = new Object[2];
         internalSize = 2;
         size = 0;
     }
@@ -24,8 +24,8 @@ public class List<E> {
     public void add(E point){
         if (internalSize == size) {
             internalSize *= 2;
-            E[] newList;
-            newList = (E[]) new Object[internalSize];
+            Object[] newList;
+            newList = new Object[internalSize];
             System.arraycopy(list, 0, newList, 0, size);
             newList[size] = point;
             size++;
@@ -41,8 +41,8 @@ public class List<E> {
     }
 
     public E get(int i) {
-        if (i<size) {
-            return list[i];
+        if (0<= i && i<size) {
+            return (E) list[i];
         } else {
             throw new IndexOutOfBoundsException("for index " + i);
         }
