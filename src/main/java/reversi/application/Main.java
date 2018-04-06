@@ -46,7 +46,8 @@ public class Main {
         
         System.out.println(game.toString());
         int score = game.getScore();
-        System.out.println("Winner is " + getPlayer(score) + " with " + score + " points.");
+        int points = score < 0 ? score*-1 : score;
+        System.out.println("Winner is " + getPlayer(score) + " with " + points + " points.");
     }
     
     private static void humanGetMove(Reversi game, Scanner reader) {

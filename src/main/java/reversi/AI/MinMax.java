@@ -22,8 +22,6 @@ public class MinMax {
     }
     
     public static int minmax(Game game, int depth, int max_depth, Evaluator eval) {
-        List<Object> moves = game.getMoves();
-        
         if (game.gameIsOver()) {
             return (game.winner() == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE);
         } else if (depth == max_depth) {
@@ -32,9 +30,11 @@ public class MinMax {
             }
             return eval.eval(game);
         } else {
+            List<Object> moves = game.getMoves();
             int bestSoFar =
                     (game.getTurn() == 1 ? Integer.MIN_VALUE : Integer.MAX_VALUE);
             Object bestMoveSoFar = null;
+            
             for (int i=0; i<moves.size(); i++) {
                 Game copy = game.getCopy();
                 copy.move(moves.get(i));

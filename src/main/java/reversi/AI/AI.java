@@ -17,7 +17,7 @@ public class AI  {
         this.eval = eval;
     }
     
-    public final static int MAX_DEPTH = 7;
+    public final static int MAX_DEPTH = 5;
     
     public void makeNextMove(Game game) {
         MinMax.minmax(game, 0, MAX_DEPTH, eval);
