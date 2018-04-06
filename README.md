@@ -12,6 +12,7 @@ Command line Java application that let's you play the game of Reversi (also know
 
 ## TODO (at least)
 
+* Refactor minmax (in progress).
 * UI
 * More unit tests
 * Better heuristic for analyzing the current board situation

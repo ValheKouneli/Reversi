@@ -18,13 +18,7 @@ public class MinMax {
     
     private MinMax() {}
     
-    /**
-     *
-     * @param game
-     * @param depth
-     * @param max_depth
-     * @return 
-     */
+   
     public int minmax(Game game, int depth, int max_depth) {
         List<Pair> moves = game.getAvailableMoves();
 
