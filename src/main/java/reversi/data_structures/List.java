@@ -11,27 +11,27 @@ package reversi.data_structures;
  * @param <E>
  */
 public class List<E> {
-    private ListNode<E> first;
-    private ListNode<E> last;
-    private ListNode<E> iterator;
     private int size;
+    private int internalSize;
+    private E[] list;
     
     public List() {
-        first = null;
-        last = null;
-        iterator = null;
+        list = (E[]) new Object[2];
+        internalSize = 2;
         size = 0;
     }
     
     public void add(E point){
-        if (isEmpty()) {
-            first = new ListNode<>(point);
-            last = first;
-            iterator = first;
+        if (internalSize == size) {
+            internalSize *= 2;
+            E[] newList;
+            newList = (E[]) new Object[internalSize];
+            System.arraycopy(list, 0, newList, 0, size);
+            newList[size] = point;
             size++;
+            list = newList;
         } else {
-            last.setNext(new ListNode<>(point));
-            last = last.getNext();
+            list[size] = point;
             size++;
         }
     }
@@ -39,23 +39,17 @@ public class List<E> {
     public int size() {
         return size;
     }
-    
-    public void iterate() {
-        iterator = first;
-    }
-    
-    public E next() {
-        if (iterator == null) {
-            return null;
+
+    public E get(int i) {
+        if (i<size) {
+            return list[i];
         } else {
-            E temp = iterator.getPoint();
-            iterator = iterator.getNext();
-            return temp;
+            throw new IndexOutOfBoundsException("for index " + i);
         }
     }
     
     public boolean isEmpty() {
-        return first == null;
+        return size == 0;
     }
     
 }

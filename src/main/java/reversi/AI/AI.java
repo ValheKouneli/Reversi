@@ -57,7 +57,7 @@ public class AI {
         //minmaxilta rekursiivisesti ja ota niistä maksimi, jos vuoro on 1
         //tai minimi, jos vuoro on -1
         for (int i=0; i<availableMoves.size(); i++) {
-            Pair point = availableMoves.next();
+            Pair point = availableMoves.get(i);
             gameCopy = game.getCopy();
             gameCopy.move(point.getX(), point.getY());
             int value = minmax(depth+1, gameCopy);

@@ -27,6 +27,16 @@ public class ReverseHelper {
        
     private ReverseHelper() {}
     
+    /**
+     * Given a move, checks if there are any Reversi pieces to be flipped.
+     * If onlyLegalityCheck is false, also flips them.
+     * @param board board in question
+     * @param turn  whose turn it is
+     * @param x x coordinate of the move
+     * @param y y coordinate of the move
+     * @param onlyLegalityCheck if false, flips pieces on the board as if specified move was played
+     * @return true if pieces are to be flipped after specified move, else false
+     */
     public static boolean reverse(Board board, int turn, int x, int y, boolean onlyLegalityCheck) {
         boolean oneIsTrue = false;
         
@@ -39,20 +49,7 @@ public class ReverseHelper {
         return oneIsTrue;
     }
     
-    /**
-     * Checks if there are Reversi pieces to be flipped the specified board
-     * in the direction specified by xDiff, yDiff. If onlyLegalityCheck is
-     * true, does not flip them, but return if some were found or not. If
-     * onlyLegalityCheck is false, also flips them.
-     * @param board board of interest
-     * @param turn  who played the piece on (x,y)
-     * @param x x coordinate of the latest move
-     * @param y y coordinate of the latest move
-     * @param xDiff 1 for down, -1 for up, else 0
-     * @param yDiff 1 for right, -1 for left, else 0
-     * @param onlyLegalityCheck if true, do not change board
-     * @return 
-     */
+    
     private static boolean generalReverse(Board board, int turn, int x, int y,
             int xDiff, int yDiff, boolean onlyLegalityCheck) {
         
