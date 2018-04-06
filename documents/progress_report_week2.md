@@ -1,6 +1,10 @@
 Progress Report: Week 2
 =======================
 
+Made a simple AI for Reversi the first day. Rest of the week: bug fixing, lots and lots of refactoring and additional tests.
+
+**Total time spent: 20h**
+
 ## Monday
 
 Made a working command line interface application that let's one play Reversi against a simple computer AI.
@@ -29,4 +33,6 @@ Made my own List class and tests for it. Made my older code use it.
 
 Refactoring. Made some improvements as per teacher's suggestions: BoardFactory and better List structure.
 
-**Time spent: 4h**
+Made new classes that made testing and reading code easier.
+
+**Time spent: 8h**
