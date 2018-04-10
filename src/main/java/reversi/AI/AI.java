@@ -9,18 +9,22 @@ package reversi.AI;
 
 
 
-public class AI  {
+public class AI <GameType> {
     
-    private Evaluator eval;
+    private final Evaluator<GameType> eval;
     
-    public AI(Evaluator eval) {
+    /**
+     *
+     * @param eval evaluator of the same game type as this AI
+     */
+    public AI(Evaluator<GameType> eval) {
         this.eval = eval;
     }
     
     public final static int MAX_DEPTH = 5;
     
-    public void makeNextMove(Game game) {
-        MinMax.minmax(game, 0, MAX_DEPTH, eval);
+    public void makeNextMove(GameType game) {
+        MinMax.minmax((Game) game, 0, MAX_DEPTH, eval);
     }
     
 }

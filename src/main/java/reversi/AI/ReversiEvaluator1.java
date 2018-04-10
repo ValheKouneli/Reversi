@@ -11,8 +11,13 @@ import reversi.game.Reversi;
  *
  * @author Valhe Kouneli
  */
-public class ReversiEvaluator1 implements Evaluator <Reversi> {
+public class ReversiEvaluator1 extends Evaluator <Reversi> {
 
+    /**
+     *
+     * @param game
+     * @return
+     */
     @Override
     public int eval(Reversi game) {
         return game.getScore();

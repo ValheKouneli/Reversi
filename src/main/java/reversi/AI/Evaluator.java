@@ -10,8 +10,17 @@ package reversi.AI;
  * @author Valhe Kouneli
  * @param <GameType>
  */
-public interface Evaluator <GameType> {
+public abstract class Evaluator <GameType> {
 
-    public int eval(GameType game);
+    public Evaluator() {
+        //check if GameType is a class that implements Game
+    }
+
+    /**
+     *
+     * @param game
+     * @return
+     */
+    public abstract int eval(GameType game);
     
 }
