@@ -6,17 +6,18 @@
 package reversi.AI.MCTS;
 
 import reversi.AI.Game;
+import reversi.data_structures.List;
 
 /**
  *
  * @author Valhe Kouneli
  */
-public class Status {
+public class State {
     Game game;
     int visitCount;
     double winScore;
     
-    public Status(Game game) {
+    public State(Game game) {
         this.game = game;
         visitCount = 0;
         winScore = 0;
@@ -36,6 +37,14 @@ public class Status {
     
     public double getWinScore() {
         return winScore;
+    }
+    
+    public List<State> getAllPossibleStates() {
+        throw new java.lang.UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public void randomPlay() {
+        throw new java.lang.UnsupportedOperationException("Not supported yet.");
     }
     
 }
