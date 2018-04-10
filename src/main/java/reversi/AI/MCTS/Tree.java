@@ -17,6 +17,10 @@ public class Tree {
         root = new Node();
     }
     
+    public void setRoot(Node root) {
+        this.root = root;
+    }
+    
     public Node getRoot() {
         return root;
     }

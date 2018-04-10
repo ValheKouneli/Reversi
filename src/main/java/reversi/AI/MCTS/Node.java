@@ -13,10 +13,19 @@ import reversi.data_structures.List;
  */
 public class Node {
     
+    private State state;
     private Node parent;
     private List<Node> children;
     
     public Node() {}
+    
+    public void setState(State state) {
+        this.state = state;
+    }
+    
+    public State getState() {
+        return state;
+    }
     
     public void setParent(Node parent) {
         this.parent = parent;
@@ -35,6 +44,10 @@ public class Node {
     }
     
     public Node getRandomChildNode() {
+        throw new java.lang.UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public Node getChildWithMaxScore() {
         throw new java.lang.UnsupportedOperationException("Not supported yet.");
     }
     
