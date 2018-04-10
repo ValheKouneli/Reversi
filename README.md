@@ -6,13 +6,13 @@ Reversi
 
 Command line Java application, Reversi AI.
 
-## Current known bugs (6.4.2018)
+## Current known bugs (11.4.2018)
 
 * My interpretation of the game rules might differ from the official rules. If either player can not play, the game ends.
 
 ## TODO (at least)
 
-* UI
-* More unit tests
-* Better heuristic for analyzing the current board situation
-* Even more refactoring??
+* Fix the implementation of rules (see current known bugs)
+* Continue making Monte Carlo Tree Search
+* Make command line user interface
+* Make more unit tests
