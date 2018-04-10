@@ -35,10 +35,18 @@ public class UCT {
         }
     }
     
+    /** Returns the child with the best UCT value for the given node.
+     * 
+     * @param node  a node
+     * @return node's child node with the best UCT value out of all child nodes
+     */
     public static Node getChildWithBestUCTValue(Node node) {
         int parentVisitCount = node.getState().getVisitCount();
         return Collections.max(node.getChildren(),
-                Comparator.comparing(c -> uctValue(parentVisitCount, c.getState().getWinScore(), c.getState().getVisitCount())));
+                Comparator.comparing(c -> 
+                        uctValue(parentVisitCount,
+                                c.getState().getWinScore(),
+                                c.getState().getVisitCount())));
     }
     
 }

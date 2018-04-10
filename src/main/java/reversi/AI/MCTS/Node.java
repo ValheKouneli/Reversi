@@ -5,7 +5,7 @@
  */
 package reversi.AI.MCTS;
 
-import reversi.data_structures.List;
+import java.util.List;
 
 /**
  *

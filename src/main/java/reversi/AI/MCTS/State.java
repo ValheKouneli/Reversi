@@ -5,8 +5,8 @@
  */
 package reversi.AI.MCTS;
 
+import java.util.List;
 import reversi.AI.Game;
-import reversi.data_structures.List;
 
 /**
  *
