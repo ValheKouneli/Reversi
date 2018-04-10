@@ -43,16 +43,4 @@ public class Node {
         return children;
     }
     
-    public Node getRandomChildNode() {
-        throw new java.lang.UnsupportedOperationException("Not supported yet.");
-    }
-    
-    public Node getChildWithMaxScore() {
-        throw new java.lang.UnsupportedOperationException("Not supported yet.");
-    }
-    
-    public Node selectPromisingNode() {
-        throw new java.lang.UnsupportedOperationException("Not supported yet.");
-    }
-    
 }
