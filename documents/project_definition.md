@@ -7,3 +7,7 @@ After that, the goal is to find information about different, previously invented
 
 The next step is to impove the AI in one way or another, keeping it's thinking time limited to one second per turn. A Monte-Carlo algorithm can be used in stead of or with a heuristic.
 
+## Sources
+
+[http://www.flyordie.com/games/help/reversi/en/games_rules_reversi.html](http://www.flyordie.com/games/help/reversi/en/games_rules_reversi.html)
+[http://www.baeldung.com/java-monte-carlo-tree-search](http://www.baeldung.com/java-monte-carlo-tree-search)
