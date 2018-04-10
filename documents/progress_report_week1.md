@@ -1,6 +1,6 @@
-Progress Report: Week 1
+Progress Report: Week 0
 =======================
 
-I refreshed my Java skills.
+Configured the programming environment.
 
-**Time spent: 40h**
+**Time spent: 2,5h**
