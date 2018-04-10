@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reversi.data_structures;
+package reversi.AI.MCTS;
+
+import reversi.data_structures.List;
 
 /**
  *
