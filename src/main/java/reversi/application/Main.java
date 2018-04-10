@@ -8,8 +8,8 @@ package reversi.application;
 import static java.lang.Integer.parseInt;
 import java.util.Scanner;
 import reversi.AI.AI;
-import reversi.AI.Game;
 import reversi.AI.ReversiEvaluator1;
+import reversi.AI.ReversiEvaluator2;
 import reversi.data_structures.Pair;
 import reversi.game.Reversi;
 
@@ -27,7 +27,7 @@ public class Main {
 
         Reversi game = new Reversi();
         AI ai1 = new AI(new ReversiEvaluator1());
-        AI ai2 = new AI(new ReversiEvaluator1());
+        AI ai2 = new AI(new ReversiEvaluator2());
  
         Scanner reader = new Scanner(System.in);
         int i = 0;

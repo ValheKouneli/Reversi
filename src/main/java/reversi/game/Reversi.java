@@ -36,6 +36,7 @@ public class Reversi implements Game {
         this.board = board;
     }
     
+    @Override
     public int getTurn() {
         return turn;
     }
