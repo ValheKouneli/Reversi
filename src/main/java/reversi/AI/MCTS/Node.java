@@ -3,7 +3,7 @@
  */
 package reversi.AI.MCTS;
 
-import java.util.List;
+import reversi.data_structures.List;
 
 /**
  *
@@ -13,9 +13,12 @@ public class Node {
     
     private State state;
     private Node parent;
-    private List<Node> children;
+    private final List<Node> children;
     
-    public Node() {}
+    public Node(State state) {
+        this.state = state;
+        children = new List<>();
+    }
     
     public void setState(State state) {
         this.state = state;
@@ -39,6 +42,12 @@ public class Node {
     
     public List<Node> getChildren() {
         return children;
+    }
+    
+    public Node getCopyWithoutChildren() {
+        Node copy = new Node(state.getCopy());
+        copy.setParent(parent);
+        return copy;
     }
     
 }

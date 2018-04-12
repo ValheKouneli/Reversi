@@ -3,8 +3,7 @@
  */
 package reversi.AI.MCTS;
 
-import java.util.Collections;
-import java.util.Comparator;
+import reversi.data_structures.List;
 
 /**
  *
@@ -40,11 +39,20 @@ public class UCT {
      */
     public static Node getChildWithBestUCTValue(Node node) {
         int parentVisitCount = node.getState().getVisitCount();
-        return Collections.max(node.getChildren(),
-                Comparator.comparing(c -> 
-                        uctValue(parentVisitCount,
-                                c.getState().getWinScore(),
-                                c.getState().getVisitCount())));
+        List<Node> children = node.getChildren();
+        Node bestChild = null;
+        double bestUCTvalue = Integer.MIN_VALUE;
+        Node child;
+        double uctValue;
+        for (int i=0; i<children.size(); i++) {
+            child = children.get(i);
+            uctValue = uctValue(parentVisitCount, child.getState().getWinScore(), child.getState().getVisitCount());
+            if (uctValue > bestUCTvalue) {
+                bestUCTvalue = uctValue;
+                bestChild = child;
+            }
+        }
+        return bestChild;
     }
     
 }

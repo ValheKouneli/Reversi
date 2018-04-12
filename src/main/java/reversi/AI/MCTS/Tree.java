@@ -10,9 +10,12 @@ package reversi.AI.MCTS;
 public class Tree {
     
     Node root;
-    
     public Tree() {
-        root = new Node();
+        root = new Node(new State());
+    }
+    
+    public Tree(State state) {
+        root = new Node(state);
     }
     
     public void setRoot(Node root) {
