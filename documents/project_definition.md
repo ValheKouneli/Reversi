@@ -12,3 +12,4 @@ The next step is to impove the AI in one way or another, keeping it's thinking t
 [http://www.flyordie.com/games/help/reversi/en/games_rules_reversi.html](http://www.flyordie.com/games/help/reversi/en/games_rules_reversi.html)
 [http://www.baeldung.com/java-monte-carlo-tree-search](http://www.baeldung.com/java-monte-carlo-tree-search)
 [https://en.wikipedia.org/wiki/Computer_Othello](https://en.wikipedia.org/wiki/Computer_Othello)
+[https://en.wikipedia.org/wiki/Monte_Carlo_tree_search](https://en.wikipedia.org/wiki/Monte_Carlo_tree_search)
