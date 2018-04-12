@@ -13,6 +13,5 @@ Command line Java application, Reversi AI.
 ## TODO (at least)
 
 * Fix the implementation of rules (see current known bugs)
-* Continue making Monte Carlo Tree Search
 * Make command line user interface
 * Make more unit tests
