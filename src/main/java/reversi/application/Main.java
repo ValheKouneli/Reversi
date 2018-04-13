@@ -8,7 +8,7 @@ package reversi.application;
 import static java.lang.Integer.parseInt;
 import java.util.Scanner;
 import reversi.AI.*;
-import reversi.AI.MCTS.MonteCarloTreeSearch;
+import reversi.AI.MCTS.MCTSbot;
 import reversi.data_structures.Pair;
 import reversi.game.Reversi;
 
@@ -25,7 +25,7 @@ public class Main {
         
 
         Reversi game = new Reversi();
-        MonteCarloTreeSearch ai1 = new MonteCarloTreeSearch(1, -1);
+        MCTSbot ai1 = new MCTSbot(1, -1);
         AI ai2 = new AI(new ReversiEvaluator2());
  
         Scanner reader = new Scanner(System.in);

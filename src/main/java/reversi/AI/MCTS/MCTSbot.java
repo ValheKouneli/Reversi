@@ -13,7 +13,7 @@ import reversi.data_structures.Pair;
  *
  * @author Valhe Kouneli
  */
-public class MonteCarloTreeSearch {
+public class MCTSbot {
     
     int level;
     static final int WIN_SCORE = 10;
@@ -21,11 +21,16 @@ public class MonteCarloTreeSearch {
     int opponent;
     int me;
     
-    public MonteCarloTreeSearch(int me, int opponent) {
+    public MCTSbot(int me, int opponent) {
         this.me = me;
         this.opponent = opponent;
     }
     
+    /**
+     * Chooses a move to play in the given game situation
+     * based on Monte Carlo Tree Search algorithm.
+     * @param game some game situation where it's the MCTSbot's turn
+     */
     public void makeNextMove(Game game) {
         long end = System.currentTimeMillis() + 2000;
         //how long to continue before selecting final move

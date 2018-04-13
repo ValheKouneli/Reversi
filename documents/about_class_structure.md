@@ -14,4 +14,4 @@ There is a class AI in package revesi.AI. There is also an interface called Eval
 
 Classes ReversiEvaluator1 and ReversiEvaluator2 implement Evaluator.
 
-In package reversi.AI.MCTS there is a class MonteCarloTreeSearch which uses classes Node, State, Tree and UCT in the same package. MonteCarloTreeSearch is basically another game bot that knows the interface Game.
+In package reversi.AI.MCTS there is a class called MCTSbot which uses classes Node, State, Tree and UCT in the same package. MonteCarloTreeSearch is basically another game bot that knows the interface Game.
