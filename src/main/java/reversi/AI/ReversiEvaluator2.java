@@ -5,7 +5,12 @@ import reversi.game.Reversi;
 import reversi.game.ReversiBoard;
 
 /**
- *
+ * This evaluator evaluates the Reversi game situation by giving values to one's
+ * own pieces based on their position on the board. Corners are most valuable,
+ * and places next to corners have negative value. Sides are the second best
+ * place to be. If the game is has continued over 40 moves, all positions have
+ * equal value.
+ * 
  * @author Valhe Kouneli
  */
 public class ReversiEvaluator2 extends Evaluator <Reversi> {

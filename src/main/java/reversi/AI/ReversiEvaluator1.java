@@ -8,7 +8,9 @@ package reversi.AI;
 import reversi.game.Reversi;
 
 /**
- *
+ * This evaluator evaluates the Reversi game situation just by counting how
+ * many black pieces and write pieces there are.
+ * 
  * @author Valhe Kouneli
  */
 public class ReversiEvaluator1 extends Evaluator <Reversi> {

@@ -9,6 +9,8 @@ import reversi.data_structures.List;
 import reversi.data_structures.Pair;
 
 /**
+ * Stores information about nodes used in Monte Carlo Tree Search
+ * in class MCTSbot.
  *
  * @author Valhe Kouneli
  */

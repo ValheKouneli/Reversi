@@ -11,7 +11,7 @@ import reversi.data_structures.List;
  */
 public class Node {
     
-    private State state;
+    private State state; //information about this node
     private Node parent;
     private final List<Node> children;
     
