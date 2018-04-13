@@ -1,6 +1,14 @@
 Progress Report: Week 3
 =======================
 
+## Overview
+
+I read about Monte Carlo Tree Seach and implemented a bot that uses MCTS. Did not have time to make tests, but it seems to work. It was a busy week.
+
+**Total time spent: 9h**
+
+## Daily reports
+
 Sunday: Refactoring or something
 
 **Time spent: 1h**
@@ -20,3 +28,7 @@ Wednesday: Started implementing Monte Carlo Tree Search. Read a tutorial about i
 Thursday: Read more about Monte Carlo Tree Search and draw some diagrams about how it works to help me understand it. Fixed the MCTS code wrote yesterday based on it. Run it and fixed couple of bugs that occured.
 
 **Time spent: 2h**
+
+Friday: Wrote documents.
+
+**Time spent: 0h**
