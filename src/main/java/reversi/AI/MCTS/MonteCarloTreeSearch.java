@@ -27,7 +27,7 @@ public class MonteCarloTreeSearch {
     }
     
     public void makeNextMove(Game game) {
-        long end = System.currentTimeMillis() + 1000;
+        long end = System.currentTimeMillis() + 2000;
         //how long to continue before selecting final move
 
         Tree tree = new Tree(new State(game));
