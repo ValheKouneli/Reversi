@@ -1,0 +1,5 @@
+<img src="http:%2F%2Fyuml.me%2Fdiagram%2Fscruffy%2Fclass%2F
+[<<Game>>;+move;+winner;+getMoves;+getTurn;+getCopy;+gameIsOver]^-.-[Reversi|+turn;+turnNumber;-availableMoves;-lastTurnToAskAvailableMoves|+setBoard;+getScore;+getWinner;+gameIsOver;+getCopy;+moveIsLegal;+move;+getBoardCopy;+toString],
+[Reversi]uses -.->[ReverseHelper||+reverse],
+[Reversi]++-1[ReversiBoard|-board|+getBoardXY;+setBoardXY;+toString;+getCopy],
+[<<AI>>]uses -.->[<<Game>>],[<<AI>>]^-.-[MCTSbot||-getRandomChildNode;-getChildWithMaxScore;-selectPromisingLeaf;-simulateRandomPlayout;-backPropagation;-expandNode],[<<AI>>]^-.-[MinimaxAI||+minimax], [<<Evaluator>>;+eval]^-.-[ReversiEvaluator], [MinimaxAI]++-0..1[<<Evaluator>>], [MCTSbot]uses -.->[UCT||+uctValue;+getChildWithBestUCTValue], [MCTSbot]uses -.->[Tree|+root], [Tree]++-*>[Node|+state;+parent;+children], [Node]++-1>[State|+Game;+visitCount;+winScore;+latestMove|+incrementVisitCount;+addScore;+getAllPossibleStates;+randomPlay], [Node]++-*[Node], [UCT]uses -.->[Node], [UCT]uses -.->[State], [State]++-1[<<Game>>], [<<Evaluator>>]uses -.->[<<Game>>]">
