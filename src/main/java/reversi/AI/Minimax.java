@@ -12,10 +12,10 @@ import reversi.data_structures.List;
  *
  * @author aepiiroi
  */
-public class MinMax {
+public class Minimax {
     
     
-    private MinMax() {}
+    private Minimax() {}
     
     public static int minmax(Game game) {
         return minmax(game, 0, Integer.MAX_VALUE, null);

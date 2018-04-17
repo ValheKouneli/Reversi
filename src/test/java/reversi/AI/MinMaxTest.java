@@ -100,7 +100,7 @@ public class MinMaxTest {
     
     @Test
     public void minMaxWithoutLimitWorks() {
-        int result = MinMax.minmax(nim);
+        int result = Minimax.minmax(nim);
         assertEquals(Integer.MIN_VALUE, result);
     }
     

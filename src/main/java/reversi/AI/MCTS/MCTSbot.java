@@ -5,6 +5,7 @@ package reversi.AI.MCTS;
 
 
 import java.util.Random;
+import reversi.AI.AI;
 import reversi.AI.Game;
 import reversi.data_structures.List;
 import reversi.data_structures.Pair;
@@ -13,7 +14,7 @@ import reversi.data_structures.Pair;
  *
  * @author Valhe Kouneli
  */
-public class MCTSbot {
+public class MCTSbot implements AI <Game> {
     
     int level;
     static final int WIN_SCORE = 10;
@@ -31,6 +32,7 @@ public class MCTSbot {
      * based on Monte Carlo Tree Search algorithm.
      * @param game some game situation where it's the MCTSbot's turn
      */
+    @Override
     public void makeNextMove(Game game) {
         long end = System.currentTimeMillis() + 2000;
         //how long to continue before selecting final move
@@ -131,5 +133,7 @@ public class MCTSbot {
             node.getChildren().add(newNode);
         }
     }
+
+
     
 }
