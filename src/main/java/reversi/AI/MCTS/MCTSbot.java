@@ -40,100 +40,20 @@ public class MCTSbot implements AI <Game> {
         Tree tree = new Tree(new State(game));
         
         while (System.currentTimeMillis() < end) {
-            Node promisingNode = selectPromisingLeaf(tree.getRoot());
+            Node promisingNode = MCTShelper.selectPromisingLeaf(tree.getRoot());
             if (!promisingNode.getState().getGame().gameIsOver()) {
-                expandNode(promisingNode);
+                MCTShelper.expandNode(promisingNode);
             }
             Node nodeToExplore = promisingNode;
             if (!promisingNode.getChildren().isEmpty()) {
-                nodeToExplore = getRandomChildNode(promisingNode);
+                nodeToExplore = MCTShelper.getRandomChildNode(promisingNode, random);
             }
-            int playoutResult = simulateRandomPlayout(nodeToExplore);
-            backPropagation(nodeToExplore, playoutResult);
+            int playoutResult = MCTShelper.simulateRandomPlayout(nodeToExplore, opponent);
+            MCTShelper.backPropagation(nodeToExplore, playoutResult, WIN_SCORE);
         }
         
-        Node winnerNode = getChildWithMaxScore(tree.getRoot());
+        Node winnerNode = MCTShelper.getChildWithMaxScore(tree.getRoot());
         Pair move = winnerNode.getState().getLatestMove();
         game.move(move);
     }
-    
-    protected Node getRandomChildNode(Node node) {
-        int size = node.getChildren().size();
-        if (size > 0) {
-            int i = random.nextInt(size);
-            return node.getChildren().get(i);
-        } else {
-            return null;
-        }
-    }
-    
-    protected static Node getChildWithMaxScore(Node node) {
-        List<Node> children = node.getChildren();
-        double bestScore = Integer.MIN_VALUE;
-        Node bestChild = null;
-        Node child;
-        for (int i=0; i<children.size(); i++) {
-            child = children.get(i);
-            if (child.getState().getWinScore() > bestScore) {
-                bestScore = child.getState().getWinScore();
-                bestChild = child;
-            }
-        }
-        return bestChild;
-    }
-    
-    /**
-     * @param rootNode a node
-     * @return if node has children, child with best UCT value; else node itself
-     */
-    protected static Node selectPromisingLeaf(Node rootNode) {
-        Node node = rootNode;
-        if (!node.getChildren().isEmpty()) {
-            node = UCT.getChildWithBestUCTValue(node);
-        }
-        return node;
-    }
-    
-    protected int simulateRandomPlayout(Node node) {
-        Node tempNode = node.getCopyWithoutChildren();
-        State tempState = tempNode.getState();
-        boolean gameIsOver = tempState.getGame().gameIsOver();
-        if (gameIsOver && tempState.getGame().winner() == opponent) {
-            tempNode.getParent().getState().setWinScore(Integer.MIN_VALUE);
-            return opponent;
-        }
-        while (!gameIsOver) {
-            tempState.randomPlay();
-            gameIsOver = tempState.getGame().gameIsOver();
-        }
-        return tempState.getGame().winner();
-    }
-    
-    protected static void backPropagation(Node nodeToExplore, int playerNo) {
-        Node tempNode = nodeToExplore;
-        while (tempNode != null) {
-            tempNode.getState().incrementVisit();
-            //if node's turn is different from who won a game following it,
-            //increment winScore
-            if (tempNode.getState().getGame().getTurn()*(-1) == playerNo) {
-                tempNode.getState().addScore(WIN_SCORE);
-            }
-            tempNode = tempNode.getParent();
-        }
-    }
-    
-    protected static void expandNode(Node node) {
-        List<State> possibleStates = node.getState().getAllPossibleStates();
-        State state;
-        Node newNode;
-        for (int i=0; i<possibleStates.size(); i++) {
-            state = possibleStates.get(i);
-            newNode = new Node(state);
-            newNode.setParent(node);
-            node.getChildren().add(newNode);
-        }
-    }
-
-
-    
 }
