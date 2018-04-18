@@ -57,7 +57,7 @@ public class MCTSbot implements AI <Game> {
         game.move(move);
     }
     
-    private Node getRandomChildNode(Node node) {
+    protected Node getRandomChildNode(Node node) {
         int size = node.getChildren().size();
         if (size > 0) {
             int i = random.nextInt(size);
@@ -67,7 +67,7 @@ public class MCTSbot implements AI <Game> {
         }
     }
     
-    private Node getChildWithMaxScore(Node node) {
+    protected static Node getChildWithMaxScore(Node node) {
         List<Node> children = node.getChildren();
         double bestScore = Integer.MIN_VALUE;
         Node bestChild = null;
@@ -86,7 +86,7 @@ public class MCTSbot implements AI <Game> {
      * @param rootNode a node
      * @return if node has children, child with best UCT value; else node itself
      */
-    private Node selectPromisingLeaf(Node rootNode) {
+    protected static Node selectPromisingLeaf(Node rootNode) {
         Node node = rootNode;
         if (!node.getChildren().isEmpty()) {
             node = UCT.getChildWithBestUCTValue(node);
@@ -94,7 +94,7 @@ public class MCTSbot implements AI <Game> {
         return node;
     }
     
-    private int simulateRandomPlayout(Node node) {
+    protected int simulateRandomPlayout(Node node) {
         Node tempNode = node.getCopyWithoutChildren();
         State tempState = tempNode.getState();
         boolean gameIsOver = tempState.getGame().gameIsOver();
@@ -109,7 +109,7 @@ public class MCTSbot implements AI <Game> {
         return tempState.getGame().winner();
     }
     
-    private void backPropagation(Node nodeToExplore, int playerNo) {
+    protected static void backPropagation(Node nodeToExplore, int playerNo) {
         Node tempNode = nodeToExplore;
         while (tempNode != null) {
             tempNode.getState().incrementVisit();
@@ -122,7 +122,7 @@ public class MCTSbot implements AI <Game> {
         }
     }
     
-    private void expandNode(Node node) {
+    protected static void expandNode(Node node) {
         List<State> possibleStates = node.getState().getAllPossibleStates();
         State state;
         Node newNode;

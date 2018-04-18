@@ -15,11 +15,16 @@ import reversi.data_structures.List;
  */
 public class MCTSbotTest {
     
-    Node node;
+    private Node parent;
     
     @Before
     public void setUp() {
-        
+        parent = MCTSTestHelper.getTestNode();
+    }
+    
+    @Test
+    public void getChildWithMaxScoreWorks() {
+        assertEquals(100, MCTSbot.getChildWithMaxScore(parent).getState().getWinScore());
     }
     
 }
