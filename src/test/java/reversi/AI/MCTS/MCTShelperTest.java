@@ -13,7 +13,7 @@ import reversi.data_structures.List;
  *
  * @author Valhe Kouneli
  */
-public class MCTSbotTest {
+public class MCTShelperTest {
     
     private Node parent;
     
@@ -24,7 +24,7 @@ public class MCTSbotTest {
     
     @Test
     public void getChildWithMaxScoreWorks() {
-        assertEquals(100, MCTSbot.getChildWithMaxScore(parent).getState().getWinScore());
+        assertEquals(100, MCTShelper.getChildWithMaxScore(parent).getState().getWinScore());
     }
     
 }
