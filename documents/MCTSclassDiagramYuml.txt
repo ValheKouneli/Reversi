@@ -1,0 +1,4 @@
+<img src="http:%2F%2Fyuml.me%2Fdiagram%2Fscruffy%2Fclass%2F
+[<<AI>>;+makeNextMove]uses -.->[<<Game>>],[<<AI>>;+makeNextMove]^-.-[MCTSbot], [MCTSbot]uses -.->[MCTShelper||-getRandomChildNode;-getChildWithMaxScore;-selectPromisingLeaf;-simulateRandomPlayout;-backPropagation;-expandNode],
+[MCTShelper]uses -.->[Node], [MCTShelper]uses -.->[State],
+[MCTSbot]uses -.->[UCT||+uctValue;+getChildWithBestUCTValue], [MCTSbot]uses -.->[Tree|+root], [Tree]++-*>[Node|+state;+parent;+children], [Node]++-1>[State|+Game;+visitCount;+winScore;+latestMove|+incrementVisitCount;+addScore;+getAllPossibleStates;+randomPlay], [Node]++-*[Node], [UCT]uses -.->[Node], [UCT]uses -.->[State], [State]++-1[<<Game>>]">
