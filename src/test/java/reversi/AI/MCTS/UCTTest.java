@@ -39,7 +39,7 @@ public class UCTTest {
     }
     
     @Test
-    public void getChildWithBestUCTvalueWorks() {
+    public void getChildWithBestUCTValueWorks() {
         assertEquals(2, UCT.getChildWithBestUCTValue(parent).getState().getVisitCount());
     }
     
