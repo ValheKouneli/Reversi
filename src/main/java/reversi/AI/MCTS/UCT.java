@@ -33,16 +33,13 @@ public class UCT {
     }
     
     public static double uctValue(Node node) {
+        if (node.getParent() == null) {
+            throw new java.lang.NullPointerException("Node has no parent.");
+        }
         int parentVisitCount = node.getParent().getState().getVisitCount();
         double nodeWinScore = node.getState().getWinScore();
-        double nodeVisitCount = node.getState().getVisitCount();
-        if (nodeVisitCount == 0) {
-            return Integer.MAX_VALUE;
-        } else {
-            return ((double) nodeWinScore / (double) nodeVisitCount) +
-                    1.41 * Math.sqrt(Math.log(parentVisitCount) / 
-                            (double) nodeVisitCount);
-        }
+        int nodeVisitCount = node.getState().getVisitCount();
+        return uctValue(parentVisitCount, nodeWinScore, nodeVisitCount);
     }
     
     /** Returns the child with the best UCT value for the given node.
