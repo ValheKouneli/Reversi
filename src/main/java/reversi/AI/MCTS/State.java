@@ -60,7 +60,7 @@ public class State {
         this.winScore += score;
     }
     
-    public double getWinScore() {
+    public int getWinScore() {
         return winScore;
     }
     
