@@ -7,7 +7,6 @@ package reversi.AI.MCTS;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import reversi.data_structures.List;
 
 /**
  *
@@ -23,8 +22,31 @@ public class MCTShelperTest {
     }
     
     @Test
-    public void getChildWithMaxScoreWorks() {
-        assertEquals(100, MCTShelper.getChildWithMaxScore(parent).getState().getWinScore());
+    public void getChildWithMaxScoreWorksForNodeWithChildren() {
+        assertEquals(100, MCTShelper.getChildWithMaxScore(parent)
+                .getState().getWinScore());
     }
+    
+    @Test
+    public void getChildWithMaxScoreReturnsNullForNodeWithoutChildren() {
+        assertEquals(null, MCTShelper
+                .getChildWithMaxScore(MCTShelper.getChildWithMaxScore(parent)));
+    }
+    
+    @Test
+    public void selectPromisingBranchWorksForNodeWithChildren() {
+        assertEquals(2, MCTShelper.selectPromisingBranch(parent)
+                .getState().getWinScore());
+    }
+    
+    @Test
+    public void selectPromisingBranchReturnsNodeItselfForNodeWithoutChildren() {
+        assertEquals(2, MCTShelper.selectPromisingBranch(MCTShelper.selectPromisingBranch(parent))
+                .getState().getWinScore());
+    }
+    
+    
+    
+    
     
 }

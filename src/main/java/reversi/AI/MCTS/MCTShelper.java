@@ -45,7 +45,7 @@ public class MCTShelper {
      * @param rootNode a node
      * @return if node has children, child with best UCT value; else node itself
      */
-    protected static Node selectPromisingLeaf(Node rootNode) {
+    protected static Node selectPromisingBranch(Node rootNode) {
         Node node = rootNode;
         if (!node.getChildren().isEmpty()) {
             node = UCT.getChildWithBestUCTValue(node);

@@ -40,7 +40,7 @@ public class MCTSbot implements AI <Game> {
         Tree tree = new Tree(new State(game));
         
         while (System.currentTimeMillis() < end) {
-            Node promisingNode = MCTShelper.selectPromisingLeaf(tree.getRoot());
+            Node promisingNode = MCTShelper.selectPromisingBranch(tree.getRoot());
             if (!promisingNode.getState().getGame().gameIsOver()) {
                 MCTShelper.expandNode(promisingNode);
             }
