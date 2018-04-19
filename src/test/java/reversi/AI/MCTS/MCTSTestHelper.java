@@ -5,7 +5,7 @@
  */
 package reversi.AI.MCTS;
 
-import reversi.AI.Game;
+import reversi.data_structures.Pair;
 import reversi.game.BoardFactory;
 import reversi.game.Reversi;
 import reversi.game.ReversiBoard;
@@ -18,11 +18,11 @@ public class MCTSTestHelper {
     
     private MCTSTestHelper() {}
     
-    public static final void addNewChild(int childWinScore, int childVisitCount, Node parent) {
-        State childState = new State();
+    public static final void addNewChild(int childWinScore, int childVisitCount, Node<Pair> parent) {
+        State<Pair> childState = new State<>();
         childState.setVisitCount(childVisitCount);
         childState.setWinScore(childWinScore);
-        Node child = new Node(childState);
+        Node<Pair> child = new Node<>(childState);
         child.setParent(parent);
         parent.addChild(child);
         parent.getState().setVisitCount(parent.getState().getVisitCount() +
@@ -31,8 +31,8 @@ public class MCTSTestHelper {
                 childWinScore);
     }
     
-    public static Node getTestNodeWithChildrenButNoSetGames() {
-        Node parent = new Node(new State());
+    public static Node<Pair> getTestNodeWithChildrenButNoSetGames() {
+        Node<Pair> parent = new Node<>(new State<>());
         MCTSTestHelper.addNewChild(2, 2, parent); //3.17377697326
         MCTSTestHelper.addNewChild(4, 4, parent); //2.53709243858
         MCTSTestHelper.addNewChild(1, 3, parent); //2.1082147997
@@ -41,7 +41,7 @@ public class MCTSTestHelper {
         return parent;
     }
     
-    public static Node getTestNodeWithSetGameButNoChildren() {
+    public static Node<Pair> getTestNodeWithSetGameButNoChildren() {
         Reversi game = new Reversi();
         ReversiBoard board = BoardFactory.makeBoard("   0 1 2 3 4 5 6 7 \n" +
                                                     "0 |●|○|○|○|○|○|○|○|\n" +
@@ -55,8 +55,8 @@ public class MCTSTestHelper {
         game.setBoard(board);
         game.setTurn(1);
         game.setTurnNumber(62);
-        State state = new State();
-        Node node = new Node(state);
+        State<Pair> state = new State<>();
+        Node<Pair> node = new Node<>(state);
         return node;
     }
 }

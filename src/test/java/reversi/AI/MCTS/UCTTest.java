@@ -7,6 +7,7 @@ package reversi.AI.MCTS;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import reversi.data_structures.Pair;
 
 /**
  *
@@ -14,7 +15,7 @@ import org.junit.Test;
  */
 public class UCTTest {
     
-    private Node parent;
+    private Node<Pair> parent;
     
     @Before
     public void setUp() {

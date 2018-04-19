@@ -6,12 +6,14 @@ package reversi.AI.MCTS;
 /**
  *
  * @author Valhe Kouneli
+ * @param <MoveType>
  */
-public class Tree {
+public class Tree <MoveType> {
     
-    Node root;
+    Node<MoveType> root;
+    
     public Tree() {
-        root = new Node(new State());
+        root = new Node(new State<>());
     }
     
     public Tree(State state) {

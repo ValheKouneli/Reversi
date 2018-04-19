@@ -8,27 +8,28 @@ import reversi.data_structures.List;
 /**
  *
  * @author Valhe Kouneli
+ * @param <MoveType>
  */
-public class Node {
+public class Node <MoveType> {
     
-    private State state; //information about this node
-    private Node parent;
-    private final List<Node> children;
+    private State<MoveType> state; //information about this node
+    private Node<MoveType> parent;
+    private final List<Node<MoveType>> children;
     
-    public Node(State state) {
+    public Node(State<MoveType> state) {
         this.state = state;
         children = new List<>();
     }
     
-    public void setState(State state) {
+    public void setState(State<MoveType> state) {
         this.state = state;
     }
     
-    public State getState() {
+    public State<MoveType> getState() {
         return state;
     }
     
-    public void setParent(Node parent) {
+    public void setParent(Node<MoveType> parent) {
         this.parent = parent;
     }
     
@@ -36,18 +37,12 @@ public class Node {
         return parent;
     }
     
-    public void addChild(Node child) {
+    public void addChild(Node<MoveType> child) {
         children.add(child);
     }
     
-    public List<Node> getChildren() {
+    public List<Node<MoveType>> getChildren() {
         return children;
-    }
-    
-    public Node getCopyWithoutChildren() {
-        Node copy = new Node(state.getCopy());
-        copy.setParent(parent);
-        return copy;
     }
     
 }

@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package reversi.AI.MCTS;
+import java.util.Random;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import reversi.data_structures.Pair;
 
 /**
  *
@@ -14,23 +16,27 @@ import org.junit.Test;
  */
 public class MCTShelperTest {
     
-    private Node parent;
+    private Node<Pair> parent;
+    private MCTShelper<Pair> MCTShelper;
+    private Random random;
     
     @Before
     public void setUp() {
+        MCTShelper = new MCTShelper<>();
         parent = MCTSTestHelper.getTestNodeWithChildrenButNoSetGames();
+        random = new Random(System.currentTimeMillis());
     }
     
     @Test
     public void getChildWithMaxScoreWorksForNodeWithChildren() {
-        assertEquals(100, MCTShelper.getChildWithMaxScore(parent)
+        assertEquals(100, MCTShelper.getChildWithMaxScore(parent, random)
                 .getState().getWinScore());
     }
     
     @Test
     public void getChildWithMaxScoreReturnsNullForNodeWithoutChildren() {
         assertEquals(null, MCTShelper
-                .getChildWithMaxScore(MCTShelper.getChildWithMaxScore(parent)));
+                .getChildWithMaxScore(MCTShelper.getChildWithMaxScore(parent,random), random));
     }
     
     @Test

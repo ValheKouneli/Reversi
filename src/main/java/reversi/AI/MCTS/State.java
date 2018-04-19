@@ -6,19 +6,19 @@ package reversi.AI.MCTS;
 import java.util.Random;
 import reversi.AI.Game;
 import reversi.data_structures.List;
-import reversi.data_structures.Pair;
 
 /**
  * Stores information about nodes used in Monte Carlo Tree Search
  * in class MCTSbot.
  *
  * @author Valhe Kouneli
+ * @param <MoveType>
  */
-public class State {
+public class State <MoveType> {
     private final Game game;
     private int visitCount;
     private int winScore;
-    private Pair latestMove;
+    private MoveType latestMove;
     private static final Random RANDOM = new Random(System.currentTimeMillis());
     
     public State() {
@@ -34,7 +34,7 @@ public class State {
         winScore = 0;
     }
     
-    public State(Game game, Pair latestMove) {
+    public State(Game game, MoveType latestMove) {
         this.latestMove = latestMove;
         this.game = game;
         visitCount = 0;
@@ -49,11 +49,11 @@ public class State {
         return visitCount;
     }
     
-    public Pair getLatestMove() {
+    public MoveType getLatestMove() {
         return latestMove;
     }
     
-    public void setLatestMove(Pair move) {
+    public void setLatestMove(MoveType move) {
         latestMove = move;
     }
     public void addScore(int score) {
@@ -76,26 +76,26 @@ public class State {
         return game;
     }
     
-    public List<State> getAllPossibleStates() {
-        List<State> nextStates = new List<>();
-        List<Pair> moves = game.getMoves();
+    public List<State<MoveType>> getAllPossibleStates() {
+        List<State<MoveType>> nextStates = new List<>();
+        List<MoveType> moves = game.getMoves();
         for (int i=0; i<moves.size(); i++) {
             Game copy = game.getCopy();
             copy.move(moves.get(i));
-            State state = new State(copy, moves.get(i));
+            State<MoveType> state = new State<>(copy, moves.get(i));
             nextStates.add(state);
         }
         return nextStates;
     }
     
     public void randomPlay() {
-        List<Pair> moves = game.getMoves();
+        List<MoveType> moves = game.getMoves();
         int i = RANDOM.nextInt(moves.size());
         game.move(moves.get(i));
     }
     
-    public State getCopy() {
-        State copy = new State(game.getCopy());
+    public State<MoveType> getCopy() {
+        State<MoveType> copy = new State<>(game.getCopy());
         copy.setVisitCount(visitCount);
         copy.setWinScore(winScore);
         copy.setLatestMove(latestMove);
