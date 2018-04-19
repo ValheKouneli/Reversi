@@ -66,7 +66,7 @@ public class MCTShelperTest {
     public void backPropagationIncrementsVisitCounts() {
         Node<Pair> node = nodeWithoutChildren;
         MCTShelper.expandNode(node);
-        Node child = node.getChildren().get(0);
+        Node<Pair> child = node.getChildren().get(0);
         //imaginary random playout ending in opponent (black) victory here
         MCTShelper.backPropagation(child, -1);
         assertEquals(1, child.getState().getVisitCount());
@@ -77,7 +77,7 @@ public class MCTShelperTest {
     public void backPropagationIncrementsWinCountForNodesWhereAIjustPlayed() {
         Node<Pair> node = nodeWithoutChildren;
         MCTShelper.expandNode(node);
-        Node child = node.getChildren().get(0);
+        Node<Pair> child = node.getChildren().get(0);
         //imaginary random playout ending in own (white) victory here
         MCTShelper.backPropagation(child, 1);
         assertEquals(1, child.getState().getWinScore());
@@ -88,11 +88,23 @@ public class MCTShelperTest {
     public void backPropagationIncrementsWinCountForNodesWhereAIsOpponentJustPlayed() {
         Node<Pair> node = nodeWithoutChildren;
         MCTShelper.expandNode(node);
-        Node child = node.getChildren().get(0);
+        Node<Pair> child = node.getChildren().get(0);
         //imaginary random playout ending in opponen (black) victory here
         MCTShelper.backPropagation(child, -1);
         assertEquals(0, child.getState().getWinScore());
         assertEquals(1, node.getState().getWinScore());
+    }
+    
+    @Test
+    public void simulateRandomPlayoutMarksMovesLeadingToOpponentInstantVictoryAsIndefinitelyBad() {
+        Node<Pair> node = nodeWithoutChildren;
+        MCTShelper.expandNode(node);
+        Node<Pair> child = node.getChildren().get(0);
+        MCTShelper.expandNode(child);
+        Node<Pair> grandchild = child.getChildren().get(0);
+        MCTShelper.simulateRandomPlayout(grandchild);
+        //it is known that the opponent, black(-1), wins in grandchild situation
+        assertEquals(Integer.MIN_VALUE, child.getState().getWinScore());
     }
     
     @Test
