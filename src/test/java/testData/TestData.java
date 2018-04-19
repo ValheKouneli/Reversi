@@ -26,6 +26,16 @@ public class TestData {
                                      "6 |○|○|○|○|●|●| |●|\n" +
                                      "7 |●|●|●|●|●|○| |●|\n";
     
+    private static final String BOARD_SITUATION2 = "   0 1 2 3 4 5 6 7 \n" +
+                                                   "0 |●|●|●|●| | | | |\n" +
+                                                   "1 |●|●|●|○| | | | |\n" +
+                                                   "2 |●|●|○|●|○| | | |\n" +
+                                                   "3 |●| |○|●|○| | | |\n" +
+                                                   "4 |●| |○|●|○| | | |\n" +
+                                                   "5 |●|●|○|○|○|○| | |\n" +
+                                                   "6 |●| |○| | | | | |\n" +
+                                                   "7 |●|●|●|●|●| | | |\n";
+    
     public static ReversiBoard getBoard1() {
         return BoardFactory.makeBoard(BOARD_SITUATION1);
     }
