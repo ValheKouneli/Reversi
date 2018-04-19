@@ -12,6 +12,7 @@ Command line Java application, Reversi AI.
 
 ## TODO (at least)
 
+* Remove the hidious <MoveType> <GameType> thingies from the AIs :O~
 * Fix the implementation of rules (see current known bugs)
 * Make command line user interface
 * Make more unit tests
