@@ -18,7 +18,7 @@ public class MCTShelperTest {
     
     @Before
     public void setUp() {
-        parent = MCTSTestHelper.getTestNode();
+        parent = MCTSTestHelper.getTestNodeWithChildrenButNoSetGames();
     }
     
     @Test

@@ -18,7 +18,7 @@ public class UCTTest {
     
     @Before
     public void setUp() {
-        parent = MCTSTestHelper.getTestNode();
+        parent = MCTSTestHelper.getTestNodeWithChildrenButNoSetGames();
     }
     
     @Test
