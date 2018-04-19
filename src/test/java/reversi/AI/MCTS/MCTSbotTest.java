@@ -19,7 +19,7 @@ public class MCTSbotTest {
     
     @Before
     public void setUp() {
-        bot = new MCTSbot<>(1, -1, 2000);
+        bot = new MCTSbot<>(2000);
     }
     
     @Test
