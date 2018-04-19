@@ -21,13 +21,13 @@ public class MCTSbot <MoveType> implements AI <MoveType> {
     public MCTSbot(int me, int opponent) {
         this.opponent = opponent;
         timeToThink = 2000;
-        MCTShelper = new MCTShelper<>();
+        MCTShelper = new MCTShelper<>(random);
     }
     
     public MCTSbot(int me, int opponent, int timeToThink) {
         this.timeToThink = timeToThink;
         this.opponent = opponent;
-        MCTShelper = new MCTShelper<>();
+        MCTShelper = new MCTShelper<>(random);
     }
     
     /**
@@ -57,7 +57,7 @@ public class MCTSbot <MoveType> implements AI <MoveType> {
             
             if (!promisingNode.getState().getGame().gameIsOver()) {
                 MCTShelper.expandNode(promisingNode);
-                nodeToExplore = MCTShelper.getRandomChildNode(promisingNode, random);
+                nodeToExplore = MCTShelper.getRandomChildNode(promisingNode);
                 playoutResult = MCTShelper.simulateRandomPlayout(nodeToExplore, opponent);
             } else {
                 nodeToExplore = promisingNode;
@@ -67,7 +67,7 @@ public class MCTSbot <MoveType> implements AI <MoveType> {
             MCTShelper.backPropagation(nodeToExplore, playoutResult, WIN_SCORE);
         }
         
-        Node<MoveType> winnerNode = MCTShelper.getChildWithMaxScore(tree.getRoot(), random);
+        Node<MoveType> winnerNode = MCTShelper.getChildWithMaxScore(tree.getRoot());
         State<MoveType> state = winnerNode.getState();
         MoveType move = state.getLatestMove(); //null pointer exception
         return move;

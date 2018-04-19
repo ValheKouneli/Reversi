@@ -10,9 +10,17 @@ import reversi.data_structures.List;
  */
 public class MCTShelper <MoveType> {
     
-    public MCTShelper() {}
+    private final Random random;
     
-    protected Node<MoveType> getRandomChildNode(Node<MoveType> node, Random random) {
+    public MCTShelper(Random random) {
+        this.random = random;
+    }
+    
+    public MCTShelper() {
+        this.random = new Random(System.currentTimeMillis());
+    }
+    
+    protected Node<MoveType> getRandomChildNode(Node<MoveType> node) {
         int size = node.getChildren().size();
         if (size > 0) {
             int i = random.nextInt(size);
@@ -22,7 +30,7 @@ public class MCTShelper <MoveType> {
         }
     }
 
-    protected Node<MoveType> getChildWithMaxScore(Node<MoveType> node, Random random) {
+    protected Node<MoveType> getChildWithMaxScore(Node<MoveType> node) {
         List<Node<MoveType>> children = node.getChildren();
         double bestScore = Integer.MIN_VALUE;
         Node bestChild = null;
@@ -35,7 +43,7 @@ public class MCTShelper <MoveType> {
             }
         }
         if (bestChild == null) {
-            return getRandomChildNode(node, random);
+            return getRandomChildNode(node);
         }
         return bestChild;
     }
