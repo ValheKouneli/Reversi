@@ -1,6 +1,3 @@
-/*
- * Implemented following the tutorial on http://www.baeldung.com/java-monte-carlo-tree-search
- */
 package reversi.AI.MCTS;
 
 
