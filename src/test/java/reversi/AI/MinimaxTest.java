@@ -27,10 +27,12 @@ public class MinimaxTest {
     public class Nim implements Game <Integer> {
         private int heap;
         private int turn;
+        private int turnNumber;
         
         public Nim() {
             heap = 5;
             turn = 1;
+            turnNumber = 0;
         }
         
         @Override
@@ -38,6 +40,7 @@ public class MinimaxTest {
             if (heap-move>=0 && 0<move && move<=3) {
                 heap -= move;
                 turn = (turn == 1 ? -1 : 1);
+                turnNumber++;
                 return true;
             } else {
                 return false;
@@ -54,6 +57,11 @@ public class MinimaxTest {
         
         private void setTurn(int turn) {
             this.turn = turn;
+        }
+        
+        @Override
+        public int getTurnNumber() {
+            return turnNumber;
         }
 
         @Override
