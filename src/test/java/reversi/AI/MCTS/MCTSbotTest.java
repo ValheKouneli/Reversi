@@ -4,24 +4,28 @@
  * and open the template in the editor.
  */
 package reversi.AI.MCTS;
+import testData.TestData;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import reversi.data_structures.Pair;
 /**
  *
  * @author Valhe Kouneli
  */
 public class MCTSbotTest {
     
-    MCTSbot bot;
+    MCTSbot<Pair> bot;
     
     @Before
     public void setUp() {
-        bot = new MCTSbot(1, -1, 9999999);
+        bot = new MCTSbot<>(1, -1, 2000);
     }
     
     @Test
     public void botPlaysTheBestMoveWhenItIsItsLastTurn() {
-        
+        Pair move = bot.getNextMove(TestData.getGame1());
+        assertEquals(6, move.getX());
+        assertEquals(6, move.getY());
     }
 }
