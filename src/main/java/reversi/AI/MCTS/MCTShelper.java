@@ -6,6 +6,7 @@ import reversi.data_structures.List;
 /**
  *
  * @author Valhe Kouneli
+ * @param <MoveType>
  */
 public class MCTShelper <MoveType> {
     
