@@ -77,14 +77,14 @@ public class MCTShelper <MoveType> {
         }
     }
 
-    protected void backPropagation(Node<MoveType> nodeToExplore, int playerNo, int WIN_SCORE) {
+    protected void backPropagation(Node<MoveType> nodeToExplore, int winner) {
         Node tempNode = nodeToExplore;
         while (tempNode != null) {
             tempNode.getState().incrementVisit();
             //if node's turn is different from who won a game following it,
             //increment winScore
-            if (tempNode.getState().getGame().getTurn() * (-1) == playerNo) {
-                tempNode.getState().addScore(WIN_SCORE);
+            if (tempNode.getState().getGame().getTurn() * (-1) == winner) {
+                tempNode.getState().addScore(1);
             }
             tempNode = tempNode.getParent();
         }

@@ -12,7 +12,6 @@ import reversi.AI.Game;
  */
 public class MCTSbot <MoveType> implements AI <MoveType> {
     
-    private static final int WIN_SCORE = 10;
     private final Random random = new Random(System.currentTimeMillis());
     private final int opponent;
     private final MCTShelper<MoveType> MCTShelper;
@@ -64,7 +63,7 @@ public class MCTSbot <MoveType> implements AI <MoveType> {
                 playoutResult = promisingNode.getState().getGame().winner();
             }
             
-            MCTShelper.backPropagation(nodeToExplore, playoutResult, WIN_SCORE);
+            MCTShelper.backPropagation(nodeToExplore, playoutResult);
         }
         
         Node<MoveType> winnerNode = MCTShelper.getChildWithMaxScore(tree.getRoot());
