@@ -63,6 +63,39 @@ public class MCTShelperTest {
     }
     
     @Test
+    public void backPropagationIncrementsVisitCounts() {
+        Node<Pair> node = nodeWithoutChildren;
+        MCTShelper.expandNode(node);
+        Node child = node.getChildren().get(0);
+        //imaginary random playout ending in opponent (black) victory here
+        MCTShelper.backPropagation(child, -1);
+        assertEquals(1, child.getState().getVisitCount());
+        assertEquals(1, node.getState().getVisitCount());
+    }
+    
+    @Test
+    public void backPropagationIncrementsWinCountForNodesWhereAIjustPlayed() {
+        Node<Pair> node = nodeWithoutChildren;
+        MCTShelper.expandNode(node);
+        Node child = node.getChildren().get(0);
+        //imaginary random playout ending in own (white) victory here
+        MCTShelper.backPropagation(child, 1);
+        assertEquals(1, child.getState().getWinScore());
+        assertEquals(0, node.getState().getWinScore());
+    }
+    
+    @Test
+    public void backPropagationIncrementsWinCountForNodesWhereAIsOpponentJustPlayed() {
+        Node<Pair> node = nodeWithoutChildren;
+        MCTShelper.expandNode(node);
+        Node child = node.getChildren().get(0);
+        //imaginary random playout ending in opponen (black) victory here
+        MCTShelper.backPropagation(child, -1);
+        assertEquals(0, child.getState().getWinScore());
+        assertEquals(1, node.getState().getWinScore());
+    }
+    
+    @Test
     public void getChildWithMaxScoreReturnsNullForNodeWithoutChildren() {
         assertEquals(null, MCTShelper
                 .getChildWithMaxScore(MCTShelper.getChildWithMaxScore(nodeWithChildren)));
