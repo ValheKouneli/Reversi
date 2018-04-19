@@ -41,6 +41,7 @@ public class Reversi implements Game {
         return turn;
     }
     
+    @Override
     public int getTurnNumber() {
         return turnNumber;
     }
