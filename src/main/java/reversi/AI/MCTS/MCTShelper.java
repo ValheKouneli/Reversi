@@ -60,13 +60,15 @@ public class MCTShelper <MoveType> {
         return node;
     }
 
-    protected int simulateRandomPlayout(Node<MoveType> node, int opponent) {
+    protected int simulateRandomPlayout(Node<MoveType> node) {
         boolean gameIsOver = node.getState().getGame().gameIsOver();
         if (gameIsOver &&
-                node.getState().getGame().getTurn() != opponent &&
-                node.getState().getGame().winner() == opponent) {
+                node.getState().getGame().getTurn()*(-1) ==
+                node.getState().getGame().winner()) {
             node.getParent().getState().setWinScore(Integer.MIN_VALUE);
-            return opponent;
+            //if the last move was made by the player who won,
+            //the previous move was indefinitely bad
+            return node.getState().getGame().winner();
         } else {
             State tempState = node.getState().getCopy();
             while (!gameIsOver) {

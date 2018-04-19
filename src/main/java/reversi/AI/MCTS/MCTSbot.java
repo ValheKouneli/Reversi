@@ -57,7 +57,7 @@ public class MCTSbot <MoveType> implements AI <MoveType> {
             if (!promisingNode.getState().getGame().gameIsOver()) {
                 MCTShelper.expandNode(promisingNode);
                 nodeToExplore = MCTShelper.getRandomChildNode(promisingNode);
-                playoutResult = MCTShelper.simulateRandomPlayout(nodeToExplore, opponent);
+                playoutResult = MCTShelper.simulateRandomPlayout(nodeToExplore);
             } else {
                 nodeToExplore = promisingNode;
                 playoutResult = promisingNode.getState().getGame().winner();
