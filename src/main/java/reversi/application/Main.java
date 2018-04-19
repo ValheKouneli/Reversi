@@ -25,7 +25,7 @@ public class Main {
         
 
         Reversi game = new Reversi();
-        MCTSbot ai1 = new MCTSbot(1000);
+        MCTSbot ai1 = new MCTSbot(500);
         MinimaxAI ai2 = new MinimaxAI(new ReversiEvaluator2());
  
         Scanner reader = new Scanner(System.in);
