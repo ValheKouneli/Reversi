@@ -13,19 +13,16 @@ import reversi.AI.Game;
 public class MCTSbot <MoveType> implements AI <MoveType> {
     
     private final Random random = new Random(System.currentTimeMillis());
-    private final int opponent;
     private final MCTShelper<MoveType> MCTShelper;
     private final int timeToThink;
     
-    public MCTSbot(int me, int opponent) {
-        this.opponent = opponent;
-        timeToThink = 2000;
+    public MCTSbot() {
+        timeToThink = 1000;
         MCTShelper = new MCTShelper<>(random);
     }
     
-    public MCTSbot(int me, int opponent, int timeToThink) {
+    public MCTSbot(int timeToThink) {
         this.timeToThink = timeToThink;
-        this.opponent = opponent;
         MCTShelper = new MCTShelper<>(random);
     }
     
