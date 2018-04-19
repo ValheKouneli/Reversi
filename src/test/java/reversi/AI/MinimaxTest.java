@@ -14,7 +14,7 @@ import reversi.data_structures.List;
  *
  * @author Valhe Kouneli
  */
-public class MinMaxTest {
+public class MinimaxTest {
     
     /**
      * This implementation of Game is created for test purposes.
@@ -92,15 +92,17 @@ public class MinMaxTest {
     
     
     private Game nim;
+    private Minimax minimax;
     
     @Before
     public void setUp() {
         nim = new Nim();
+        minimax = new Minimax();
     }
     
     @Test
     public void minMaxWithoutLimitWorks() {
-        int result = Minimax.minmax(nim);
+        int result = minimax.minmax(nim);
         assertEquals(Integer.MIN_VALUE, result);
     }
     
