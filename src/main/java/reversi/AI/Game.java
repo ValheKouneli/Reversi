@@ -18,6 +18,7 @@ public interface Game <MoveType> {
     public int winner();
     public List<MoveType> getMoves();
     public int getTurn();
+    public int getTurnNumber();
     public Game getCopy();
     public boolean gameIsOver();
     
