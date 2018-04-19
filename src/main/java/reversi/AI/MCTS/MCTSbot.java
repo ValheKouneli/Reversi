@@ -45,16 +45,29 @@ public class MCTSbot <MoveType> implements AI <MoveType> {
         Tree tree = new Tree(new State(game));
         
         while (System.currentTimeMillis() < end) {
-            Node promisingNode = MCTShelper.selectPromisingBranch(tree.getRoot());
+            
+            Node promisingNode = MCTShelper
+                    .selectPromisingBranch(tree.getRoot());
+            // At frist, promisingNode is root itself, because root
+            // does not have any children yet.
+            
             if (!promisingNode.getState().getGame().gameIsOver()) {
                 MCTShelper.expandNode(promisingNode);
-            }
+            } // PromisingNode (or root without children) is expanded
+            
             Node nodeToExplore = promisingNode;
             if (!promisingNode.getChildren().isEmpty()) {
                 nodeToExplore = MCTShelper.getRandomChildNode(promisingNode, random);
             }
             int playoutResult = MCTShelper.simulateRandomPlayout(nodeToExplore, opponent);
+            // If this is the first time, random playout is made beginning from
+            // root's random child.
+            // If it is not, we begin the random playout from the root's most 
+            // promising child's random child.
+            
             MCTShelper.backPropagation(nodeToExplore, playoutResult, WIN_SCORE);
+            // After random playout, we update information about which nodes
+            // led to what results.
         }
         
         Node winnerNode = MCTShelper.getChildWithMaxScore(tree.getRoot());
