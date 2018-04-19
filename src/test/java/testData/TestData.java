@@ -5,13 +5,18 @@
  */
 package testData;
 
+import reversi.AI.Game;
+import reversi.game.BoardFactory;
+import reversi.game.Reversi;
+import reversi.game.ReversiBoard;
+
 /**
  *
  * @author Valhe Kouneli
  */
 public class TestData {
     
-    private String boardSituation1 = "   0 1 2 3 4 5 6 7 \n" +
+    private static final String BOARD_SITUATION1 = "   0 1 2 3 4 5 6 7 \n" +
                                      "0 |●|●|●|●|●|●|●|●|\n" +
                                      "1 |○|○|○|○|○|○|●|●|\n" +
                                      "2 |○|○|●|○|●|●|●|●|\n" +
@@ -21,5 +26,20 @@ public class TestData {
                                      "6 |○|○|○|○|●|●| |●|\n" +
                                      "7 |●|●|●|●|●|○| |●|\n";
     
+    public static ReversiBoard getBoard1() {
+        return BoardFactory.makeBoard(BOARD_SITUATION1);
+    }
+    
+    public static Reversi getReversi1() {
+        Reversi reversi = new Reversi();
+        reversi.setBoard(getBoard1());
+        reversi.setTurn(1);
+        reversi.setTurnNumber(62);
+        return reversi;
+    }
+    
+    public static Game getGame1() {
+        return (Game) getReversi1();
+    }
     
 }
