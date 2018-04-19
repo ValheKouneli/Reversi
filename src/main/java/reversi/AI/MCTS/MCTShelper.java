@@ -82,12 +82,14 @@ public class MCTShelper {
     }
 
     protected static void expandNode(Node node) {
-        List<State> possibleStates = node.getState().getAllPossibleStates();
-        for (int i = 0; i < possibleStates.size(); i++) {
-            State state = possibleStates.get(i);
-            Node newNode = new Node(state);
-            newNode.setParent(node);
-            node.addChild(newNode);
+        if (node.getChildren().isEmpty()) {
+            List<State> possibleStates = node.getState().getAllPossibleStates();
+            for (int i = 0; i < possibleStates.size(); i++) {
+                State state = possibleStates.get(i);
+                Node newNode = new Node(state);
+                newNode.setParent(node);
+                node.addChild(newNode);
+            }
         }
     }
     
