@@ -55,8 +55,20 @@ public class MCTSTestHelper {
         game.setBoard(board);
         game.setTurn(1);
         game.setTurnNumber(62);
-        State<Pair> state = new State<>();
+        State<Pair> state = new State<>(game);
         Node<Pair> node = new Node<>(state);
+        return node;
+    }
+    
+    public static Node<Pair> getTestNodeWithChildrenWithInfenitelyBadScores() {
+        Node<Pair> node = getTestNodeWithSetGameButNoChildren();
+        MCTShelper<Pair> mctshelper = new MCTShelper<>();
+        mctshelper.expandNode(node);
+        Node<Pair> child;
+        for(int i=0; i<node.getChildren().size(); i++) {
+            child = node.getChildren().get(i);
+            child.getState().setWinScore(Integer.MIN_VALUE);
+        }
         return node;
     }
 }

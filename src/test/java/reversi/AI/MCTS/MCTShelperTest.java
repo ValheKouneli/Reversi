@@ -29,14 +29,19 @@ public class MCTShelperTest {
     
     @Test
     public void getChildWithMaxScoreWorksForNodeWithChildren() {
-        assertEquals(100, MCTShelper.getChildWithMaxScore(parent, random)
+        assertEquals(100, MCTShelper.getChildWithMaxScore(parent)
                 .getState().getWinScore());
     }
     
     @Test
     public void getChildWithMaxScoreReturnsNullForNodeWithoutChildren() {
         assertEquals(null, MCTShelper
-                .getChildWithMaxScore(MCTShelper.getChildWithMaxScore(parent,random), random));
+                .getChildWithMaxScore(MCTShelper.getChildWithMaxScore(parent)));
+    }
+    
+    @Test
+    public void getChildWithMaxScoreDoesNotReturnNullForNodeWithInfinetelyBadChildren() {
+        assertNotNull(MCTShelper.getChildWithMaxScore(MCTSTestHelper.getTestNodeWithChildrenWithInfenitelyBadScores()));
     }
     
     @Test
