@@ -79,12 +79,10 @@ public class State {
     public List<State> getAllPossibleStates() {
         List<State> nextStates = new List<>();
         List<Pair> moves = game.getMoves();
-        State state;
-        Game copy;
         for (int i=0; i<moves.size(); i++) {
-            copy = game.getCopy();
+            Game copy = game.getCopy();
             copy.move(moves.get(i));
-            state = new State(copy, moves.get(i));
+            State state = new State(copy, moves.get(i));
             nextStates.add(state);
         }
         return nextStates;

@@ -36,9 +36,9 @@ public class Main {
             System.out.println(game.toString());
             System.out.println("It's " + getPlayer(game.getTurn()) + "'s turn.");
             if (game.getTurn() == 1) {
-                ai1.makeNextMove(game);
+                game.move(ai1.getNextMove(game));
             } else {
-                ai2.makeNextMove(game);
+                game.move(ai2.getNextMove(game));
             }
             i++;
         } while (!game.getMoves().isEmpty());

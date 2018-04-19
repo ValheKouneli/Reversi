@@ -14,14 +14,21 @@ import reversi.data_structures.List;
  */
 public class Minimax {
     
+    private Object bestMove;
     
-    private Minimax() {}
+    public Minimax() {
+        bestMove = null;
+    }
     
-    public static int minmax(Game game) {
+    public Object getBestMove() {
+        return bestMove;
+    }
+    
+    public int minmax(Game game) {
         return minmax(game, 0, Integer.MAX_VALUE, null);
     }
     
-    public static int minmax(Game game, int depth, int max_depth, Evaluator eval) {
+    public int minmax(Game game, int depth, int max_depth, Evaluator eval) {
         if (game.gameIsOver()) {
             return (game.winner() == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE);
         } else if (depth == max_depth) {
@@ -48,7 +55,7 @@ public class Minimax {
                 if (bestMoveSoFar == null) {
                     bestMoveSoFar = moves.get(0);
                 }
-                game.move(bestMoveSoFar);
+                bestMove = bestMoveSoFar;
             }
             return bestSoFar;
         }

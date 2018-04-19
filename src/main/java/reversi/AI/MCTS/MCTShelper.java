@@ -83,13 +83,11 @@ public class MCTShelper {
 
     protected static void expandNode(Node node) {
         List<State> possibleStates = node.getState().getAllPossibleStates();
-        State state;
-        Node newNode;
         for (int i = 0; i < possibleStates.size(); i++) {
-            state = possibleStates.get(i);
-            newNode = new Node(state);
+            State state = possibleStates.get(i);
+            Node newNode = new Node(state);
             newNode.setParent(node);
-            node.getChildren().add(newNode);
+            node.addChild(newNode);
         }
     }
     

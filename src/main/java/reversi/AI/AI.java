@@ -8,8 +8,8 @@ package reversi.AI;
 /**
  *
  * @author Valhe Kouneli
- * @param <GameType>
+ * @param <MoveType>
  */
-public interface AI <GameType> {
-    public void makeNextMove(GameType game);
+public interface AI <MoveType> {
+    public MoveType getNextMove(Game game);
 }
