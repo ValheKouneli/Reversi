@@ -9,11 +9,11 @@ package reversi.data_structures;
  *
  * @author Valhe Kouneli
  */
-public class Pair {
+public class IntPair {
     private final int x;
     private final int y;
     
-    public Pair(int x, int y) {
+    public IntPair(int x, int y) {
         this.x = x;
         this.y = y;
     }
