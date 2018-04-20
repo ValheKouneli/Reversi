@@ -20,3 +20,7 @@ Time spent: 4h
 Thursday: More unit tests. I found out some more mistakes my MCTSbot had because I followed that bad tutorial at first. I corrected my mistakes and now the bot is so much stronger.
 
 Time spent: 3h
+
+Friday: Started implementing a command line user interface. I tried to use the Model–view–controller pattern. I'd like it to be easy to made a GUI later on.
+
+Time spent: 3h
