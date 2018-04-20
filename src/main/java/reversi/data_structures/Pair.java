@@ -8,27 +8,29 @@ package reversi.data_structures;
 /**
  *
  * @author Valhe Kouneli
+ * @param <Class1>
+ * @param <Class2>
  */
-public class Pair {
-    private final int x;
-    private final int y;
+public class Pair <Class1, Class2> {
+    private final Class1 x;
+    private final Class2 y;
     
-    public Pair(int x, int y) {
+    public Pair(Class1 x, Class2 y) {
         this.x = x;
         this.y = y;
     }
     
-    public int getX() {
+    public Class1 getFirst() {
         return x;
     }
     
-    public int getY() {
+    public Class2 getSecond() {
         return y;
     }
     
     @Override
     public String toString() {
-        return "[" + x + "," + y + "]";
+        return "[" + x.toString() + "," + y.toString() + "]";
     }
     
 }
