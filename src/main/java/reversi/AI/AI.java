@@ -11,5 +11,11 @@ package reversi.AI;
  * @param <MoveType>
  */
 public interface AI <MoveType> {
+
+    /**
+     *
+     * @param game
+     * @return
+     */
     public MoveType getNextMove(Game game);
 }
