@@ -9,10 +9,11 @@ Command line Java application, Reversi AI.
 ## Current known bugs (11.4.2018)
 
 * My interpretation of the game rules might differ from the official rules. If either player can not play, the game ends.
+* User interface is unfinished.
 
 ## TODO (at least)
 
+* Finish making the UI.
 * Remove the hidious <MoveType> <GameType> thingies from the AIs :O~
 * Fix the implementation of rules (see current known bugs)
-* Make command line user interface
 * Make more unit tests
