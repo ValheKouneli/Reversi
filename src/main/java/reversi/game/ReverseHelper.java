@@ -5,7 +5,7 @@
  */
 package reversi.game;
 
-import reversi.data_structures.Pair;
+import reversi.data_structures.IntPair;
 
 
 /**
@@ -14,15 +14,15 @@ import reversi.data_structures.Pair;
  */
 public class ReverseHelper {
     
-    private static final Pair[] DIRECTIONS = {
-        new Pair(1,1),     //down right
-        new Pair(0,1),     //right
-        new Pair(1,0),     //down
-        new Pair(-1,-1),   //up left
-        new Pair(-1,0),    //up
-        new Pair(0,-1),    //left
-        new Pair(-1,1),    //up right
-        new Pair(1,-1)     //down left
+    private static final IntPair[] DIRECTIONS = {
+        new IntPair(1,1),     //down right
+        new IntPair(0,1),     //right
+        new IntPair(1,0),     //down
+        new IntPair(-1,-1),   //up left
+        new IntPair(-1,0),    //up
+        new IntPair(0,-1),    //left
+        new IntPair(-1,1),    //up right
+        new IntPair(1,-1)     //down left
     };
        
     private ReverseHelper() {}
@@ -40,7 +40,7 @@ public class ReverseHelper {
     public static boolean reverse(ReversiBoard board, int turn, int x, int y, boolean onlyLegalityCheck) {
         boolean oneIsTrue = false;
         
-        for (Pair p : DIRECTIONS) {
+        for (IntPair p : DIRECTIONS) {
             if (generalReverse(board, turn, x, y, p.getX(), p.getY(), onlyLegalityCheck)) {
                 oneIsTrue = true;
             }

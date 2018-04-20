@@ -6,7 +6,7 @@
 package reversi.game;
 
 import reversi.AI.Game;
-import reversi.data_structures.Pair;
+import reversi.data_structures.IntPair;
 import reversi.data_structures.List;
 
 /**
@@ -20,7 +20,7 @@ public class Reversi implements Game {
     private ReversiBoard board;
     private int turn; //black = 1, white = -1
     private int turnNumber;
-    private List<Pair> availableMoves;
+    private List<IntPair> availableMoves;
     private int lastTurnNumberToAskAvailableMoves;
     
     public Reversi() {
@@ -103,7 +103,7 @@ public class Reversi implements Game {
     }
     
     @Override
-    public List<Pair> getMoves() {
+    public List<IntPair> getMoves() {
         if (lastTurnNumberToAskAvailableMoves == turnNumber) {
             return availableMoves;
         }
@@ -112,7 +112,7 @@ public class Reversi implements Game {
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
                 if (moveIsLegal(board, turn, i, j)) {
-                    availableMoves.add(new Pair(i, j));
+                    availableMoves.add(new IntPair(i, j));
                 }
             }
         }
@@ -128,7 +128,25 @@ public class Reversi implements Game {
     
     @Override
     public String toString() {
-        return board.toString();
+        String temp = board.toString();
+        if (!gameIsOver()) {
+            temp += "It's " + getPlayer(getTurn()) + "'s turn.\n";
+        } else {
+            int score = getScore();
+            int points = score < 0 ? score*-1 : score;
+            temp += "Winner is " + getPlayer(score) + " with " + points + " points.";
+        }
+        return temp;
+    }
+    
+    private static String getPlayer(int i) {
+        if (i<0) {
+            return "black";
+        } else if (i>0) {
+            return "white";
+        } else {
+            return "no one";
+        }
     }
     
     /**
@@ -169,7 +187,7 @@ public class Reversi implements Game {
 
     @Override
     public boolean move(Object move) {
-        Pair pair = (Pair) move;
+        IntPair pair = (IntPair) move;
         return move(pair.getX(), pair.getY());
     }
 

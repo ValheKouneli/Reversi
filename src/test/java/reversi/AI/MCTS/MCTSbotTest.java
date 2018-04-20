@@ -8,14 +8,14 @@ import testData.TestData;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import reversi.data_structures.Pair;
+import reversi.data_structures.IntPair;
 /**
  *
  * @author Valhe Kouneli
  */
 public class MCTSbotTest {
     
-    MCTSbot<Pair> bot;
+    MCTSbot<IntPair> bot;
     
     @Before
     public void setUp() {
@@ -24,7 +24,7 @@ public class MCTSbotTest {
     
     @Test
     public void botPlaysSomethingEvenWhenItIsItsLastTurnAndItIsLosingAnyway() {
-        Pair move = bot.getNextMove(TestData.getGame1());
+        IntPair move = bot.getNextMove(TestData.getGame1());
         assertNotNull(move);
     }
 }

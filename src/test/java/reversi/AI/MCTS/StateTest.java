@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import reversi.AI.Game;
-import reversi.data_structures.Pair;
+import reversi.data_structures.IntPair;
 import reversi.game.BoardFactory;
 import reversi.game.Reversi;
 import reversi.game.ReversiBoard;
@@ -19,7 +19,7 @@ import reversi.game.ReversiBoard;
  */
 public class StateTest {
     
-    State<Pair> state;
+    State<IntPair> state;
     
     @Before
     public void setUp() {
