@@ -9,8 +9,9 @@ import static java.lang.Integer.parseInt;
 import java.util.Scanner;
 import reversi.AI.*;
 import reversi.AI.MCTS.MCTSbot;
-import reversi.controller.IO;
+import reversi.controller.CLI;
 import reversi.data_structures.IntPair;
+import reversi.data_structures.Pair;
 import reversi.game.Reversi;
 
 /**
@@ -23,8 +24,28 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        IO io = new IO();
-        io.run();
+        Reversi game = new Reversi();
+        MCTSbot ai1 = new MCTSbot(500);
+        MinimaxAI ai2 = new MinimaxAI(new ReversiEvaluator2());
+        
+        Scanner reader = new Scanner(System.in);
+        
+         int i = 0;
+         Pair move;
+ 
+        do {
+            System.out.println(game.toString());
+            if (game.getTurn() == 1) {
+                game.move(ai1.getNextMove(game));
+            } else {
+                game.move(ai2.getNextMove(game));
+            }
+            i++;
+        } while (!game.getMoves().isEmpty());
+        
+        System.out.println(game.toString());
+         
+      
     }
     
     private static void humanGetMove(Reversi game, Scanner reader) {
