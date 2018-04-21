@@ -6,60 +6,57 @@
 package reversi.controller;
 
 import java.util.Scanner;
-import reversi.data_structures.List;
 
 /**
  *
  * @author Valhe Kouneli
  */
-public class IO {
+public class CLI {
     
     private final Model model;
     private final Controller controller;
     private final Scanner reader;
+    private final View CLIShowPlayersView;
+    private final View CLIGameView;
+    private final View CLIChoosePlayerView;
+    private View currentView;
     
-    public IO() {
+    public CLI() {
         this.model = new Model();
         this.controller = new Controller(model);
         this.reader = new Scanner(System.in);
+        this.CLIShowPlayersView = new CLIShowPlayersView(model, controller);
+        this.CLIGameView = new CLIGameView(model);
+        this.CLIChoosePlayerView = new CLIChoosePlayerView(controller);
+        currentView = new CLIWelcomeView();
     }
     
     public void run() {
-        System.out.println("Welcome. Write a command.");
 
         while (true) {
-            if (!model.gameIsInProgress()) {
-                printCommandOptions();
-                String nextCommand = reader.nextLine();
-                if (nextCommand.matches("quit")) {
-                    break;
-                }
-                int functionNbr = getFunctionNbr(nextCommand);
-                controller.implementFunction(functionNbr);
-            } else {
-                controller.implementFunction(2);
-            }
-            System.out.println(model.toString());
+            currentView.show();
+            String input = reader.nextLine();
+            String nextView = currentView.processInput(input);
+            changeView(nextView);
         }
         
-        System.out.println("Quitting.");
+        
     }
     
-    private int getFunctionNbr(String command) {
-        try {
-            return Integer.parseInt(command);
-        } catch (NumberFormatException e) {
-            return -1;
+    private void changeView(String control) {
+        switch (control) {
+            case "show players"         : currentView = CLIShowPlayersView;
+                                          break;
+            case "choose white player"  : ((CLIChoosePlayerView) CLIChoosePlayerView).setPlayer("WHITE");
+                                          currentView = CLIChoosePlayerView;
+                                          break;
+            case "choose black player"  : ((CLIChoosePlayerView) CLIChoosePlayerView).setPlayer("BLACK");
+                                          currentView = CLIChoosePlayerView;
+                                          break;
+            case "game view"            : currentView = CLIGameView;
+                                          break;
+            default                     : break;
         }
     }
-    
-    private void printCommandOptions() {
-        List<String> commands = controller.getCommands();
-        for (int i=0; i<commands.size(); i++) {
-            System.out.println("[" + i + "] " + commands.get(i));
-        }
-    }
-    
-    
     
 }

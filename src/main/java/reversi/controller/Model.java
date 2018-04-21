@@ -18,47 +18,39 @@ import reversi.game.Reversi;
  */
 public class Model {
     
-    Game game;
+    private Game game;
     private boolean gameInProgress;
-    private boolean displayBoard;
     private AI ai1;
     private AI ai2;
     private String ai1name;
     private String ai2name;
-    private String textOnDisplay;
     
     public Model() {
         game = new Reversi();
         ai1 = new MCTSbot(1000);
         ai2 = new MinimaxAI(new ReversiEvaluator2());
-        textOnDisplay = "";
         gameInProgress = false;
-        displayBoard = false;
     }
     
     public void toggleGameInProgress() {
         gameInProgress = !gameInProgress;
-        textOnDisplay = "";
     }
-    
-    public void toggleDisplayBoard() {
-        displayBoard = !displayBoard;
-    }
-    
-    public String getTextOnDisplay() {
-        return textOnDisplay;
-    }
-    
+
     public boolean gameIsInProgress() {
         return gameInProgress;
     }
     
+    public String getAi1Name() {
+        return ai1name;
+    }
+    
+    public String getAi2Name() {
+        return ai2name;
+    }
     
     public void newGame() {
         game = new Reversi();
         gameInProgress = false;
-        textOnDisplay = "";
-        displayBoard = true;
     }
     
     public void nextTurn() {
@@ -69,22 +61,12 @@ public class Model {
                 game.move(ai2.getNextMove(game));
             }          
         } else {
-            textOnDisplay = "Game finished.";
             gameInProgress = false;
-            displayBoard = false;
         }   
     }
     
-    @Override
-    public String toString() {
-        String temp = "";
-        if (displayBoard) {
-            temp += textOnDisplay + "\n" + game.toString();
-        } else {
-            temp += textOnDisplay;
-        }
-        return temp;
+    public Game getGame() {
+        return game;
     }
-    
     
 }
