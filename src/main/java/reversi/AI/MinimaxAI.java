@@ -13,14 +13,14 @@ package reversi.AI;
  * @param <GameType> type of game the MinimaxAI will play
  * @param <MoveType>
  */
-public class MinimaxAI <GameType, MoveType> implements AI <MoveType> {
+public class MinimaxAI <GameType, MoveType> implements Player <MoveType> {
     
     private final Evaluator<GameType> eval;
     private final Minimax minimax;
     
     /**
      *
-     * @param eval evaluator of the same game type as this AI
+     * @param eval evaluator of the same game type as this Player
      */
     public MinimaxAI(Evaluator<GameType> eval) {
         this.eval = eval;
@@ -38,6 +38,11 @@ public class MinimaxAI <GameType, MoveType> implements AI <MoveType> {
     public MoveType getNextMove(Game game) {
         minimax.minmax((Game) game, 0, MAX_DEPTH, eval);
         return (MoveType) minimax.getBestMove();
+    }
+    
+    @Override
+    public String name() {
+        return "Minimax AI + " + eval.name();
     }
     
 }

@@ -25,4 +25,9 @@ public class ReversiEvaluator1 extends Evaluator <Reversi> {
         return game.getScore();
     }
     
+    @Override
+    public String name() {
+        return "SimpleEvaluator";
+    }
+    
 }

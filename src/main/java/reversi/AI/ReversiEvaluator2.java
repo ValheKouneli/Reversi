@@ -49,4 +49,9 @@ public class ReversiEvaluator2 extends Evaluator <Reversi> {
         return eval;
     }
     
+    @Override
+    public String name() {
+        return "GoodEvaluator";
+    }
+    
 }

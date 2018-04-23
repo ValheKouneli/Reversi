@@ -2,15 +2,15 @@ package reversi.AI.MCTS;
 
 
 import java.util.Random;
-import reversi.AI.AI;
 import reversi.AI.Game;
+import reversi.AI.Player;
 
 /**
  *
  * @author Valhe Kouneli
  * @param <MoveType>
  */
-public class MCTSbot <MoveType> implements AI <MoveType> {
+public class MCTSbot <MoveType> implements Player <MoveType> {
     
     private final Random random = new Random(System.currentTimeMillis());
     private final MCTShelper<MoveType> MCTShelper;
@@ -67,5 +67,10 @@ public class MCTSbot <MoveType> implements AI <MoveType> {
         State<MoveType> state = winnerNode.getState();
         MoveType move = state.getLatestMove(); //null pointer exception
         return move;
+    }
+    
+    @Override
+    public String name() {
+        return "MCTS Bot";
     }
 }
