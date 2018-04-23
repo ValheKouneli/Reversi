@@ -44,6 +44,11 @@ public class CLIChoosePlayerView implements View {
         player = playerNbr == 1 ? "WHITE" : "BLACK";
     }
 
+    /**
+     * Responds to user input and applies changes on the Model.
+     * @param input user's input
+     * @return the next view
+     */
     @Override
     public String processInput(String input) {
         switch (input) {

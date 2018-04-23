@@ -12,5 +12,10 @@ package CLI;
 public interface View {
     public void show();
     public String name();
+    /**
+     * Responds to user input and applies changes on the Model.
+     * @param input user's input
+     * @return the next view
+     */
     public String processInput(String input);
 }
