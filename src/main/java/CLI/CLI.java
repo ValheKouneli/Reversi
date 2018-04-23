@@ -45,7 +45,7 @@ public class CLI implements View {
     public void run() {
 
         while (keepRunning) {
-            currentView.show();
+            toString();
             if (!model.gameIsInProgress()) {
                 String input = reader.nextLine();
                 String nextView = currentView.processInput(input);
@@ -80,8 +80,8 @@ public class CLI implements View {
     }
 
     @Override
-    public void show() {
-        currentView.show();
+    public String toString() {
+        return currentView.toString();
     }
 
     @Override

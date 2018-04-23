@@ -16,10 +16,10 @@ public class CLIWelcomeView implements View {
     }
     
     @Override
-    public void show() {
-        System.out.println("WELCOME TO PLAY REVERSI\n" +
-                           "=========================================\n" +
-                           "Press [enter] to continue\n");
+    public String toString() {
+        return "WELCOME TO PLAY REVERSI\n" +
+               "=========================================\n" +
+               "Press [enter] to continue\n";
     }
 
     @Override

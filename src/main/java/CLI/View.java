@@ -10,7 +10,13 @@ package CLI;
  * @author Valhe Kouneli
  */
 public interface View {
-    public void show();
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString();
     public String name();
     /**
      * Responds to user input and applies changes on the Model.

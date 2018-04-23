@@ -18,8 +18,8 @@ public class CLIGameView implements View {
     }
     
     @Override
-    public void show() {
-        System.out.println(model.toString());
+    public String toString() {
+        return model.toString();
     }
 
     @Override

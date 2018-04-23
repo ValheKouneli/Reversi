@@ -19,8 +19,8 @@ public class CLIShowPlayersView implements View {
     }
     
     @Override
-    public void show() {
-        System.out.println("MENU\n" +
+    public String toString() {
+        return "MENU\n" +
                            "=========================================\n" +
                            "WHITE: " + model.getPlayer1Name() + "\n" +
                            "BLACK: " + model.getPlayer2Name() + "\n" +
@@ -28,7 +28,8 @@ public class CLIShowPlayersView implements View {
                            "[2] Choose white player\n" +
                            "[3] Choose black player\n" +
                            "[4] Play\n" +
-                           "[5] Quit\n");    }
+                           "[5] Quit\n";
+    }
 
     @Override
     public String name() {

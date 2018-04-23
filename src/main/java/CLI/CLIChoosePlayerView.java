@@ -25,13 +25,13 @@ public class CLIChoosePlayerView implements View {
     }
     
     @Override
-    public void show() {
-        System.out.println("MENU: Choose " + player + " Player\n" +
+    public String toString() {
+        return "MENU: Choose " + player + " Player\n" +
                            "=========================================\n" +
                            "[1] Monte Carlo Tree Search Bot\n" +
                            "[2] MinimaxAI\n" +
                            "[3] Human\n" +
-                           "[4] go back\n");
+                           "[4] go back\n";
     }
 
     @Override
@@ -44,11 +44,6 @@ public class CLIChoosePlayerView implements View {
         player = playerNbr == 1 ? "WHITE" : "BLACK";
     }
 
-    /**
-     * Responds to user input and applies changes on the Model.
-     * @param input user's input
-     * @return the next view
-     */
     @Override
     public String processInput(String input) {
         switch (input) {
