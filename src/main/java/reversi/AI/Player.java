@@ -10,7 +10,7 @@ package reversi.AI;
  * @author Valhe Kouneli
  * @param <MoveType>
  */
-public interface AI <MoveType> {
+public interface Player <MoveType> {
 
     /**
      *
@@ -18,4 +18,5 @@ public interface AI <MoveType> {
      * @return
      */
     public MoveType getNextMove(Game game);
+    public String name();
 }
