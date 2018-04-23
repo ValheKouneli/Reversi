@@ -1,6 +1,12 @@
 Progress report, week 5
 =======================
 
+Overview: I rewrote my Monte Carlo Tree Search Bot, because the older version was made following a faulty tutorial. I started implementing a command line interface.
+
+**Total time spent: 14 h**
+
+## Weekly reports
+
 Tuesday: tried to learn how to draw UML class diagrams. Drew some.
 
 Time spent: 1h

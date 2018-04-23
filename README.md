@@ -6,14 +6,14 @@ Reversi
 
 Command line Java application, Reversi AI.
 
-## Current known bugs (11.4.2018)
+## Bugs (23.4.2018)
 
 * My interpretation of the game rules might differ from the official rules. If either player can not play, the game ends.
-* User interface is unfinished.
+* CLIHumanPlayer is buggy. At some point, the program stops accepting valid moves, claiming they are illegal.
 
 ## TODO (at least)
 
-* Finish making the UI.
+* Fix CLIHumanPlayer (see bugs)
 * Remove the hidious <MoveType> <GameType> thingies from the AIs :O~
-* Fix the implementation of rules (see current known bugs)
+* Fix the implementation of rules (see bugs)
 * Make more unit tests
