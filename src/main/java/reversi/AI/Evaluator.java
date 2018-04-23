@@ -22,5 +22,7 @@ public abstract class Evaluator <GameType> {
      * @return
      */
     public abstract int eval(GameType game);
+    public abstract String name();
+    
     
 }
