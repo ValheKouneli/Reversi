@@ -5,6 +5,14 @@ Overview: I rewrote my Monte Carlo Tree Search Bot, because the older version wa
 
 **Total time spent: 14 h**
 
+## What I learned
+
+This week I learned about UML diagrams, about MCTS algorithm and about the MVC model.
+I learned that not all Internet tutorials are trustworty.
+I learned to value unit testing more and more and found out that doing them helps to design the class structure of a program.
+I learned that there is some value in drawing and using UML class diagrams as well.
+I found it hard to see how the MVC model could be applied to my program.
+
 ## Weekly reports
 
 Tuesday: tried to learn how to draw UML class diagrams. Drew some.
