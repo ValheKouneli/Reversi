@@ -7,6 +7,10 @@ I read about Monte Carlo Tree Seach and implemented a bot that uses MCTS. Did no
 
 **Total time spent: 9h**
 
+## What I learned
+
+I learned the basics of the MCTS algorithm and that should not estimate the amount of time it takes to arrange a house party.
+
 ## Daily reports
 
 Sunday: Refactoring or something
