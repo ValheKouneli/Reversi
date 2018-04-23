@@ -52,6 +52,16 @@ public class List<E> {
     public boolean isEmpty() {
         return size == 0;
     }
+    
+    public boolean contains(E item) {
+        boolean contains = false;
+        for (int i=0; i<size; i++) {
+            if (list[i].equals(item)) {
+                return true;
+            }
+        }
+        return contains;
+    }
 
   
     
