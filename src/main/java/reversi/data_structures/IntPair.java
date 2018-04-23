@@ -31,4 +31,30 @@ public class IntPair {
         return "[" + x + "," + y + "]";
     }
     
+    /**
+     *
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o==this) {
+            return true;
+        }
+        
+        if (!(o instanceof IntPair)) {
+            return false;
+        }
+
+        return (((IntPair) o).getX() == x && ((IntPair) o).getY() == y);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.x;
+        hash = 29 * hash + this.y;
+        return hash;
+    }
+    
 }
