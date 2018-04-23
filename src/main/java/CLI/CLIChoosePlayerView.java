@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reversi.controller;
+package CLI;
+
+import java.util.Scanner;
 
 /**
  *
@@ -11,11 +13,15 @@ package reversi.controller;
  */
 public class CLIChoosePlayerView implements View {
 
-    private final Controller controller;
-    private String player;
     
-    public CLIChoosePlayerView(Controller controller) {
-        this.controller = controller;
+    private int playerNbr;
+    private String player;
+    private final Model model;
+    private final Scanner reader;
+    
+    public CLIChoosePlayerView(Model model, Scanner reader) {
+        this.reader = reader;
+        this.model = model;
     }
     
     @Override
@@ -33,17 +39,26 @@ public class CLIChoosePlayerView implements View {
         return "choose player";
     }
     
-    public void setPlayer(String player) {
-        this.player = player;
+    public void setPlayer(int playerNbr) {
+        this.playerNbr = playerNbr;
+        player = playerNbr == 1 ? "WHITE" : "BLACK";
     }
 
     @Override
     public String processInput(String input) {
         switch (input) {
-            case "1"    : return "mcts";
-            case "2"    : return "minimax";
-            case "3"    : return "human";
-            default     : return "";
+            case "1"    :   model.setAI(playerNbr, "MCTSbot");
+                            return "show players";
+            case "2"    :   model.setAI(playerNbr, "MinimaxAI");
+                            return "show players";
+            case "3"    :   CLIHumanPlayer human = new CLIHumanPlayer(reader);
+                            model.setPlayer(playerNbr, human);
+                            System.out.println("Give player's name:");
+                            human.setName(reader.nextLine().substring(0,10));
+                            System.out.println();
+                            return "show players";
+            case "4"    :   return "show players";
+            default     :   return "";
         }
     }
     

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reversi.controller;
+package CLI;
 
 /**
  *
@@ -12,23 +12,23 @@ package reversi.controller;
 public class CLIShowPlayersView implements View {
     
     private final Model model;
-    private final Controller controller;
     
     
-    public CLIShowPlayersView(Model model, Controller controller) {
+    public CLIShowPlayersView(Model model) {
         this.model = model;
-        this.controller = controller;
     }
     
     @Override
     public void show() {
         System.out.println("MENU\n" +
                            "=========================================\n" +
-                           "WHITE: " + model.getAi1Name() + "\n" +
-                           "BLACK: " + model.getAi2Name() + "\n" +
+                           "WHITE: " + model.getPlayer1Name() + "\n" +
+                           "BLACK: " + model.getPlayer2Name() + "\n" +
                            "[1] Switch colors\n" +
-                           "[2] Choose Player\n" +
-                           "[3] Play");    }
+                           "[2] Choose white player\n" +
+                           "[3] Choose black player\n" +
+                           "[4] Play\n" +
+                           "[5] Quit\n");    }
 
     @Override
     public String name() {
@@ -38,10 +38,15 @@ public class CLIShowPlayersView implements View {
     @Override
     public String processInput(String input) {
         switch (input) {
-            case "1"    : return "switch colors";
-            case "2"    : return "choose player";
-            case "3"    : return "play";
-            default     : return "";
+            case "1"    :   model.switchPlayers();
+                            return "";
+            case "2"    :   return "choose white player";
+            case "3"    :   return "choose black player";
+            case "4"    :   model.gameOn();
+                            return "play";
+            case "5"    :   return "quit";
+            case "quit" :   return "quit";
+            default     :   return "";
         }
     }
 }

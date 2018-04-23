@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reversi.controller;
+package CLI;
 
 /**
  *
@@ -19,7 +19,7 @@ public class CLIGameView implements View {
     
     @Override
     public void show() {
-        System.out.println(model.getGame().toString());
+        System.out.println(model.toString());
     }
 
     @Override
@@ -29,7 +29,11 @@ public class CLIGameView implements View {
 
     @Override
     public String processInput(String input) {
-        return "";
+        if (model.gameIsInProgress()) {
+            return "";
+        } else {
+            return "show players";
+        }
     }
     
 }
