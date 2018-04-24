@@ -16,14 +16,14 @@ import reversi.data_structures.Tree;
  * @author Valhe Kouneli
  * @param <MoveType>
  */
-public class MinimaxTimeLimited <MoveType> implements Player {
+public class MinimaxAITimeLimited <MoveType> implements Player {
     
     private final Evaluator<MoveType> eval;
     private long timeLimit;
     private final MinimaxTLHelper<MoveType> helper;
     private final Random random;
     
-    public MinimaxTimeLimited(long timeLimit, Evaluator<MoveType> eval) {
+    public MinimaxAITimeLimited(long timeLimit, Evaluator<MoveType> eval) {
         this.timeLimit = timeLimit;
         this.eval = eval;
         helper = new MinimaxTLHelper<>();
