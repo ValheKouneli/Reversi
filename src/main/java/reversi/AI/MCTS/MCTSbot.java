@@ -6,7 +6,6 @@ import reversi.data_structures.Tree;
 import java.util.Random;
 import reversi.AI.Game;
 import reversi.AI.Player;
-import reversi.data_structures.IntPair;
 
 /**
  *
