@@ -46,6 +46,37 @@ public class ListTest {
         assertEquals(4, list.size());
     }
     
+    @Test
+    public void containsGivesFalseForEmptryList() {
+        assertEquals(false, list.contains(5));
+    }
+    
+    @Test
+    public void containsGivesTrueForListThatContainsOnlyTheSameElement() {
+        list.add(5);
+        assertEquals(true, list.contains(5));
+    }
+    
+    @Test
+    public void containsGivesTrueForListWithSeveralElementsAndTheAskedElement() {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        assertEquals(true, list.contains(3));
+    }
+    
+    @Test
+    public void containsGivesFalseForListWithSeveralElementsButNotTheAskedElement() {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        assertEquals(false, list.contains(6));
+    }
+    
     
     
 }
