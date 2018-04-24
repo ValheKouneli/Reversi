@@ -1,5 +1,6 @@
 package reversi.AI.MCTS;
 
+import reversi.data_structures.Node;
 import java.util.Random;
 import reversi.data_structures.List;
 
@@ -11,16 +12,19 @@ import reversi.data_structures.List;
 public class MCTShelper <MoveType> {
     
     private final Random random;
+    private final UCT<MoveType> uct;
     
     public MCTShelper(Random random) {
         this.random = random;
+        this.uct = new UCT<>();
     }
     
     public MCTShelper() {
         this.random = new Random(System.currentTimeMillis());
+        this.uct = new UCT<>();
     }
     
-    protected Node<MoveType> getRandomChildNode(Node<MoveType> node) {
+    protected Node getRandomChildNode(Node node) {
         int size = node.getChildren().size();
         if (size > 0) {
             int i = random.nextInt(size);
@@ -30,15 +34,15 @@ public class MCTShelper <MoveType> {
         }
     }
 
-    protected Node<MoveType> getChildWithMaxScore(Node<MoveType> node) {
-        List<Node<MoveType>> children = node.getChildren();
+    protected Node getChildWithMaxScore(Node node) {
+        List<Node> children = node.getChildren();
         double bestScore = Integer.MIN_VALUE;
         Node bestChild = null;
         Node child;
         for (int i = 0; i < children.size(); i++) {
             child = children.get(i);
-            if (child.getState().getWinScore() > bestScore) {
-                bestScore = child.getState().getWinScore();
+            if (((MCTSState)child.getState()).getWinScore() > bestScore) {
+                bestScore = ((MCTSState) child.getState()).getWinScore();
                 bestChild = child;
             }
         }
@@ -52,25 +56,25 @@ public class MCTShelper <MoveType> {
      * @param rootNode a node
      * @return if node has children, child with best UCT value; else node itself
      */
-    protected Node<MoveType> selectPromisingBranch(Node<MoveType> rootNode) {
+    protected Node selectPromisingBranch(Node rootNode) {
         Node node = rootNode;
         if (!node.getChildren().isEmpty()) {
-            node = UCT.getChildWithBestUCTValue(node);
+            node = uct.getChildWithBestUCTValue(node);
         }
         return node;
     }
 
-    protected int simulateRandomPlayout(Node<MoveType> node) {
-        boolean gameIsOver = node.getState().getGame().gameIsOver();
+    protected int simulateRandomPlayout(Node node) {
+        boolean gameIsOver = ((MCTSState) node.getState()).getGame().gameIsOver();
         if (gameIsOver &&
-                node.getState().getGame().getTurn()*(-1) ==
-                node.getState().getGame().winner()) {
-            node.getParent().getState().setWinScore(Integer.MIN_VALUE);
+                ((MCTSState) node.getState()).getGame().getTurn()*(-1) ==
+                ((MCTSState) node.getState()).getGame().winner()) {
+            ((MCTSState) node.getParent().getState()).setWinScore(Integer.MIN_VALUE);
             //if the last move was made by the player who won,
             //the previous move was indefinitely bad
-            return node.getState().getGame().winner();
+            return ((MCTSState) node.getState()).getGame().winner();
         } else {
-            State tempState = node.getState().getCopy();
+            MCTSState tempState = ((MCTSState) node.getState()).getCopy();
             while (!gameIsOver) {
                 tempState.randomPlay();
                 gameIsOver = tempState.getGame().gameIsOver();
@@ -79,24 +83,24 @@ public class MCTShelper <MoveType> {
         }
     }
 
-    protected void backPropagation(Node<MoveType> nodeToExplore, int winner) {
+    protected void backPropagation(Node nodeToExplore, int winner) {
         Node tempNode = nodeToExplore;
         while (tempNode != null) {
-            tempNode.getState().incrementVisit();
+            ((MCTSState) tempNode.getState()).incrementVisit();
             //if node's turn is different from who won a game following it,
             //increment winScore
-            if (tempNode.getState().getGame().getTurn() * (-1) == winner) {
-                tempNode.getState().addScore(1);
+            if (((MCTSState) tempNode.getState()).getGame().getTurn() * (-1) == winner) {
+                ((MCTSState) tempNode.getState()).addScore(1);
             }
             tempNode = tempNode.getParent();
         }
     }
 
-    protected void expandNode(Node<MoveType> node) {
+    protected void expandNode(Node node) {
         if (node.getChildren().isEmpty()) {
-            List<State<MoveType>> possibleStates = node.getState().getAllPossibleStates();
+            List<MCTSState<MoveType>> possibleStates = ((MCTSState)node.getState()).getAllPossibleStates();
             for (int i = 0; i < possibleStates.size(); i++) {
-                State state = possibleStates.get(i).getCopy();
+                MCTSState state = possibleStates.get(i).getCopy();
                 Node newNode = new Node(state);
                 newNode.setParent(node);
                 node.addChild(newNode);

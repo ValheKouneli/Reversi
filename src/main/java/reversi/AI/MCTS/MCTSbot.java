@@ -1,9 +1,12 @@
 package reversi.AI.MCTS;
 
 
+import reversi.data_structures.Node;
+import reversi.data_structures.Tree;
 import java.util.Random;
 import reversi.AI.Game;
 import reversi.AI.Player;
+import reversi.data_structures.IntPair;
 
 /**
  *
@@ -36,12 +39,13 @@ public class MCTSbot <MoveType> implements Player <MoveType> {
     public MoveType getNextMove(Game game) {
         long end = System.currentTimeMillis() + timeToThink;
         //how long to continue before selecting final move
-
-        Tree<MoveType> tree = new Tree<>(new State(game));
+        MCTSState rootState = new MCTSState(game);
+        Node root = new Node(rootState);
+        Tree tree = new Tree(root);
         
         while (System.currentTimeMillis() < end) {
             
-            Node<MoveType> promisingNode = tree.getRoot();
+            Node promisingNode = tree.getRoot();
             
             while (!promisingNode.getChildren().isEmpty()) {
                 promisingNode = MCTShelper
@@ -49,22 +53,22 @@ public class MCTSbot <MoveType> implements Player <MoveType> {
             }
 
             int playoutResult;
-            Node<MoveType> nodeToExplore;
+            Node nodeToExplore;
             
-            if (!promisingNode.getState().getGame().gameIsOver()) {
+            if (!((MCTSState) promisingNode.getState()).getGame().gameIsOver()) {
                 MCTShelper.expandNode(promisingNode);
                 nodeToExplore = MCTShelper.getRandomChildNode(promisingNode);
                 playoutResult = MCTShelper.simulateRandomPlayout(nodeToExplore);
             } else {
                 nodeToExplore = promisingNode;
-                playoutResult = promisingNode.getState().getGame().winner();
+                playoutResult = ((MCTSState) promisingNode.getState()).getGame().winner();
             }
             
             MCTShelper.backPropagation(nodeToExplore, playoutResult);
         }
         
-        Node<MoveType> winnerNode = MCTShelper.getChildWithMaxScore(tree.getRoot());
-        State<MoveType> state = winnerNode.getState();
+        Node winnerNode = MCTShelper.getChildWithMaxScore(tree.getRoot());
+        MCTSState<MoveType> state = (MCTSState<MoveType>) winnerNode.getState();
         MoveType move = state.getLatestMove(); //null pointer exception
         return move;
     }

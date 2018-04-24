@@ -3,15 +3,18 @@
  */
 package reversi.AI.MCTS;
 
+import reversi.data_structures.IntPair;
+import reversi.data_structures.Node;
 import reversi.data_structures.List;
 
 /**
  *
  * @author Valhe Kouneli
+ * @param <MoveType>
  */
-public class UCT {
+public class UCT <MoveType> {
     
-    private UCT() {}
+    public UCT() {}
     
     /** Returns the UCT (Upper Confidence bound applied to Trees)
      * value for the node whose information is given as parameter.
@@ -21,7 +24,7 @@ public class UCT {
      * @param nodeVisitCount the node's visitCount
      * @return UCT value for the node calculated according to the UCT formula
      */
-    public static double uctValue(int parentVisitCount,
+    public double uctValue(int parentVisitCount,
             double nodeWinScore, int nodeVisitCount) {
         if (nodeVisitCount == 0) {
             return Integer.MAX_VALUE;
@@ -32,13 +35,13 @@ public class UCT {
         }
     }
     
-    public static double uctValue(Node node) {
+    public double uctValue(Node node) {
         if (node.getParent() == null) {
             throw new java.lang.NullPointerException("Node has no parent.");
         }
-        int parentVisitCount = node.getParent().getState().getVisitCount();
-        double nodeWinScore = node.getState().getWinScore();
-        int nodeVisitCount = node.getState().getVisitCount();
+        int parentVisitCount = ((MCTSState) node.getParent().getState()).getVisitCount();
+        double nodeWinScore = ((MCTSState) node.getState()).getWinScore();
+        int nodeVisitCount = ((MCTSState) node.getState()).getVisitCount();
         return uctValue(parentVisitCount, nodeWinScore, nodeVisitCount);
     }
     
@@ -47,8 +50,8 @@ public class UCT {
      * @param node  a node
      * @return node's child node with the best UCT value out of all child nodes
      */
-    public static Node getChildWithBestUCTValue(Node node) {
-        int parentVisitCount = node.getState().getVisitCount();
+    public Node getChildWithBestUCTValue(Node node) {
+        int parentVisitCount = ((MCTSState) node.getState()).getVisitCount();
         List<Node> children = node.getChildren();
         Node bestChild = null;
         double bestUCTvalue = Integer.MIN_VALUE;
@@ -56,7 +59,7 @@ public class UCT {
         double uctValue;
         for (int i=0; i<children.size(); i++) {
             child = children.get(i);
-            uctValue = uctValue(parentVisitCount, child.getState().getWinScore(), child.getState().getVisitCount());
+            uctValue = uctValue(parentVisitCount, ((MCTSState) child.getState()).getWinScore(), ((MCTSState) child.getState()).getVisitCount());
             if (uctValue > bestUCTvalue) {
                 bestUCTvalue = uctValue;
                 bestChild = child;

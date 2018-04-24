@@ -11,27 +11,27 @@ import reversi.data_structures.List;
  * @author Valhe Kouneli
  * @param <MoveType>
  */
-public class State <MoveType> {
+public class MCTSState <MoveType> {
     private final Game game;
     private int visitCount;
     private int winScore;
     private MoveType latestMove;
     private static final Random RANDOM = new Random(System.currentTimeMillis());
     
-    public State() {
+    public MCTSState() {
         latestMove = null;
         game = null;
         visitCount = 0;
         winScore = 0;
     }
-    public State(Game game) {
+    public MCTSState(Game game) {
         latestMove = null;
         this.game = game;
         visitCount = 0;
         winScore = 0;
     }
     
-    public State(Game game, MoveType latestMove) {
+    public MCTSState(Game game, MoveType latestMove) {
         this.latestMove = latestMove;
         this.game = game;
         visitCount = 0;
@@ -73,13 +73,13 @@ public class State <MoveType> {
         return game;
     }
     
-    public List<State<MoveType>> getAllPossibleStates() {
-        List<State<MoveType>> nextStates = new List<>();
+    public List<MCTSState<MoveType>> getAllPossibleStates() {
+        List<MCTSState<MoveType>> nextStates = new List<>();
         List<MoveType> moves = game.getMoves();
         for (int i=0; i<moves.size(); i++) {
             Game copy = game.getCopy();
             copy.move(moves.get(i));
-            State<MoveType> state = new State<>(copy, moves.get(i));
+            MCTSState<MoveType> state = new MCTSState<>(copy, moves.get(i));
             nextStates.add(state);
         }
         return nextStates;
@@ -91,8 +91,8 @@ public class State <MoveType> {
         game.move(moves.get(i));
     }
     
-    public State<MoveType> getCopy() {
-        State<MoveType> copy = new State<>(game.getCopy());
+    public MCTSState<MoveType> getCopy() {
+        MCTSState<MoveType> copy = new MCTSState<>(game.getCopy());
         copy.setVisitCount(visitCount);
         copy.setWinScore(winScore);
         copy.setLatestMove(latestMove);
