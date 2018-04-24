@@ -19,7 +19,7 @@ import reversi.game.ReversiBoard;
  */
 public class StateTest {
     
-    State<IntPair> state;
+    MCTSState<IntPair> state;
     
     @Before
     public void setUp() {
@@ -36,7 +36,7 @@ public class StateTest {
         game.setBoard(board);
         game.setTurn(1);
         game.setTurnNumber(62);
-        state = new State<>((Game) game);
+        state = new MCTSState<>((Game) game);
     }
     
     @Test

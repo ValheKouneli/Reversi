@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package reversi.AI.MCTS;
+import reversi.data_structures.Node;
 import java.util.Random;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -16,8 +17,8 @@ import reversi.data_structures.IntPair;
  */
 public class MCTShelperTest {
     
-    private Node<IntPair> nodeWithChildren;
-    private Node<IntPair> nodeWithoutChildren;
+    private Node nodeWithChildren;
+    private Node nodeWithoutChildren;
     private MCTShelper<IntPair> MCTShelper;
     private Random random;
     
@@ -31,20 +32,20 @@ public class MCTShelperTest {
     
     @Test
     public void getChildWithMaxScoreWorksForNodeWithChildren() {
-        assertEquals(100, MCTShelper.getChildWithMaxScore(nodeWithChildren)
-                .getState().getWinScore());
+        assertEquals(100, ((MCTSState) MCTShelper.getChildWithMaxScore(nodeWithChildren)
+                .getState()).getWinScore());
     }
     
     @Test
     public void expandNodeExpandsNodeTheRightAmountOfNodes() {
-        Node<IntPair> node = nodeWithoutChildren;
+        Node node = nodeWithoutChildren;
         MCTShelper.expandNode(node);
         assertEquals(2, node.getChildren().size());
     }
     
     @Test
     public void expandNodeSetsTheStateOfTheExpansionNodes() {
-        Node<IntPair> node = nodeWithoutChildren;
+        Node node = nodeWithoutChildren;
         MCTShelper.expandNode(node);
         assertNotNull(node.getChildren().get(0).getState());
     }
@@ -57,54 +58,54 @@ public class MCTShelperTest {
     
     @Test
     public void expandNodeSetsChildNodesParentRight() {
-        Node<IntPair> node = nodeWithoutChildren;
+        Node node = nodeWithoutChildren;
         MCTShelper.expandNode(node);
-        assertEquals(62, node.getChildren().get(0).getParent().getState().getGame().getTurnNumber());
+        assertEquals(62, ((MCTSState) node.getChildren().get(0).getParent().getState()).getGame().getTurnNumber());
     }
     
     @Test
     public void backPropagationIncrementsVisitCounts() {
-        Node<IntPair> node = nodeWithoutChildren;
+        Node node = nodeWithoutChildren;
         MCTShelper.expandNode(node);
-        Node<IntPair> child = node.getChildren().get(0);
+        Node child = node.getChildren().get(0);
         //imaginary random playout ending in opponent (black) victory here
         MCTShelper.backPropagation(child, -1);
-        assertEquals(1, child.getState().getVisitCount());
-        assertEquals(1, node.getState().getVisitCount());
+        assertEquals(1, ((MCTSState) child.getState()).getVisitCount());
+        assertEquals(1, ((MCTSState) node.getState()).getVisitCount());
     }
     
     @Test
     public void backPropagationIncrementsWinCountForNodesWhereAIjustPlayed() {
-        Node<IntPair> node = nodeWithoutChildren;
+        Node node = nodeWithoutChildren;
         MCTShelper.expandNode(node);
-        Node<IntPair> child = node.getChildren().get(0);
+        Node child = node.getChildren().get(0);
         //imaginary random playout ending in own (white) victory here
         MCTShelper.backPropagation(child, 1);
-        assertEquals(1, child.getState().getWinScore());
-        assertEquals(0, node.getState().getWinScore());
+        assertEquals(1, ((MCTSState) child.getState()).getWinScore());
+        assertEquals(0, ((MCTSState) node.getState()).getWinScore());
     }
     
     @Test
     public void backPropagationIncrementsWinCountForNodesWhereAIsOpponentJustPlayed() {
-        Node<IntPair> node = nodeWithoutChildren;
+        Node node = nodeWithoutChildren;
         MCTShelper.expandNode(node);
-        Node<IntPair> child = node.getChildren().get(0);
+        Node child = node.getChildren().get(0);
         //imaginary random playout ending in opponen (black) victory here
         MCTShelper.backPropagation(child, -1);
-        assertEquals(0, child.getState().getWinScore());
-        assertEquals(1, node.getState().getWinScore());
+        assertEquals(0, ((MCTSState) child.getState()).getWinScore());
+        assertEquals(1, ((MCTSState) node.getState()).getWinScore());
     }
     
     @Test
     public void simulateRandomPlayoutMarksMovesLeadingToOpponentInstantVictoryAsIndefinitelyBad() {
-        Node<IntPair> node = nodeWithoutChildren;
+        Node node = nodeWithoutChildren;
         MCTShelper.expandNode(node);
-        Node<IntPair> child = node.getChildren().get(0);
+        Node child = node.getChildren().get(0);
         MCTShelper.expandNode(child);
-        Node<IntPair> grandchild = child.getChildren().get(0);
+        Node grandchild = child.getChildren().get(0);
         MCTShelper.simulateRandomPlayout(grandchild);
         //it is known that the opponent, black(-1), wins in grandchild situation
-        assertEquals(Integer.MIN_VALUE, child.getState().getWinScore());
+        assertEquals(Integer.MIN_VALUE, ((MCTSState) child.getState()).getWinScore());
     }
     
     @Test
@@ -120,14 +121,14 @@ public class MCTShelperTest {
     
     @Test
     public void selectPromisingBranchWorksForNodeWithChildren() {
-        assertEquals(2, MCTShelper.selectPromisingBranch(nodeWithChildren)
-                .getState().getWinScore());
+        assertEquals(2, ((MCTSState) MCTShelper.selectPromisingBranch(nodeWithChildren)
+                .getState()).getWinScore());
     }
     
     @Test
     public void selectPromisingBranchReturnsNodeItselfForNodeWithoutChildren() {
-        assertEquals(2, MCTShelper.selectPromisingBranch(MCTShelper.selectPromisingBranch(nodeWithChildren))
-                .getState().getWinScore());
+        assertEquals(2, ((MCTSState) MCTShelper.selectPromisingBranch(MCTShelper.selectPromisingBranch(nodeWithChildren))
+                .getState()).getWinScore());
     }
    
     
