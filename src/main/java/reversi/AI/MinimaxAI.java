@@ -42,7 +42,7 @@ public class MinimaxAI <GameType, MoveType> implements Player <MoveType> {
     
     @Override
     public String name() {
-        return "Minimax AI + " + eval.name();
+        return "Minimax AI + " + eval.name() + ", depth " + MAX_DEPTH;
     }
     
 }
