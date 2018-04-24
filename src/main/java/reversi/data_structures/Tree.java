@@ -1,20 +1,16 @@
-package reversi.AI.MCTS;
+package reversi.data_structures;
+
 
 /**
  *
  * @author Valhe Kouneli
- * @param <MoveType>
  */
-public class Tree <MoveType> {
+public class Tree  {
     
-    Node<MoveType> root;
+    Node root;
     
-    public Tree() {
-        root = new Node(new State<>());
-    }
-    
-    public Tree(State state) {
-        root = new Node(state);
+    public Tree(Node node) {
+        root = node;
     }
     
     public void setRoot(Node root) {

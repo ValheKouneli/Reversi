@@ -1,32 +1,29 @@
-package reversi.AI.MCTS;
-
-import reversi.data_structures.List;
+package reversi.data_structures;
 
 /**
  *
  * @author Valhe Kouneli
- * @param <MoveType>
  */
-public class Node <MoveType> {
+public class Node {
     
-    private State<MoveType> state; //information about this node
-    private Node<MoveType> parent;
-    private final List<Node<MoveType>> children;
+    private Object state; //information about this node
+    private Node parent;
+    private final List<Node> children;
     
-    public Node(State<MoveType> state) {
+    public Node(Object state) {
         this.state = state;
         children = new List<>();
     }
     
-    public void setState(State<MoveType> state) {
+    public void setState(Object state) {
         this.state = state;
     }
     
-    public State<MoveType> getState() {
+    public Object getState() {
         return state;
     }
     
-    public void setParent(Node<MoveType> parent) {
+    public void setParent(Node parent) {
         this.parent = parent;
     }
     
@@ -34,11 +31,11 @@ public class Node <MoveType> {
         return parent;
     }
     
-    public void addChild(Node<MoveType> child) {
+    public void addChild(Node child) {
         children.add(child);
     }
     
-    public List<Node<MoveType>> getChildren() {
+    public List<Node> getChildren() {
         return children;
     }
     
