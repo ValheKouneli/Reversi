@@ -9,7 +9,7 @@ import static java.lang.Integer.parseInt;
 import java.util.Scanner;
 import reversi.AI.*;
 import reversi.AI.MCTS.MCTSbot;
-import CLI.CLI;
+import CLI.Controller;
 import reversi.data_structures.Pair;
 import reversi.game.Reversi;
 
@@ -24,7 +24,7 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        CLI cli = new CLI();
+        Controller cli = new Controller();
         cli.run();
 //        Reversi game = new Reversi();
 //        MCTSbot ai1 = new MCTSbot(500);
