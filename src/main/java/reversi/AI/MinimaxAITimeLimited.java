@@ -23,6 +23,13 @@ public class MinimaxAITimeLimited <MoveType> implements Player {
     private final MinimaxTLHelper<MoveType> helper;
     private final Random random;
     
+    public MinimaxAITimeLimited(Evaluator<MoveType> eval) {
+        timeLimit = 1000;
+        this.eval = eval;
+        helper = new MinimaxTLHelper<>();
+        random = new Random(System.currentTimeMillis());
+    }
+    
     public MinimaxAITimeLimited(int timeLimit, Evaluator<MoveType> eval) {
         this.timeLimit = timeLimit;
         this.eval = eval;
