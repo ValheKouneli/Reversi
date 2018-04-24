@@ -5,13 +5,8 @@
  */
 package reversi.application;
 
-import static java.lang.Integer.parseInt;
-import java.util.Scanner;
-import reversi.AI.*;
-import reversi.AI.MCTS.MCTSbot;
 import CLI.Controller;
-import reversi.data_structures.Pair;
-import reversi.game.Reversi;
+
 
 /**
  *
@@ -26,61 +21,7 @@ public class Main {
         
         Controller cli = new Controller();
         cli.run();
-//        Reversi game = new Reversi();
-//        MCTSbot ai1 = new MCTSbot(500);
-//        MinimaxAI ai2 = new MinimaxAI(new ReversiEvaluator2());
-//        
-//        Scanner reader = new Scanner(System.in);
-//        
-//         int i = 0;
-//         Pair move;
-// 
-//        do {
-//            System.out.println(game.toString());
-//            if (game.getTurn() == 1) {
-//                game.move(ai1.getNextMove(game));
-//            } else {
-//                game.move(ai2.getNextMove(game));
-//            }
-//            i++;
-//        } while (!game.getMoves().isEmpty());
-//        
-//        System.out.println(game.toString());
-//         
-//      
-    }
-    
-    private static void humanGetMove(Reversi game, Scanner reader) {
-        String input = null;
-        int x;
-        int y;
-        
-        do {
-            do {
-                System.out.println("Give row.");
-                input = reader.nextLine();
-            } while (isCoordinate(input));
-            x = parseInt(input);
-            do {
-                System.out.println("Give column.");
-                input = reader.nextLine();
-            } while (isCoordinate(input));
-            y = parseInt(input);
-        } while (!game.move(x, y));
-    }
-    
-    private static String getPlayer(int i) {
-        if (i<0) {
-            return "black";
-        } else if (i>0) {
-            return "white";
-        } else {
-            return "no one";
-        }
-    }
-    
-    private static boolean isCoordinate(String s) {  
-        return s != null && s.matches("[01234567]\n");  
+
     }
     
 }
