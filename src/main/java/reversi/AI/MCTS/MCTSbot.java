@@ -74,6 +74,6 @@ public class MCTSbot <MoveType> implements Player <MoveType> {
     
     @Override
     public String name() {
-        return "MCTS Bot";
+        return "MCTS Bot, " + timeToThink + " ms time/move";
     }
 }
