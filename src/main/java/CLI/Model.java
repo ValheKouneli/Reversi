@@ -11,6 +11,8 @@ import reversi.AI.MinimaxAI;
 import reversi.AI.ReversiEvaluator2;
 import reversi.game.Reversi;
 import reversi.AI.Player;
+import reversi.data_structures.IntPair;
+import reversi.data_structures.List;
 
 /**
  *
@@ -22,16 +24,26 @@ public class Model {
     private boolean gameInProgress;
     private Player player1;
     private Player player2;
+    private View currentView;
     
     public Model() {
         game = new Reversi();
         player1 = new MCTSbot(1000);
         player2 = new MinimaxAI(new ReversiEvaluator2());
         gameInProgress = false;
+        currentView = new WelcomeView();
     }
     
     public void toggleGameInProgress() {
         gameInProgress = !gameInProgress;
+    }
+    
+    public void setView(View view) {
+        currentView = view;
+    }
+    
+    public View getView() {
+        return currentView;
     }
     
     public void gameOn() {
@@ -54,6 +66,10 @@ public class Model {
         return player2.name();
     }
     
+    public List<IntPair> getLegalMoves() {
+        return game.getMoves();
+    }
+
     public void newGame() {
         game = new Reversi();
         gameInProgress = false;

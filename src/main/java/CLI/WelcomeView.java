@@ -9,31 +9,27 @@ package CLI;
  *
  * @author Valhe Kouneli
  */
-public class CLIGameView implements View {
-    
-    private final Model model;
-    
-    public CLIGameView(Model model) {
-        this.model = model;
+public class WelcomeView implements View {
+
+    public WelcomeView() {
+        
     }
     
     @Override
     public String toString() {
-        return model.toString();
+        return "WELCOME TO PLAY REVERSI\n" +
+               "=========================================\n" +
+               "Press [enter] to continue\n";
     }
 
     @Override
     public String name() {
-        return "game view";
+        return "welcome";
     }
 
     @Override
     public String processInput(String input) {
-        if (model.gameIsInProgress()) {
-            return "";
-        } else {
-            return "show players";
-        }
+        return "show players";
     }
     
 }

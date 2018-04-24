@@ -6,94 +6,93 @@
 package CLI;
 
 import java.util.Scanner;
+import reversi.data_structures.IntPair;
+import reversi.data_structures.List;
 
 /**
  *
  * @author Valhe Kouneli
  */
-public class CLI implements View {
+public class CLI implements IO {
     
-
-    private final Scanner reader;
-    private final View CLIShowPlayersView;
-    private final View CLIGameView;
-    private final View CLIChoosePlayerView;
-    private View currentView;
+    private Scanner reader;
     private final Model model;
-    private boolean keepRunning;
-    
-    public CLI() {
-        this.model = new Model();
-        this.reader = new Scanner(System.in);
-        this.CLIShowPlayersView = new CLIShowPlayersView(model);
-        this.CLIGameView = new CLIGameView(model);
-        this.CLIChoosePlayerView = new CLIChoosePlayerView(model, reader);
-        currentView = new CLIWelcomeView();
-        keepRunning = true;
-    }
     
     public CLI(Model model) {
         this.model = model;
-        this.reader = new Scanner(System.in);
-        this.CLIShowPlayersView = new CLIShowPlayersView(model);
-        this.CLIGameView = new CLIGameView(model);
-        this.CLIChoosePlayerView = new CLIChoosePlayerView(model, reader);
-        currentView = new CLIWelcomeView();
-        keepRunning = true;
+        reader = new Scanner(System.in);
     }
     
-    public void run() {
+    public void setScanner(Scanner reader) {
+        this.reader = reader;
+    }
 
-        while (keepRunning) {
-            toString();
-            if (!model.gameIsInProgress()) {
+    @Override
+    public String nextInput() {
+        return reader.nextLine();
+    }
+
+    @Override
+    public void nextOutput() {
+        System.out.println(model.getView().toString());
+    }
+
+    @Override
+    public IntPair nextMove() {
+        IntPair move = null;
+        int y = -1;
+        int x = -1;
+        boolean properMoveGiven = false;
+        
+        while (!properMoveGiven) {
+            boolean properRowGiven = false;
+            while (!properRowGiven) {
+                System.out.println("Give row:");
                 String input = reader.nextLine();
-                String nextView = currentView.processInput(input);
-                changeView(nextView);
-            } else {
-                model.nextTurn();
+                y = validateInput(input);
+                if (y!=-1) {
+                    properRowGiven = true;
+                }
             }
-            
+
+            boolean properColumnGiven = false;
+            while (!properColumnGiven) {
+                System.out.println("Give column:");
+                String input = reader.nextLine();
+                x = validateInput(input);
+                if (x!=-1) {
+                    properColumnGiven = true;
+                }
+            }
+
+            move = new IntPair(x, y);
+            List<IntPair> legalMoves = model.getLegalMoves();
+            if (legalMoves.contains(move)) {
+                return move;
+            } else {
+                System.out.println("[r " + y + ", c " + x + "] is not a legal move.");
+            }
         }
-        
-        
+        return move; //should never come here          
     }
     
-    private void changeView(String control) {
-        switch (control) {
-            case "show players"         : currentView = CLIShowPlayersView;
-                                          break;
-            case "choose white player"  : ((CLIChoosePlayerView) CLIChoosePlayerView).setPlayer(1);
-                                          currentView = CLIChoosePlayerView;
-                                          break;
-            case "choose black player"  : ((CLIChoosePlayerView) CLIChoosePlayerView).setPlayer(-1);
-                                          currentView = CLIChoosePlayerView;
-                                          break;
-            case "play"                 : currentView = CLIGameView;
-                                          break;
-            case "game view"            : currentView = CLIGameView;
-                                          break;
-            case "quit"                 : keepRunning = false;
-                                          break;
-            default                     : break;
-        }
-    }
-
-    @Override
-    public String toString() {
-        return currentView.toString();
-    }
-
-    @Override
-    public String name() {
-        return "CLI";
-    }
-
-    @Override
-    public String processInput(String input) {
-        String nextView = currentView.processInput(input);
-        changeView(nextView);
-        return "";
+    private int validateInput(String input) {
+        int k;
+        try {
+                k = Integer.parseInt(input);
+            } catch (NumberFormatException a) {
+                System.out.println("Not a valid number.");
+                return -1;
+            } catch (NullPointerException a) {
+                System.out.println("You must choose a coordinate.");
+                return -1;
+            }
+            if (0<=k && k<= 7) {
+                return k;
+            } else {
+                System.out.println("Give a number in range 0–7.");
+                return -1;
+            }  
     }
     
 }

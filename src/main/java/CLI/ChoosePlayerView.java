@@ -11,16 +11,14 @@ import java.util.Scanner;
  *
  * @author Valhe Kouneli
  */
-public class CLIChoosePlayerView implements View {
+public class ChoosePlayerView implements View {
 
     
     private int playerNbr;
     private String player;
     private final Model model;
-    private final Scanner reader;
     
-    public CLIChoosePlayerView(Model model, Scanner reader) {
-        this.reader = reader;
+    public ChoosePlayerView(Model model) {
         this.model = model;
     }
     
@@ -51,12 +49,7 @@ public class CLIChoosePlayerView implements View {
                             return "show players";
             case "2"    :   model.setAI(playerNbr, "MinimaxAI");
                             return "show players";
-            case "3"    :   CLIHumanPlayer human = new CLIHumanPlayer(reader);
-                            model.setPlayer(playerNbr, human);
-                            System.out.println("Give player's name:");
-                            human.setName(reader.nextLine().substring(0,10));
-                            System.out.println();
-                            return "show players";
+            case "3"    :   return "choose " + player + " player's name";
             case "4"    :   return "show players";
             default     :   return "";
         }

@@ -9,12 +9,12 @@ package CLI;
  *
  * @author Valhe Kouneli
  */
-public class CLIShowPlayersView implements View {
+public class ShowPlayersView implements View {
     
     private final Model model;
     
     
-    public CLIShowPlayersView(Model model) {
+    public ShowPlayersView(Model model) {
         this.model = model;
     }
     
