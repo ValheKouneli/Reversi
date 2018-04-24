@@ -27,9 +27,7 @@ public class Reversi implements Game {
         board = new ReversiBoard();
         turn = 1;
         turnNumber = 0;
-        lastTurnNumberToAskAvailableMoves = 100;
-
-        
+        lastTurnNumberToAskAvailableMoves = 100;   
     }
     
     public void setBoard(ReversiBoard board) {
