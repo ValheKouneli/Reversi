@@ -76,19 +76,30 @@ public class MCTSState <MoveType> {
     public List<MCTSState<MoveType>> getAllPossibleStates() {
         List<MCTSState<MoveType>> nextStates = new List<>();
         List<MoveType> moves = game.getMoves();
-        for (int i=0; i<moves.size(); i++) {
+        if (moves.isEmpty()) {
             Game copy = game.getCopy();
-            copy.move(moves.get(i));
-            MCTSState<MoveType> state = new MCTSState<>(copy, moves.get(i));
+            copy.move(null);
+            MCTSState<MoveType> state = new MCTSState<>(copy, null);
             nextStates.add(state);
+        } else {
+            for (int i=0; i<moves.size(); i++) {
+                Game copy = game.getCopy();
+                copy.move(moves.get(i));
+                MCTSState<MoveType> state = new MCTSState<>(copy, moves.get(i));
+                nextStates.add(state);
+            }
         }
         return nextStates;
     }
     
     public void randomPlay() {
         List<MoveType> moves = game.getMoves();
-        int i = RANDOM.nextInt(moves.size());
-        game.move(moves.get(i));
+        if (moves.size() == 0) {
+            game.move(null);
+        } else {       
+            int i = RANDOM.nextInt(moves.size());
+            game.move(moves.get(i));
+        }
     }
     
     public MCTSState<MoveType> getCopy() {

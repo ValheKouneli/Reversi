@@ -30,7 +30,8 @@ public class MCTShelper <MoveType> {
             int i = random.nextInt(size);
             return node.getChildren().get(i);
         } else {
-            return null;
+            throw new java.lang.Error(
+                    "random child node asked from a node without childen");
         }
     }
 
@@ -65,6 +66,9 @@ public class MCTShelper <MoveType> {
     }
 
     protected int simulateRandomPlayout(Node node) {
+        if (node == null) {
+            throw new java.lang.NullPointerException("node was null");
+        }
         boolean gameIsOver = ((MCTSState) node.getState()).getGame().gameIsOver();
         if (gameIsOver &&
                 ((MCTSState) node.getState()).getGame().getTurn()*(-1) ==

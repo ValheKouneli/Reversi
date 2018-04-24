@@ -36,6 +36,10 @@ public class MCTSbot <MoveType> implements Player <MoveType> {
      */
     @Override
     public MoveType getNextMove(Game game) {
+        if (game.getMoves().isEmpty()) {
+            return null;
+        }
+        
         long end = System.currentTimeMillis() + timeToThink;
         //how long to continue before selecting final move
         MCTSState rootState = new MCTSState(game);

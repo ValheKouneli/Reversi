@@ -109,12 +109,6 @@ public class MCTShelperTest {
     }
     
     @Test
-    public void getChildWithMaxScoreReturnsNullForNodeWithoutChildren() {
-        assertEquals(null, MCTShelper
-                .getChildWithMaxScore(MCTShelper.getChildWithMaxScore(nodeWithChildren)));
-    }
-    
-    @Test
     public void getChildWithMaxScoreDoesNotReturnNullForNodeWithInfinetelyBadChildren() {
         assertNotNull(MCTShelper.getChildWithMaxScore(MCTSTestHelper.getTestNodeWithChildrenWithInfenitelyBadScores()));
     }

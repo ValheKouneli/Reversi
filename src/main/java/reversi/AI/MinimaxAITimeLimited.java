@@ -51,6 +51,10 @@ public class MinimaxAITimeLimited <MoveType> implements Player {
      */
     @Override
     public MoveType getNextMove(Game game) {
+        if (game.getMoves().size() == 0) {
+            return null;
+        }
+        
         long timeNow = System.currentTimeMillis();
         
         MinimaxState rootState = new MinimaxState(game);
@@ -59,12 +63,16 @@ public class MinimaxAITimeLimited <MoveType> implements Player {
         
         Queue<Node> queue = new ArrayDeque<>();
         queue.add(rootNode);
-        Node nodeProcessed;
+        Node nodeToProcess;
 
         helper.branchOutAndEvaluate(rootNode, eval, queue);
         
         while (System.currentTimeMillis() < timeNow + timeLimit) {
-            nodeProcessed = queue.remove();
+            
+            nodeToProcess = queue.poll();
+            if (nodeToProcess == null) {
+                break;
+            }
             helper.branchOutAndEvaluate(rootNode, eval, queue);
         }
         

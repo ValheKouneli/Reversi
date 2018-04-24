@@ -13,21 +13,18 @@ import reversi.data_structures.List;
  *
  * @author Valhe Kouneli
  */
-public class Reversi implements Game {
+public class Reversi implements Game <IntPair> {
     
  
     
     private ReversiBoard board;
     private int turn; //black = 1, white = -1
     private int turnNumber;
-    private List<IntPair> availableMoves;
-    private int lastTurnNumberToAskAvailableMoves;
     
     public Reversi() {
         board = new ReversiBoard();
         turn = 1;
-        turnNumber = 0;
-        lastTurnNumberToAskAvailableMoves = 100;   
+        turnNumber = 0;   
     }
     
     public void setBoard(ReversiBoard board) {
@@ -50,14 +47,6 @@ public class Reversi implements Game {
     
     public void setTurnNumber(int turnNumber) {
         this.turnNumber = turnNumber;
-    }
-    
-    public void setLastTurnNumberToAskAvailableMoves(int turnNumber) {
-        this.lastTurnNumberToAskAvailableMoves = turnNumber;
-    }
-    
-    public int getLastTurnNumberToAskAvailableMoves() {
-        return this.lastTurnNumberToAskAvailableMoves;
     }
     
     /**
@@ -87,7 +76,11 @@ public class Reversi implements Game {
     
     @Override
     public boolean gameIsOver() {
-        return getMoves().isEmpty();
+        boolean currentPlayerCanNotMove = getMoves().isEmpty();
+        turn *= -1; //change turn temporarily
+        boolean nextPlayerCanNotMove = getMoves().isEmpty();
+        turn *= -1; //change turn back
+        return currentPlayerCanNotMove && nextPlayerCanNotMove;
     }
     
     @Override
@@ -102,11 +95,7 @@ public class Reversi implements Game {
     
     @Override
     public List<IntPair> getMoves() {
-        if (lastTurnNumberToAskAvailableMoves == turnNumber) {
-            return availableMoves;
-        }
-        lastTurnNumberToAskAvailableMoves = turnNumber;
-        availableMoves = new List<>();
+        List<IntPair> availableMoves = new List<>();
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
                 if (moveIsLegal(board, turn, i, j)) {
@@ -114,10 +103,11 @@ public class Reversi implements Game {
                 }
             }
         }
+
         return availableMoves;
     }
     
-    public boolean moveIsLegal(ReversiBoard board, int turn, int x, int y) {
+    protected boolean moveIsLegal(ReversiBoard board, int turn, int x, int y) {
         if (board.getBoardXY(x, y) != 0) {
             return false;
         }
@@ -149,7 +139,7 @@ public class Reversi implements Game {
     
     /**
      * Makes the suggested move and changes turn if it is legal;
-     * returns wheater the move is legal.
+     * returns whether the move is legal.
      * @param x row number of the move
      * @param y column number of the move
      * @return true if move is legal, false if not
@@ -163,7 +153,7 @@ public class Reversi implements Game {
         }
         
         /**
-         * If the move does not reverse any pieces of the opposing colour,
+         * If the move does not reverse any pieces of the opposing color,
          * the move is not legal.
          */
 
@@ -172,7 +162,7 @@ public class Reversi implements Game {
         if (moveFlips) {
             board.setBoardXY(x, y, turn);
             turnNumber++;
-            turn = turn*(-1);
+            turn *= -1;
             return true;
         } else {
             return false;
@@ -184,9 +174,13 @@ public class Reversi implements Game {
     }
 
     @Override
-    public boolean move(Object move) {
-        IntPair pair = (IntPair) move;
-        return move(pair.getX(), pair.getY());
+    public boolean move(IntPair move) {
+        if (move == null) {
+            turnNumber++;
+            turn *= -1;
+            return true;
+        }
+        return move(move.getX(), move.getY());
     }
 
     @Override
