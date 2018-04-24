@@ -8,11 +8,12 @@ Command line Java application, Reversi AI.
 
 ## Bugs (23.4.2018)
 
-* CLIHumanPlayer is buggy. At some point, the program stops accepting valid moves, claiming they are illegal.
+* For unknown reason, when human plays against AI, after two human moves the program keeps refusing all moves saying they are illegal.
+
 
 ## TODO (at least)
 
-* Fix CLIHumanPlayer (see bugs)
+* Fix taking human player's input (see bugs)
 * Unit tests for MinimaxAITimeLimited and package CLI!!!
 * Statistics
 * Remove the hidious <MoveType> <GameType> thingies from the AIs :O~
