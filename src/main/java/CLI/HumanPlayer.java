@@ -34,6 +34,7 @@ public class HumanPlayer implements Player <IntPair> {
             return name;
         }
     }
+    
     @Override
     public IntPair getNextMove(Game game) {
         return io.nextMove();
