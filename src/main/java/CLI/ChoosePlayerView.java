@@ -27,9 +27,10 @@ public class ChoosePlayerView implements View {
         return "MENU: Choose " + player + " Player\n" +
                            "=========================================\n" +
                            "[1] Monte Carlo Tree Search Bot\n" +
-                           "[2] MinimaxAI\n" +
-                           "[3] Human\n" +
-                           "[4] go back\n";
+                           "[2] MinimaxAI with time limit" +
+                           "[3] MinimaxAI\n" +
+                           "[4] Human\n" +
+                           "[5] go back\n";
     }
 
     @Override
@@ -49,8 +50,10 @@ public class ChoosePlayerView implements View {
                             return "show players";
             case "2"    :   model.setAI(playerNbr, "MinimaxAI");
                             return "show players";
-            case "3"    :   return "choose " + player + " player's name";
-            case "4"    :   return "show players";
+            case "3"    :   model.setAI(playerNbr, "MinimaxTL");
+                            return "show player";
+            case "4"    :   return "choose " + player + " player's name";
+            case "5"    :   return "show players";
             default     :   return "";
         }
     }

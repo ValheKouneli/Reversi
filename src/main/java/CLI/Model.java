@@ -8,6 +8,7 @@ package CLI;
 import reversi.AI.Game;
 import reversi.AI.MCTS.MCTSbot;
 import reversi.AI.MinimaxAI;
+import reversi.AI.MinimaxAITimeLimited;
 import reversi.AI.ReversiEvaluator2;
 import reversi.game.Reversi;
 import reversi.AI.Player;
@@ -29,7 +30,7 @@ public class Model {
     public Model() {
         game = new Reversi();
         player1 = new MCTSbot(1000);
-        player2 = new MinimaxAI(new ReversiEvaluator2());
+        player2 = new MinimaxAITimeLimited(new ReversiEvaluator2());
         gameInProgress = false;
         currentView = new WelcomeView();
     }
@@ -109,6 +110,8 @@ public class Model {
                                       break;
                 case "MinimaxAI"    : player1 = new MinimaxAI(new ReversiEvaluator2());
                                       break;
+                case "MinimaxTL"    : player1 = new MinimaxAITimeLimited(new ReversiEvaluator2());
+                                      break;
                 default             : break;
             }
         } else if (color == -1) {
@@ -116,6 +119,8 @@ public class Model {
                 case "MCTSbot"      : player2 = new MCTSbot();
                                       break;
                 case "MinimaxAI"    : player2 = new MinimaxAI(new ReversiEvaluator2());
+                                      break;
+                case "MinimaxTL"    : player1 = new MinimaxAITimeLimited(new ReversiEvaluator2());
                                       break;
                 default             : break;
             }
