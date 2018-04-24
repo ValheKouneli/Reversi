@@ -19,18 +19,18 @@ import reversi.data_structures.Tree;
 public class MinimaxAITimeLimited <MoveType> implements Player {
     
     private final Evaluator<MoveType> eval;
-    private long timeLimit;
+    private int timeLimit;
     private final MinimaxTLHelper<MoveType> helper;
     private final Random random;
     
-    public MinimaxAITimeLimited(long timeLimit, Evaluator<MoveType> eval) {
+    public MinimaxAITimeLimited(int timeLimit, Evaluator<MoveType> eval) {
         this.timeLimit = timeLimit;
         this.eval = eval;
         helper = new MinimaxTLHelper<>();
         random = new Random(System.currentTimeMillis());
     }
     
-    public void setTimeLimit(long timeLimit) {
+    public void setTimeLimit(int timeLimit) {
         this.timeLimit = timeLimit;
     }
     
