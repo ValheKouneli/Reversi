@@ -7,4 +7,4 @@ Time spent: 3h
 
 Tuesday: Made improvements(?) to user interface classes. Made a time limited Minimax bot (breadth first branching out).
 
-Time spent: 8h
+Time spent: 5h
