@@ -14,6 +14,8 @@ Command line Java application, Reversi AI.
 ## TODO (at least)
 
 * Fix CLIHumanPlayer (see bugs)
+* Unit tests for MinimaxAITimeLimited and package CLI!!!
+* Statistics
 * Remove the hidious <MoveType> <GameType> thingies from the AIs :O~
 * Fix the implementation of rules (see bugs)
-* Make more unit tests
+* Make more unit tests for everything
