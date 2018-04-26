@@ -57,7 +57,7 @@ public class MinimaxAI implements Player {
     
     @Override
     public String name() {
-        return "Minimax AI + " + eval.name() + ", depth " + depth;
+        return "MinimaxAI (depth " + depth + ") + " + eval.name();
     }
     
 }
