@@ -22,7 +22,7 @@ public class Reversi implements Game {
     
     public Reversi() {
         board = new ReversiBoard();
-        turn = 1;
+        turn = -1;
         turnNumber = 0;
         lastTurnToAskMoves = -1;
         getMovesCache = null;
@@ -32,6 +32,16 @@ public class Reversi implements Game {
     
     public void setBoard(ReversiBoard board) {
         this.board = board;
+        int piecesOnBoard = 0;
+        for (int i=0; i<8; i++) {
+            for (int j=0; j<8; j++) {
+                if (board.getBoardXY(i, j) != 0) {
+                    piecesOnBoard++;
+                }
+            }
+        }
+        turnNumber = piecesOnBoard;
+        turn = turnNumber % 2 == 0 ? -1 : 1;
     }
     
     @Override
@@ -44,13 +54,6 @@ public class Reversi implements Game {
         return turnNumber;
     }
     
-    public void setTurn(int turn) {
-        this.turn = turn;
-    }
-    
-    public void setTurnNumber(int turnNumber) {
-        this.turnNumber = turnNumber;
-    }
     
     /**
      * Returns a negative number if black is winning
@@ -107,8 +110,6 @@ public class Reversi implements Game {
         Reversi copy = new Reversi();
         ReversiBoard boardCopy = board.getCopy();
         copy.setBoard(boardCopy);
-        copy.setTurn(turn);
-        copy.setTurnNumber(turnNumber);
         return copy;
     }
     
@@ -162,7 +163,8 @@ public class Reversi implements Game {
         } else {
             int score = getScore();
             int points = score < 0 ? score*-1 : score;
-            temp += "Winner is " + getPlayer(score) + " with " + points + " points.";
+            temp += "Winner is " + getPlayer(score) + 
+                    " with " + points + " points.\n";
         }
         return temp;
     }
@@ -227,7 +229,7 @@ public class Reversi implements Game {
     @Override
     public int winner() {
         if (!gameIsOver()) {
-            throw new java.lang.IllegalAccessError(
+            throw new java.lang.IllegalStateException(
                     "Winner asked but game is not over.");
         }
         return getScore() > 0 ? 1 : -1;
