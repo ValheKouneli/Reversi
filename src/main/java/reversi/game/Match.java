@@ -10,8 +10,10 @@ public class Match {
     private final Player player2;
     private final Game game;
     private int timeSpentPlayer1;
+    private int movesPlayedPlayer1;
+    private int movesPlayedPlayer2;
     private int timeSpentPlayer2;
-    private int timeSpentTotal;
+    private long timeSpentTotal;
     private Player winner;
     
     public Match(Game game, Player player1, Player player2) {
@@ -22,13 +24,38 @@ public class Match {
         this.player2 = player2;
         timeSpentPlayer1 = 0;
         timeSpentPlayer2 = 0;
+        movesPlayedPlayer1 = 0;
+        movesPlayedPlayer2 = 0;
     }
     
     public void playMatch() {
+        long timeBeforeMatch = System.currentTimeMillis();
+        long timeBeforeMove;
+        long moveTime;
+        long timeAfterMove;
         while (!game.gameIsOver()) {
-            Player playerInTurn = game.getTurn() == 1 ? player1 : player2;
-            game.move(playerInTurn.getNextMove(game));
+            int turn = game.getTurn();
+            Player playerInTurn = turn == 1 ? player1 : player2;
+            
+            timeBeforeMove = System.currentTimeMillis();
+            Object move = playerInTurn.getNextMove(game);
+            timeAfterMove = System.currentTimeMillis();
+            
+            moveTime = timeAfterMove - timeBeforeMove;
+            if (turn == 1) {
+                timeSpentPlayer1 += moveTime;
+                movesPlayedPlayer1++;
+            } else {
+                timeSpentPlayer2 += moveTime;
+                movesPlayedPlayer2++;
+            }
+            
+            game.move(move);
         }
+        long timeAfterMatch = System.currentTimeMillis();
+        
+        timeSpentTotal = timeAfterMatch - timeBeforeMatch;
+        
         switch (game.winner()) {
             case 1:
                 winner = player1;
@@ -42,6 +69,38 @@ public class Match {
         }
     }
     
+    public long averageTimePerMovePlayer1() {
+        if (movesPlayedPlayer1 == 0) {
+            return 0;
+        } else {
+            return timeSpentPlayer1 / movesPlayedPlayer1;
+        }
+    }
+    
+    public long averageTimePerMovePlayer2() {
+        if (movesPlayedPlayer2 == 0) {
+            return 0;
+        } else {
+            return timeSpentPlayer2 / movesPlayedPlayer2;
+        }
+    }
+    
+    public int returnWinner() {
+        return game.winner();
+    }
+    
+    public String returnWinnerName() {
+        return winner.name();
+    }
+    
+    public long averageTimePerMove() {
+        if (movesPlayedPlayer1 + movesPlayedPlayer2 == 0) {
+            return 0;
+        } else {
+            return (timeSpentPlayer1 + timeSpentPlayer2) /
+                    (movesPlayedPlayer1 + movesPlayedPlayer2);
+        }
+    }
 
     
 }
