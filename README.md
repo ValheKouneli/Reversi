@@ -6,15 +6,11 @@ Reversi
 
 Command line Java application, Reversi AI.
 
-## Bugs (23.4.2018)
-
-* For unknown reason, when human plays against AI, after two human moves the program keeps refusing all moves saying they are illegal.
+## Bugs (26.4.2018)
 
 
 ## TODO (at least)
 
-* Fix taking human player's input (see bugs)
-* Unit tests for MinimaxAITimeLimited and package CLI!!!
+* Unit tests
 * Statistics
-* Remove the hidious <MoveType> <GameType> thingies from the AIs :O~
-* Make more unit tests for everything
+* Maybe do something about the hidious <MoveType> <GameType> thingies from the AIs :O~
