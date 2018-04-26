@@ -29,11 +29,20 @@ public class Match {
     }
     
     public void playMatch() {
+        playMatch(false);
+    }
+    
+    public void playMatch(boolean print) {
         long timeBeforeMatch = System.currentTimeMillis();
         long timeBeforeMove;
         long moveTime;
         long timeAfterMove;
+        if (print) {
+            System.out.println(game.toString());
+        }
         while (!game.gameIsOver()) {
+
+            System.out.println(game.toString());
             int turn = game.getTurn();
             Player playerInTurn = turn == 1 ? player1 : player2;
             
@@ -51,9 +60,22 @@ public class Match {
             }
             
             game.move(move);
+            if (print) {
+                System.out.println(game.toString());
+            }
         }
         long timeAfterMatch = System.currentTimeMillis();
         
+        if (print) {
+            System.out.println(game.toString());
+            System.out.println(player1.name() + " used " + 
+                    averageTimePerMovePlayer1() +
+                    " ms per move on average.");
+            System.out.println(player2.name() + " used " + 
+                    averageTimePerMovePlayer2() +
+                    " ms per move on average.");
+        }
+
         timeSpentTotal = timeAfterMatch - timeBeforeMatch;
         
         switch (game.winner()) {
