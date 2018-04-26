@@ -23,6 +23,7 @@ public class Reversi implements Game {
         turn = 1;
         turnNumber = 0;
         lastTurnToAskMoves = -1;
+        getMovesCache = null;
     }
     
     public void setBoard(ReversiBoard board) {
@@ -112,7 +113,7 @@ public class Reversi implements Game {
      */
     protected List<Object> getMoves(boolean cache) {
         if (cache) {
-            if (lastTurnToAskMoves == turn) {
+            if (lastTurnToAskMoves == turnNumber) {
                 return getMovesCache;
             }
         }
