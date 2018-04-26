@@ -13,7 +13,7 @@ public class MinimaxAI implements Player {
     
     private final Evaluator eval;
     private int depth;
-    private Minimax minimax;
+    private final Minimax minimax;
     
     /**
      *
@@ -51,7 +51,7 @@ public class MinimaxAI implements Player {
                                 + "of the given type.");
             }
         }
-        minimax.minmax((Game) game, 0, depth, eval);
+        minimax.minmax(game, 0, depth, eval);
         return minimax.getBestMove();
     }
     
