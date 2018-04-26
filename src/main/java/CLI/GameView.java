@@ -29,10 +29,12 @@ public class GameView implements View {
 
     @Override
     public String processInput(String input) {
-        if (model.gameIsInProgress()) {
-            return "";
-        } else {
+        
+        if (model.gameHasEnded()) {
             return "show players";
+        } else {
+            model.toggleGameInProgress();
+            return "";
         }
     }
     

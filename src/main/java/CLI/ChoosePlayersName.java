@@ -15,12 +15,12 @@ public class ChoosePlayersName implements View {
     private final Model model;
     private int playerNbr;
     private String playerColor;
-    private final IO io;
+    private final UIin in;
     
-    public ChoosePlayersName(Model model, IO io) {
+    public ChoosePlayersName(Model model, UIin in) {
+        this.in = in;
         this.model = model;
         this.playerColor = null;
-        this.io = io;
     }
     
     public void setPlayerNbr(int playerNbr) {
@@ -42,7 +42,7 @@ public class ChoosePlayersName implements View {
 
     @Override
     public String processInput(String input) {
-        HumanPlayer player = new HumanPlayer(io);
+        HumanPlayer player = new HumanPlayer(in);
         if (input.length() > 9) {
             input = input.substring(0,10);
         }

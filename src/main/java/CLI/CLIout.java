@@ -5,37 +5,29 @@
  */
 package CLI;
 
-
-
 /**
  *
  * @author Valhe Kouneli
  */
-public class CLI implements UI, Runnable {
-    
-    private final Controller controller;
+public class CLIout implements Runnable {
     private final Model model;
-    private final CLIin in;
-    private final CLIout out;
     private Thread thread;
-
-   
-    public CLI(Controller controller) {
-        this.controller = controller;
+    
+    public CLIout(Controller controller) {
         this.model = controller.getModel();
-        in = new CLIin(controller);
-        out = new CLIout(controller);
     }
-   
-    @Override
-    public UIin getUIin() {
-        return (UIin) in;
-    }
-
+    
     @Override
     public void run() {
-        in.start();
-        out.start();
+        while (true) {
+            if (model.getChanged()) {
+                System.out.println(model.getView().toString());
+                //model.setChangedToFalse();
+                if (model.gameIsInProgress()) {
+                    model.nextTurn();
+                }
+            }
+        }
     }
     
     public void start() {
@@ -44,6 +36,4 @@ public class CLI implements UI, Runnable {
             thread.start();
         }
     }
-  
-    
 }

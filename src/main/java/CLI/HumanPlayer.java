@@ -14,11 +14,11 @@ import reversi.data_structures.IntPair;
  */
 public class HumanPlayer implements Player <IntPair> {
 
-    private final IO io;
+    private final UIin in;
     private String name;
     
-    public HumanPlayer(IO io) {
-        this.io = io;
+    public HumanPlayer(UIin in) {
+        this.in = in;
         
     }
     
@@ -37,7 +37,7 @@ public class HumanPlayer implements Player <IntPair> {
     
     @Override
     public IntPair getNextMove(Game game) {
-        return io.nextMove();
+        return in.nextMove();
     }
 
    

@@ -26,6 +26,8 @@ public class Model {
     private Player player1;
     private Player player2;
     private View currentView;
+    private boolean changed;
+    private boolean waitingForHumanMove;
     
     public Model() {
         game = new Reversi();
@@ -33,26 +35,43 @@ public class Model {
         player2 = new MinimaxAITimeLimited(new ReversiEvaluator2());
         gameInProgress = false;
         currentView = new WelcomeView();
+        changed = true;
+    }
+    
+    public void setChangedToFalse() {
+        changed = false;
+    }
+    
+    public boolean getChanged() {
+        return changed;
     }
     
     public void toggleGameInProgress() {
         gameInProgress = !gameInProgress;
+        changed = true;
     }
     
     public void setView(View view) {
         currentView = view;
+        changed = true;
     }
     
     public View getView() {
         return currentView;
     }
     
+    public boolean gameHasEnded() {
+        return game.gameIsOver();
+    }
+    
     public void gameOn() {
         gameInProgress = true;
+        changed = true;
     }
     
     public void gameOff() {
         gameInProgress = false;
+        changed = true;
     }
 
     public boolean gameIsInProgress() {
@@ -74,6 +93,7 @@ public class Model {
     public void newGame() {
         game = new Reversi();
         gameInProgress = false;
+        changed = true;
     }
     
     public void nextTurn() {
@@ -86,12 +106,22 @@ public class Model {
         } else {
             gameInProgress = false;
         }   
+        changed = true;
+    }
+    
+    public void setWaitingForHumanMove(boolean value) {
+        waitingForHumanMove = value;
+    }
+    
+    public boolean getWaitingForHumanMove() {
+        return waitingForHumanMove;
     }
     
     public void switchPlayers() {
         Player temp = player1;
         player1 = player2;
         player2 = temp;
+        changed = true;
     }
     
     public void setPlayer(int color, Player player) {
@@ -100,6 +130,7 @@ public class Model {
         } else {
             player2 = player;
         }
+        changed = true;
     }
     
  
@@ -125,6 +156,7 @@ public class Model {
                 default             : break;
             }
         }
+        changed = true;
     }
     
     @Override

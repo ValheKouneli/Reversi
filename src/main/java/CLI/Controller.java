@@ -5,8 +5,6 @@
  */
 package CLI;
 
-import java.util.Scanner;
-
 /**
  *
  * @author Valhe Kouneli
@@ -14,49 +12,39 @@ import java.util.Scanner;
 public class Controller {
     
 
-    private final Scanner reader;
     private final View ShowPlayersView;
     private final View GameView;
     private final View ChoosePlayerView;
-    private final View ChoosePlayersName;
+    private View ChoosePlayersName;
     private final Model model;
-    private boolean keepRunning;
-    private final IO io;
+    private UI ui;
     
     public Controller() {
         this.model = new Model();
-        this.io = new CLI(model);
-        this.reader = new Scanner(System.in);
         this.ShowPlayersView = new ShowPlayersView(model);
         this.GameView = new GameView(model);
         this.ChoosePlayerView = new ChoosePlayerView(model);
-        this.ChoosePlayersName = new ChoosePlayersName(model, io);
-        keepRunning = true;
+        
     }
     
     public Controller(Model model) {
         this.model = model;
-        this.io = new CLI(model);
-        this.reader = new Scanner(System.in);
         this.ShowPlayersView = new ShowPlayersView(model);
         this.GameView = new GameView(model);
         this.ChoosePlayerView = new ChoosePlayerView(model);
-        this.ChoosePlayersName = new ChoosePlayersName(model, io);
-        keepRunning = true;
     }
     
-    public void run() {
-
-        while (keepRunning) {
-            io.nextOutput();
-            if (!model.gameIsInProgress()) {
-                String input = io.nextInput();
-                String nextView = model.getView().processInput(input);
-                changeView(nextView);
-            } else {
-                model.nextTurn();
-            }     
-        } 
+    public void setUI(UI ui) {
+        this.ui = ui;
+        this.ChoosePlayersName = new ChoosePlayersName(model, ui.getUIin());
+    }
+    
+    public Model getModel() {
+        return model;
+    }
+    
+    public void processInput(String input) {
+        changeView(model.getView().processInput(input));
     }
     
     private void changeView(String control) {
@@ -85,9 +73,6 @@ public class Controller {
                         break;
             case "game view"
                     :   model.setView(GameView);
-                        break;
-            case "quit"
-                    :   keepRunning = false;
                         break;
             default
                     :   break;

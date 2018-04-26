@@ -5,7 +5,10 @@
  */
 package reversi.application;
 
+import CLI.CLI;
 import CLI.Controller;
+import CLI.Model;
+import CLI.UI;
 
 
 /**
@@ -19,8 +22,11 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        Controller cli = new Controller();
-        cli.run();
+        Model model = new Model();
+        Controller controller = new Controller(model);
+        UI ui = (UI) new CLI(controller);
+        controller.setUI(ui);
+        ui.start();
 
     }
     
