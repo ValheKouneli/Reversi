@@ -26,7 +26,7 @@ public class MCTShelper {
             int i = random.nextInt(size);
             return node.getChildren().get(i);
         } else {
-            throw new java.lang.Error(
+            throw new java.lang.IllegalArgumentException(
                     "random child node asked from a node without childen");
         }
     }
