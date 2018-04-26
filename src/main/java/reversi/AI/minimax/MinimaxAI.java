@@ -12,7 +12,8 @@ import reversi.game.Player;
 public class MinimaxAI implements Player {
     
     private final Evaluator eval;
-    private final Minimax minimax;
+    private int depth;
+    private Minimax minimax;
     
     /**
      *
@@ -20,10 +21,19 @@ public class MinimaxAI implements Player {
      */
     public MinimaxAI(Evaluator eval) {
         this.eval = eval;
+        depth = 5;
         minimax = new Minimax();
     }
     
-    public final static int MAX_DEPTH = 5;
+    public MinimaxAI(Evaluator eval, int depth) {
+        this.eval = eval;
+        this.depth = depth;
+        minimax = new Minimax();
+    }
+    
+    public void setDepth(int depth) {
+        this.depth = depth;
+    }
     
     /**
      * Chooses a move in the given game situation based on a minimax algorithm.
@@ -41,13 +51,13 @@ public class MinimaxAI implements Player {
                                 + "of the given type.");
             }
         }
-        minimax.minmax((Game) game, 0, MAX_DEPTH, eval);
+        minimax.minmax((Game) game, 0, depth, eval);
         return minimax.getBestMove();
     }
     
     @Override
     public String name() {
-        return "Minimax AI + " + eval.name() + ", depth " + MAX_DEPTH;
+        return "Minimax AI + " + eval.name() + ", depth " + depth;
     }
     
 }
