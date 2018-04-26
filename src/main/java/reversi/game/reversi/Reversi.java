@@ -15,11 +15,14 @@ public class Reversi implements Game {
     private ReversiBoard board;
     private int turn; //black = 1, white = -1
     private int turnNumber;
+    private List<Object> getMovesCache;
+    private int lastTurnToAskMoves;
     
     public Reversi() {
         board = new ReversiBoard();
         turn = 1;
-        turnNumber = 0;   
+        turnNumber = 0;
+        lastTurnToAskMoves = -1;
     }
     
     public void setBoard(ReversiBoard board) {
@@ -69,12 +72,20 @@ public class Reversi implements Game {
         }
     }
     
+    /**
+     * Returns whether game is over or not.
+     * According to the Reversi rules, game is over if both players do not have
+     * any legal moves left.
+     * @return  is this game over
+     */
     @Override
     public boolean gameIsOver() {
         boolean currentPlayerCanNotMove = getMoves().isEmpty();
         turn *= -1; //change turn temporarily
-        boolean nextPlayerCanNotMove = getMoves().isEmpty();
+        turnNumber++; //change turn number temporarily
+        boolean nextPlayerCanNotMove = getMoves(false).isEmpty();
         turn *= -1; //change turn back
+        turnNumber--; //change turn number back;
         return currentPlayerCanNotMove && nextPlayerCanNotMove;
     }
     
@@ -90,6 +101,22 @@ public class Reversi implements Game {
     
     @Override
     public List<Object> getMoves() {
+        return getMoves(true);
+    }
+    
+    /**
+     * Returns legal moves in this game situation
+     * and puts them in the getMovesCache if that option is chosen.
+     * @param cache whether to save result in the cache or not
+     * @return legal moves in this game situation
+     */
+    protected List<Object> getMoves(boolean cache) {
+        if (cache) {
+            if (lastTurnToAskMoves == turn) {
+                return getMovesCache;
+            }
+        }
+
         List<Object> availableMoves = new List<>();
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
@@ -98,6 +125,12 @@ public class Reversi implements Game {
                 }
             }
         }
+        
+        if (cache) {
+            getMovesCache = availableMoves;
+            lastTurnToAskMoves = turnNumber;
+        }
+        
         return availableMoves;
     }
     
