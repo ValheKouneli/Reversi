@@ -17,6 +17,8 @@ public class Reversi implements Game {
     private int turnNumber;
     private List<Object> getMovesCache;
     private int lastTurnToAskMoves;
+    private boolean gameIsOverCache;
+    private int lastTurnToAskGameIsOver;
     
     public Reversi() {
         board = new ReversiBoard();
@@ -24,6 +26,8 @@ public class Reversi implements Game {
         turnNumber = 0;
         lastTurnToAskMoves = -1;
         getMovesCache = null;
+        gameIsOverCache = false;
+        lastTurnToAskGameIsOver = -1;
     }
     
     public void setBoard(ReversiBoard board) {
@@ -81,13 +85,21 @@ public class Reversi implements Game {
      */
     @Override
     public boolean gameIsOver() {
+        if (lastTurnToAskGameIsOver == turnNumber) {
+            return gameIsOverCache;
+        }
         boolean currentPlayerCanNotMove = getMoves().isEmpty();
         turn *= -1; //change turn temporarily
         turnNumber++; //change turn number temporarily
         boolean nextPlayerCanNotMove = getMoves(false).isEmpty();
         turn *= -1; //change turn back
         turnNumber--; //change turn number back;
-        return currentPlayerCanNotMove && nextPlayerCanNotMove;
+        
+        
+        boolean gameIsOver = currentPlayerCanNotMove && nextPlayerCanNotMove;
+        lastTurnToAskGameIsOver = turnNumber;
+        gameIsOverCache = gameIsOver;
+        return gameIsOver;
     }
     
     @Override
