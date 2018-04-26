@@ -3,8 +3,6 @@ import reversi.data_structures.Node;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import reversi.data_structures.IntPair;
-
 /**
  *
  * @author Valhe Kouneli
