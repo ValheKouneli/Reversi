@@ -1,6 +1,7 @@
 
-package reversi.AI.minimax;
+package reversi.game.reversi;
 
+import reversi.AI.minimax.Evaluator;
 import reversi.game.reversi.Reversi;
 import reversi.game.reversi.ReversiBoard;
 
