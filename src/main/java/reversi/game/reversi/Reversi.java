@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reversi.game;
+package reversi.game.reversi;
 
-import reversi.AI.Game;
+import reversi.game.Game;
 import reversi.data_structures.IntPair;
 import reversi.data_structures.List;
 

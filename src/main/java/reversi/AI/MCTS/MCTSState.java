@@ -1,7 +1,7 @@
 package reversi.AI.MCTS;
 
 import java.util.Random;
-import reversi.AI.Game;
+import reversi.game.Game;
 import reversi.data_structures.List;
 
 /**

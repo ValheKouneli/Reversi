@@ -4,8 +4,8 @@ package reversi.AI.MCTS;
 import reversi.data_structures.Node;
 import reversi.data_structures.Tree;
 import java.util.Random;
-import reversi.AI.Game;
-import reversi.AI.Player;
+import reversi.game.Game;
+import reversi.game.Player;
 
 /**
  *

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reversi.AI;
+package reversi.AI.minimax;
 
+import reversi.game.Game;
 import reversi.data_structures.List;
 
 

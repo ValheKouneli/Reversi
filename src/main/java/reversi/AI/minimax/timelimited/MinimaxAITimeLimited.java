@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reversi.AI;
+package reversi.AI.minimax.timelimited;
 
+import reversi.game.Game;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Random;
+import reversi.AI.minimax.Evaluator;
+import reversi.game.Player;
 import reversi.data_structures.Node;
 import reversi.data_structures.Tree;
 

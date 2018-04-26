@@ -7,11 +7,11 @@ package reversi.AI.MCTS;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import reversi.AI.Game;
+import reversi.game.Game;
 import reversi.data_structures.IntPair;
-import reversi.game.BoardFactory;
-import reversi.game.Reversi;
-import reversi.game.ReversiBoard;
+import reversi.game.reversi.BoardFactory;
+import reversi.game.reversi.Reversi;
+import reversi.game.reversi.ReversiBoard;
 
 /**
  *

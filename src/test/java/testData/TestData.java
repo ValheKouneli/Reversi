@@ -5,10 +5,10 @@
  */
 package testData;
 
-import reversi.AI.Game;
-import reversi.game.BoardFactory;
-import reversi.game.Reversi;
-import reversi.game.ReversiBoard;
+import reversi.game.Game;
+import reversi.game.reversi.BoardFactory;
+import reversi.game.reversi.Reversi;
+import reversi.game.reversi.ReversiBoard;
 
 /**
  *

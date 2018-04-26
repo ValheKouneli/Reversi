@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package reversi.game;
+import reversi.game.reversi.ReverseHelper;
+import reversi.game.reversi.BoardFactory;
+import reversi.game.reversi.Reversi;
+import reversi.game.reversi.ReversiBoard;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;

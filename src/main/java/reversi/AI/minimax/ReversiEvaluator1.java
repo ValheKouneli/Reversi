@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reversi.AI;
+package reversi.AI.minimax;
 
-import reversi.game.Reversi;
+import reversi.game.reversi.Reversi;
 
 /**
  * This evaluator evaluates the Reversi game situation just by counting how

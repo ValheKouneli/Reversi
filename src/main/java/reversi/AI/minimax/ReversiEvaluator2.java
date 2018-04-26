@@ -1,8 +1,8 @@
 
-package reversi.AI;
+package reversi.AI.minimax;
 
-import reversi.game.Reversi;
-import reversi.game.ReversiBoard;
+import reversi.game.reversi.Reversi;
+import reversi.game.reversi.ReversiBoard;
 
 /**
  * This evaluator evaluates the Reversi game situation by giving values to one's

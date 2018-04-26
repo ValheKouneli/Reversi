@@ -5,6 +5,8 @@
  */
 package reversi.game;
 
+import reversi.game.reversi.BoardFactory;
+import reversi.game.reversi.ReversiBoard;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

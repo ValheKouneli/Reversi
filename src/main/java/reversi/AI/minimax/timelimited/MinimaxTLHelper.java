@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reversi.AI;
+package reversi.AI.minimax.timelimited;
 
+import reversi.game.Game;
 import java.util.Queue;
+import reversi.AI.minimax.Evaluator;
 import reversi.data_structures.List;
 import reversi.data_structures.Node;
 

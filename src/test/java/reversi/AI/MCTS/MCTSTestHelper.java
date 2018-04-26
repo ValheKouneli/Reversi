@@ -7,9 +7,9 @@ package reversi.AI.MCTS;
 
 import reversi.data_structures.Node;
 import reversi.data_structures.IntPair;
-import reversi.game.BoardFactory;
-import reversi.game.Reversi;
-import reversi.game.ReversiBoard;
+import reversi.game.reversi.BoardFactory;
+import reversi.game.reversi.Reversi;
+import reversi.game.reversi.ReversiBoard;
 
 /**
  *
