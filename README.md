@@ -13,4 +13,3 @@ Command line Java application, Reversi AI.
 
 * Unit tests
 * Statistics
-* Maybe do something about the hidious <MoveType> <GameType> thingies from the AIs :O~
