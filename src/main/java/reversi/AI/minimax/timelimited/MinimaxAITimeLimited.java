@@ -12,7 +12,6 @@ import reversi.data_structures.Tree;
 /**
  *
  * @author Valhe Kouneli
- * @param <MoveType>
  */
 public class MinimaxAITimeLimited implements Player {
     

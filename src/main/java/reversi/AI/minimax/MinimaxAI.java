@@ -4,7 +4,7 @@ import reversi.game.Game;
 import reversi.game.Player;
 
 /**
- * Plays moves on a Game of GameType.
+ * Chooses move to play in the given game using minimax to the set depth.
  * Evaluator GameType is given in constructor.
  * 
  * @author Valhe Kouneli

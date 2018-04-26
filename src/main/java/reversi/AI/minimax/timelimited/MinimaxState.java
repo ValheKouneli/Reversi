@@ -5,12 +5,11 @@ import reversi.game.Game;
 /**
  *
  * @author Valhe Kouneli
- * @param <MoveType>
  */
-public class MinimaxState <MoveType> {
+public class MinimaxState {
     
     private final Game game;
-    private final MoveType latestMove;
+    private final Object latestMove;
     private int value;
     
     public MinimaxState(Game game) {
@@ -19,7 +18,7 @@ public class MinimaxState <MoveType> {
         value = 0;
     }
     
-    public MinimaxState(Game game, MoveType latestMove) {
+    public MinimaxState(Game game, Object latestMove) {
         this.game = game;
         this.latestMove = latestMove;
         value = 0;
@@ -33,7 +32,7 @@ public class MinimaxState <MoveType> {
         return value;
     }
     
-    public MoveType getLatestMove() {
+    public Object getLatestMove() {
         return latestMove;
     }
     
