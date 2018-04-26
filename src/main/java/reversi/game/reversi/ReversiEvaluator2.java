@@ -1,9 +1,6 @@
 
 package reversi.game.reversi;
-
 import reversi.AI.minimax.Evaluator;
-import reversi.game.reversi.Reversi;
-import reversi.game.reversi.ReversiBoard;
 
 /**
  * This evaluator evaluates the Reversi game situation by giving values to one's
@@ -14,7 +11,7 @@ import reversi.game.reversi.ReversiBoard;
  * 
  * @author Valhe Kouneli
  */
-public class ReversiEvaluator2 extends Evaluator <Reversi> {
+public class ReversiEvaluator2 implements Evaluator {
 
     /**
      *
@@ -22,9 +19,10 @@ public class ReversiEvaluator2 extends Evaluator <Reversi> {
      * @return
      */
     @Override
-    public int eval(Reversi game) {
-        ReversiBoard board = game.getBoardCopy();
-        int turnNumber = game.getTurnNumber();
+    public int eval(Object game) {
+        Reversi reversi = (Reversi) game;
+        ReversiBoard board = reversi.getBoardCopy();
+        int turnNumber = reversi.getTurnNumber();
         int piece;
         int eval = 0;
         for (int i=0; i<8; i++) {
@@ -53,6 +51,11 @@ public class ReversiEvaluator2 extends Evaluator <Reversi> {
     @Override
     public String name() {
         return "GoodEvaluator";
+    }
+
+    @Override
+    public Class getGameType() {
+        return Reversi.class;
     }
     
 }

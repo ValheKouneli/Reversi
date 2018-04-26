@@ -7,21 +7,17 @@ import reversi.data_structures.List;
 /**
  *
  * @author Valhe Kouneli
- * @param <MoveType>
  */
-public class MCTShelper <MoveType> {
+public class MCTShelper {
     
     private final Random random;
-    private final UCT<MoveType> uct;
     
     public MCTShelper(Random random) {
         this.random = random;
-        this.uct = new UCT<>();
     }
     
     public MCTShelper() {
         this.random = new Random(System.currentTimeMillis());
-        this.uct = new UCT<>();
     }
     
     protected Node getRandomChildNode(Node node) {
@@ -60,7 +56,7 @@ public class MCTShelper <MoveType> {
     protected Node selectPromisingBranch(Node rootNode) {
         Node node = rootNode;
         if (!node.getChildren().isEmpty()) {
-            node = uct.getChildWithBestUCTValue(node);
+            node = UCT.getChildWithBestUCTValue(node);
         }
         return node;
     }
@@ -102,7 +98,7 @@ public class MCTShelper <MoveType> {
 
     protected void expandNode(Node node) {
         if (node.getChildren().isEmpty()) {
-            List<MCTSState<MoveType>> possibleStates = ((MCTSState)node.getState()).getAllPossibleStates();
+            List<MCTSState> possibleStates = ((MCTSState)node.getState()).getAllPossibleStates();
             for (int i = 0; i < possibleStates.size(); i++) {
                 MCTSState state = possibleStates.get(i).getCopy();
                 Node newNode = new Node(state);

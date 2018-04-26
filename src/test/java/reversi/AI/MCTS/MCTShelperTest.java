@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reversi.AI.MCTS;
 import reversi.data_structures.Node;
 import java.util.Random;
@@ -19,12 +14,12 @@ public class MCTShelperTest {
     
     private Node nodeWithChildren;
     private Node nodeWithoutChildren;
-    private MCTShelper<IntPair> MCTShelper;
+    private MCTShelper MCTShelper;
     private Random random;
     
     @Before
     public void setUp() {
-        MCTShelper = new MCTShelper<>();
+        MCTShelper = new MCTShelper();
         nodeWithChildren = MCTSTestHelper.getTestNodeWithChildrenButNoSetGames();
         nodeWithoutChildren = MCTSTestHelper.getTestNodeWithSetGameButNoChildren();
         random = new Random(System.currentTimeMillis());

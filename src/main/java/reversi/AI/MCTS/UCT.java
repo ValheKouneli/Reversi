@@ -3,18 +3,14 @@
  */
 package reversi.AI.MCTS;
 
-import reversi.data_structures.IntPair;
 import reversi.data_structures.Node;
 import reversi.data_structures.List;
 
 /**
  *
  * @author Valhe Kouneli
- * @param <MoveType>
  */
-public class UCT <MoveType> {
-    
-    public UCT() {}
+public class UCT {
     
     /** Returns the UCT (Upper Confidence bound applied to Trees)
      * value for the node whose information is given as parameter.
@@ -24,7 +20,7 @@ public class UCT <MoveType> {
      * @param nodeVisitCount the node's visitCount
      * @return UCT value for the node calculated according to the UCT formula
      */
-    public double uctValue(int parentVisitCount,
+    public static double uctValue(int parentVisitCount,
             double nodeWinScore, int nodeVisitCount) {
         if (nodeVisitCount == 0) {
             return Integer.MAX_VALUE;
@@ -35,7 +31,7 @@ public class UCT <MoveType> {
         }
     }
     
-    public double uctValue(Node node) {
+    public static double uctValue(Node node) {
         if (node.getParent() == null) {
             throw new java.lang.NullPointerException("Node has no parent.");
         }
@@ -50,7 +46,7 @@ public class UCT <MoveType> {
      * @param node  a node
      * @return node's child node with the best UCT value out of all child nodes
      */
-    public Node getChildWithBestUCTValue(Node node) {
+    public static Node getChildWithBestUCTValue(Node node) {
         int parentVisitCount = ((MCTSState) node.getState()).getVisitCount();
         List<Node> children = node.getChildren();
         Node bestChild = null;

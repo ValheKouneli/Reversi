@@ -10,22 +10,21 @@ import reversi.game.Player;
 /**
  *
  * @author Valhe Kouneli
- * @param <MoveType>
  */
-public class MCTSbot <MoveType> implements Player <MoveType> {
+public class MCTSbot implements Player {
     
     private final Random random = new Random(System.currentTimeMillis());
-    private final MCTShelper<MoveType> MCTShelper;
+    private final MCTShelper MCTShelper;
     private final int timeToThink;
     
     public MCTSbot() {
         timeToThink = 1000;
-        MCTShelper = new MCTShelper<>(random);
+        MCTShelper = new MCTShelper(random);
     }
     
     public MCTSbot(int timeToThink) {
         this.timeToThink = timeToThink;
-        MCTShelper = new MCTShelper<>(random);
+        MCTShelper = new MCTShelper(random);
     }
     
     /**
@@ -35,7 +34,7 @@ public class MCTSbot <MoveType> implements Player <MoveType> {
      * @return 
      */
     @Override
-    public MoveType getNextMove(Game game) {
+    public Object getNextMove(Game game) {
         if (game.getMoves().isEmpty()) {
             return null;
         }
@@ -71,8 +70,8 @@ public class MCTSbot <MoveType> implements Player <MoveType> {
         }
         
         Node winnerNode = MCTShelper.getChildWithMaxScore(tree.getRoot());
-        MCTSState<MoveType> state = (MCTSState<MoveType>) winnerNode.getState();
-        MoveType move = state.getLatestMove(); //null pointer exception
+        MCTSState state = (MCTSState) winnerNode.getState();
+        Object move = state.getLatestMove(); //null pointer exception
         return move;
     }
     

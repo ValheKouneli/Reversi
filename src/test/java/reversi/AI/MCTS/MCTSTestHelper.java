@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reversi.AI.MCTS;
 
 import reversi.data_structures.Node;
@@ -20,7 +15,7 @@ public class MCTSTestHelper {
     private MCTSTestHelper() {}
     
     public static final void addNewChild(int childWinScore, int childVisitCount, Node parent) {
-        MCTSState<IntPair> childState = new MCTSState<>();
+        MCTSState childState = new MCTSState();
         childState.setVisitCount(childVisitCount);
         childState.setWinScore(childWinScore);
         Node child = new Node(childState);
@@ -33,7 +28,7 @@ public class MCTSTestHelper {
     }
     
     public static Node getTestNodeWithChildrenButNoSetGames() {
-        Node parent = new Node(new MCTSState<>());
+        Node parent = new Node(new MCTSState());
         MCTSTestHelper.addNewChild(2, 2, parent); //3.17377697326
         MCTSTestHelper.addNewChild(4, 4, parent); //2.53709243858
         MCTSTestHelper.addNewChild(1, 3, parent); //2.1082147997
@@ -56,14 +51,14 @@ public class MCTSTestHelper {
         game.setBoard(board);
         game.setTurn(1);
         game.setTurnNumber(62);
-        MCTSState<IntPair> state = new MCTSState<>(game);
+        MCTSState state = new MCTSState(game);
         Node node = new Node(state);
         return node;
     }
     
     public static Node getTestNodeWithChildrenWithInfenitelyBadScores() {
         Node node = getTestNodeWithSetGameButNoChildren();
-        MCTShelper<IntPair> mctshelper = new MCTShelper<>();
+        MCTShelper mctshelper = new MCTShelper();
         mctshelper.expandNode(node);
         Node child;
         for(int i=0; i<node.getChildren().size(); i++) {

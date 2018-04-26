@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reversi.game.reversi;
 
 import reversi.AI.minimax.Evaluator;
-import reversi.game.reversi.Reversi;
 
 /**
  * This evaluator evaluates the Reversi game situation just by counting how
@@ -14,7 +8,7 @@ import reversi.game.reversi.Reversi;
  * 
  * @author Valhe Kouneli
  */
-public class ReversiEvaluator1 extends Evaluator <Reversi> {
+public class ReversiEvaluator1 implements Evaluator {
 
     /**
      *
@@ -22,13 +16,19 @@ public class ReversiEvaluator1 extends Evaluator <Reversi> {
      * @return
      */
     @Override
-    public int eval(Reversi game) {
-        return game.getScore();
+    public int eval(Object game) {
+        Reversi reversi = (Reversi) game;
+        return reversi.getScore();
     }
     
     @Override
     public String name() {
         return "SimpleEvaluator";
+    }
+
+    @Override
+    public Class getGameType() {
+        return Reversi.class;
     }
     
 }

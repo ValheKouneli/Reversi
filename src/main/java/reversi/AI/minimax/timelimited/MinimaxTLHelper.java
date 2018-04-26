@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reversi.AI.minimax.timelimited;
 
 import reversi.game.Game;
@@ -14,9 +9,8 @@ import reversi.data_structures.Node;
 /**
  *
  * @author Valhe Kouneli
- * @param <MoveType>
  */
-public class MinimaxTLHelper <MoveType> {
+public class MinimaxTLHelper {
     
     public MinimaxTLHelper() {}
     
@@ -32,13 +26,13 @@ public class MinimaxTLHelper <MoveType> {
             } //default value is 0 anyway
             return;
         }
-        List<MoveType> availableMoves = game.getMoves();
+        List<Object> availableMoves = game.getMoves();
         
         int bestValue = turn == 1 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
         int valueAfterMove;
         
         for (int i=0; i<availableMoves.size(); i++) {
-            MoveType move = availableMoves.get(i);
+            Object move = availableMoves.get(i);
             Game copy = game.getCopy();
             copy.move(move);
 

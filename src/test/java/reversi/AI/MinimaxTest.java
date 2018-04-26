@@ -26,7 +26,7 @@ public class MinimaxTest {
      * The player who is forced to take the last token loses.
      * The other player wins.
      */
-    public class Nim implements Game <Integer> {
+    public class Nim implements Game {
         private int heap;
         private int turn;
         private int turnNumber;
@@ -38,9 +38,10 @@ public class MinimaxTest {
         }
         
         @Override
-        public boolean move(Integer move) {
-            if (heap-move>=0 && 0<move && move<=3) {
-                heap -= move;
+        public boolean move(Object move) {
+            int amount = (Integer) move;
+            if (heap-amount>=0 && 0<amount && amount<=3) {
+                heap -= amount;
                 turn = (turn == 1 ? -1 : 1);
                 turnNumber++;
                 return true;
@@ -72,8 +73,8 @@ public class MinimaxTest {
         }
 
         @Override
-        public List<Integer> getMoves() {
-            List<Integer> list = new List<>();
+        public List<Object> getMoves() {
+            List<Object> list = new List<>();
             for (int i=1; i<= (heap>3 ? 3 : heap); i++) {
                 list.add(i);
             }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reversi.AI.minimax.timelimited;
 
 import reversi.game.Game;
@@ -19,24 +14,24 @@ import reversi.data_structures.Tree;
  * @author Valhe Kouneli
  * @param <MoveType>
  */
-public class MinimaxAITimeLimited <MoveType> implements Player {
+public class MinimaxAITimeLimited implements Player {
     
-    private final Evaluator<MoveType> eval;
+    private final Evaluator eval;
     private int timeLimit;
-    private final MinimaxTLHelper<MoveType> helper;
+    private final MinimaxTLHelper helper;
     private final Random random;
     
-    public MinimaxAITimeLimited(Evaluator<MoveType> eval) {
+    public MinimaxAITimeLimited(Evaluator eval) {
         timeLimit = 1000;
         this.eval = eval;
-        helper = new MinimaxTLHelper<>();
+        helper = new MinimaxTLHelper();
         random = new Random(System.currentTimeMillis());
     }
     
-    public MinimaxAITimeLimited(int timeLimit, Evaluator<MoveType> eval) {
+    public MinimaxAITimeLimited(int timeLimit, Evaluator eval) {
         this.timeLimit = timeLimit;
         this.eval = eval;
-        helper = new MinimaxTLHelper<>();
+        helper = new MinimaxTLHelper();
         random = new Random(System.currentTimeMillis());
     }
     
@@ -53,7 +48,7 @@ public class MinimaxAITimeLimited <MoveType> implements Player {
      * @return
      */
     @Override
-    public MoveType getNextMove(Game game) {
+    public Object getNextMove(Game game) {
         if (game.getMoves().size() == 0) {
             return null;
         }
@@ -81,7 +76,7 @@ public class MinimaxAITimeLimited <MoveType> implements Player {
         
         int bestValue = game.getTurn() == 1 ?
                 Integer.MIN_VALUE : Integer.MAX_VALUE;
-        MoveType bestMove = null;
+        Object bestMove = null;
         
         for (int i=0; i<rootNode.getChildren().size(); i++) {
             MinimaxState childState = (MinimaxState) rootNode.getChildren()
@@ -89,14 +84,14 @@ public class MinimaxAITimeLimited <MoveType> implements Player {
             int value = childState.getValue();
             if (game.getTurn() == 1 ? value > bestValue : value < bestValue) {
                 bestValue = value;
-                bestMove = (MoveType) childState.getLatestMove();
+                bestMove = childState.getLatestMove();
             }
         }
         
         if (bestMove == null) {
             Node randomNode = rootNode.getChildren()
                     .get(random.nextInt(rootNode.getChildren().size()));
-            bestMove = (MoveType) ((MinimaxState) randomNode.getState())
+            bestMove =  ((MinimaxState) randomNode.getState())
                     .getLatestMove();
         }
         

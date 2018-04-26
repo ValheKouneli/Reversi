@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reversi.AI.MCTS;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -19,7 +14,7 @@ import reversi.game.reversi.ReversiBoard;
  */
 public class StateTest {
     
-    MCTSState<IntPair> state;
+    MCTSState state;
     
     @Before
     public void setUp() {
@@ -36,7 +31,7 @@ public class StateTest {
         game.setBoard(board);
         game.setTurn(1);
         game.setTurnNumber(62);
-        state = new MCTSState<>((Game) game);
+        state = new MCTSState(game);
     }
     
     @Test

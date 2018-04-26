@@ -1,28 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reversi.AI.minimax;
 
 /**
  *
  * @author Valhe Kouneli
- * @param <GameType>
  */
-public abstract class Evaluator <GameType> {
-
-    public Evaluator() {
-        //check if GameType is a class that implements Game
-    }
-
+public interface Evaluator {
     /**
      *
      * @param game
      * @return
      */
-    public abstract int eval(GameType game);
-    public abstract String name();
+    public int eval(Object game);
+    public String name();
+    public Class getGameType();
     
     
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reversi.game.reversi;
 
 import reversi.game.Game;
@@ -13,7 +8,7 @@ import reversi.data_structures.List;
  *
  * @author Valhe Kouneli
  */
-public class Reversi implements Game <IntPair> {
+public class Reversi implements Game {
     
  
     
@@ -94,8 +89,8 @@ public class Reversi implements Game <IntPair> {
     }
     
     @Override
-    public List<IntPair> getMoves() {
-        List<IntPair> availableMoves = new List<>();
+    public List<Object> getMoves() {
+        List<Object> availableMoves = new List<>();
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
                 if (moveIsLegal(board, turn, i, j)) {
@@ -103,7 +98,6 @@ public class Reversi implements Game <IntPair> {
                 }
             }
         }
-
         return availableMoves;
     }
     
@@ -174,13 +168,14 @@ public class Reversi implements Game <IntPair> {
     }
 
     @Override
-    public boolean move(IntPair move) {
-        if (move == null) {
+    public boolean move(Object move) {
+        IntPair pair = (IntPair) move;
+        if (pair == null) {
             turnNumber++;
             turn *= -1;
             return true;
         }
-        return move(move.getX(), move.getY());
+        return move(pair.getX(), pair.getY());
     }
 
     @Override
