@@ -14,7 +14,11 @@ Made some tests for older classes to make sure they are not the cause for the hu
 
 Time spent: 3h
 
-Thursday: I deleded all UI related because damn it. I decided to focus on performance tests. I created a Match class to measure how long the bot's take to move. I made the bots play against each other, giving the MCTSbot the same amount of time the minimaxAI takes to decide a move on average.
+Thursday: I deleded all UI related because trying to build it was going to any sensible direction. I decided to focus on performance tests. I created a Match class to measure how long the bot's take to move. I made the bots play against each other, giving the MCTSbot the same amount of time the minimaxAI takes to decide a move on average.
 The bots play several matches against each other and Main collects statistics.
+
+Time spent: 4h
+
+Thursday: Made a ton of unit tests.
 
 Time spent: 4h
