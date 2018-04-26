@@ -11,5 +11,6 @@ Command line Java application, Reversi AI.
 
 ## TODO (at least)
 
+* Make checks for input (that they are of the right type)
 * Unit tests
 * Statistics
