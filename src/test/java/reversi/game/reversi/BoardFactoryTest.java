@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package reversi.game;
+package reversi.game.reversi;
 
-import reversi.game.reversi.BoardFactory;
-import reversi.game.reversi.ReversiBoard;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

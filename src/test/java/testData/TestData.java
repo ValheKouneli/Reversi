@@ -43,8 +43,6 @@ public class TestData {
     public static Reversi getReversi1() {
         Reversi reversi = new Reversi();
         reversi.setBoard(getBoard1());
-        reversi.setTurn(1);
-        reversi.setTurnNumber(62);
         return reversi;
     }
     

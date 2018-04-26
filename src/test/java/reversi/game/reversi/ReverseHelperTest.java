@@ -1,13 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package reversi.game;
-import reversi.game.reversi.ReverseHelper;
-import reversi.game.reversi.BoardFactory;
-import reversi.game.reversi.Reversi;
-import reversi.game.reversi.ReversiBoard;
+package reversi.game.reversi;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,8 +24,8 @@ public class ReverseHelperTest {
                                   "4 | | | | | | | | |\n" +
                                   "5 | | | | | | | | |\n" +
                                   "6 | | | | | | | | |\n" +
-                                  "7 | | | | | | | | |\n");
-        
+                                  "7 | | | | | | | |○|\n");
+        //it's black's turn
         boardDoubleFlips = BoardFactory.makeBoard
                                  ("   0 1 2 3 4 5 6 7 \n" +
                                   "0 | | | | | | | | |\n" +
@@ -44,8 +35,8 @@ public class ReverseHelperTest {
                                   "4 | | |○|○|○| | | |\n" +
                                   "5 | |○| |○| |○| | |\n" +
                                   "6 | | | | | | | | |\n" +
-                                  "7 | | | | | | | | |\n");
-        
+                                  "7 | | | | | | | |○|\n");
+        //it's black's turn
         boardComboFlips = BoardFactory.makeBoard
                                  ("   0 1 2 3 4 5 6 7 \n" +
                                   "0 | | | | | | | | |\n" +
@@ -56,9 +47,9 @@ public class ReverseHelperTest {
                                   "5 | | | |○| | | | |\n" +
                                   "6 | |●|○| |○|●| | |\n" +
                                   "7 | | | | | | | | |\n"); 
-        
+        //it's black's turn
         gameComboFlips = new Reversi();
-        gameComboFlips.setTurn(-1);
+        
         gameComboFlips.setBoard(boardComboFlips);
     }
     

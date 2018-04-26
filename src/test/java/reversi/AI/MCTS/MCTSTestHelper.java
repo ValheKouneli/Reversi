@@ -1,7 +1,6 @@
 package reversi.AI.MCTS;
 
 import reversi.data_structures.Node;
-import reversi.data_structures.IntPair;
 import reversi.game.reversi.BoardFactory;
 import reversi.game.reversi.Reversi;
 import reversi.game.reversi.ReversiBoard;
@@ -40,17 +39,15 @@ public class MCTSTestHelper {
     public static Node getTestNodeWithSetGameButNoChildren() {
         Reversi game = new Reversi();
         ReversiBoard board = BoardFactory.makeBoard("   0 1 2 3 4 5 6 7 \n" +
-                                                    "0 |●|○|○|○|○|○|○|○|\n" +
-                                                    "1 |●|●|●|●|●|●|●|○|\n" +
-                                                    "2 |●|○|○|○|●|●|○|○|\n" +
-                                                    "3 |●|○|●|○|●|●|●|○|\n" +
-                                                    "4 |●|○|○|○|○|●|●|○|\n" +
-                                                    "5 |●|○|○|●|●|●|●|○|\n" +
-                                                    "6 |●| |●|●|●|●|●|○|\n" +
-                                                    "7 | |●|●|●|●|●|●|○|\n");
+                                                    "0 |○|●|●|●|●|●|●|●|\n" +
+                                                    "1 |○|○|○|○|○|○|○|●|\n" +
+                                                    "2 |○|●|●|●|○|○|●|●|\n" +
+                                                    "3 |○|●|○|●|○|○|○|●|\n" +
+                                                    "4 |○|●|●|●|●|○|○|●|\n" +
+                                                    "5 |○|●|●|○|○|○|○|●|\n" +
+                                                    "6 |○| |○|○|○|○|○|●|\n" +
+                                                    "7 | |○|○|○|○|○|○|●|\n");
         game.setBoard(board);
-        game.setTurn(1);
-        game.setTurnNumber(62);
         MCTSState state = new MCTSState(game);
         Node node = new Node(state);
         return node;
