@@ -226,6 +226,10 @@ public class Reversi implements Game {
 
     @Override
     public int winner() {
+        if (!gameIsOver()) {
+            throw new java.lang.IllegalAccessError(
+                    "Winner asked but game is not over.");
+        }
         return getScore() > 0 ? 1 : -1;
     }
     
