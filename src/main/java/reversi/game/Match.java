@@ -14,6 +14,7 @@ public class Match {
     private int movesPlayedPlayer2;
     private int timeSpentPlayer2;
     private long timeSpentTotal;
+    private boolean matchFinished;
     private Player winner;
     
     public Match(Game game, Player player1, Player player2) {
@@ -26,6 +27,7 @@ public class Match {
         timeSpentPlayer2 = 0;
         movesPlayedPlayer1 = 0;
         movesPlayedPlayer2 = 0;
+        matchFinished = false;
     }
     
     public void playMatch() {
@@ -65,6 +67,7 @@ public class Match {
             }
         }
         long timeAfterMatch = System.currentTimeMillis();
+        matchFinished = true;
         
         if (print) {
             System.out.println(game.toString());
@@ -92,6 +95,9 @@ public class Match {
     }
     
     public long averageTimePerMovePlayer1() {
+        if (!matchFinished) {
+            throw new java.lang.IllegalAccessError("Game is not over yet.");
+        }
         if (movesPlayedPlayer1 == 0) {
             return 0;
         } else {
@@ -100,6 +106,9 @@ public class Match {
     }
     
     public long averageTimePerMovePlayer2() {
+        if (!matchFinished) {
+            throw new java.lang.IllegalAccessError("Game is not over yet.");
+        }
         if (movesPlayedPlayer2 == 0) {
             return 0;
         } else {
@@ -112,16 +121,29 @@ public class Match {
     }
     
     public String returnWinnerName() {
+        if (!matchFinished) {
+            throw new java.lang.IllegalAccessError("Game is not over yet.");
+        }
         return winner.name();
     }
     
     public long averageTimePerMove() {
+        if (!matchFinished) {
+            throw new java.lang.IllegalAccessError("Game is not over yet.");
+        }
         if (movesPlayedPlayer1 + movesPlayedPlayer2 == 0) {
             return 0;
         } else {
             return (timeSpentPlayer1 + timeSpentPlayer2) /
                     (movesPlayedPlayer1 + movesPlayedPlayer2);
         }
+    }
+    
+    public long timeSpentTotal() {
+        if (!matchFinished) {
+            throw new java.lang.IllegalAccessError("Game is not over yet.");
+        }
+        return timeSpentTotal;
     }
 
     
