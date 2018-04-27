@@ -1,5 +1,7 @@
 package reversi.game;
 
+import reversi.game.reversi.Reversi;
+
 /**
  *
  * @author Valhe Kouneli
@@ -100,7 +102,7 @@ public class Match {
     
     public long averageTimePerMovePlayer1() {
         if (!matchFinished) {
-            throw new java.lang.IllegalAccessError("Game is not over yet.");
+            throw new java.lang.IllegalStateException("Game is not over yet.");
         }
         if (movesPlayedPlayer1 == 0) {
             return 0;
@@ -111,7 +113,7 @@ public class Match {
     
     public long averageTimePerMovePlayer2() {
         if (!matchFinished) {
-            throw new java.lang.IllegalAccessError("Game is not over yet.");
+            throw new java.lang.IllegalStateException("Game is not over yet.");
         }
         if (movesPlayedPlayer2 == 0) {
             return 0;
@@ -121,19 +123,25 @@ public class Match {
     }
     
     public int returnWinner() {
+        if (!matchFinished) {
+            throw new java.lang.IllegalStateException("Game is not over yet.");
+        }
         return game.winner();
     }
     
     public String returnWinnerName() {
         if (!matchFinished) {
-            throw new java.lang.IllegalAccessError("Game is not over yet.");
+            throw new java.lang.IllegalStateException("Game is not over yet.");
+        }
+        if (winner == null) {
+            return "Tie";
         }
         return winner.name();
     }
     
     public long averageTimePerMove() {
         if (!matchFinished) {
-            throw new java.lang.IllegalAccessError("Game is not over yet.");
+            throw new java.lang.IllegalStateException("Game is not over yet.");
         }
         if (movesPlayedPlayer1 + movesPlayedPlayer2 == 0) {
             return 0;
@@ -145,9 +153,27 @@ public class Match {
     
     public long timeSpentTotal() {
         if (!matchFinished) {
-            throw new java.lang.IllegalAccessError("Game is not over yet.");
+            throw new java.lang.IllegalStateException("Game is not over yet.");
         }
         return timeSpentTotal;
+    }
+    
+    @Override
+    public String toString() {        
+        if (!matchFinished) {
+            throw new java.lang.IllegalStateException("Game is not over yet.");
+        }
+        String temp = "Match between \n" +
+                        player2.name() + " (black) &\n" +
+                        player1.name() + " (white)\n" +
+                        "ended in " + returnWinnerName() + " victory\n";
+        try {
+            Reversi reversi = (Reversi) game;
+            temp += "by " + Math.abs(reversi.getScore()) + " points.";
+        } catch (ClassCastException e) {
+            //do nothing
+        }
+        return temp;
     }
 
     
