@@ -40,6 +40,9 @@ public class Match {
         long moveTime;
         long timeAfterMove;
         if (print) {
+            System.out.println("______________________________________");
+            System.out.println("Black player: " + player2.name());
+            System.out.println("White player: " + player1.name());
             System.out.println(game.toString());
         }
         while (!game.gameIsOver()) {
