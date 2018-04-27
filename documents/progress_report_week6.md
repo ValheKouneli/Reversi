@@ -1,6 +1,21 @@
 Progress Report: Week 6
 =======================
 
+## Overview
+
+I started the week by trying to make an UI, but then gave up, because I set my standards too high and couldn't do what I wanted in the end.
+
+In the end, I ended up making a simple program that tests the two types of bots against each other.
+
+**Total time spent: 25 h**
+
+## What I learned
+
+I learned to prioritize tasks. I realized that when following Scrum for example, there is a point in setting a priority to each story. I also learned some useful things about testing for exceptions and testing for output.
+I found it hard to keep myself from making more and more additional features to my program before the previous ones had been properly tested and documented.
+
+## Weekly reports
+
 Monday: Made a working version of the command line user interface.
 
 Time spent: 3h
@@ -22,3 +37,7 @@ Time spent: 4h
 Thursday: Made a ton of unit tests.
 
 Time spent: 4h
+
+Friday: I created classes to help make statistics of the two bots and to match them against each other in a fair way. I made a lot of tests too.
+
+Time spent: 6h
