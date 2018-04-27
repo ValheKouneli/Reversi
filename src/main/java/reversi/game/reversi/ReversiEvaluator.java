@@ -11,7 +11,7 @@ import reversi.AI.minimax.Evaluator;
  * 
  * @author Valhe Kouneli
  */
-public class ReversiEvaluator2 implements Evaluator {
+public class ReversiEvaluator implements Evaluator {
 
     /** Returns positive number value for game situations that are good for
      * white and negative values for situations that are good for black.

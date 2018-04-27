@@ -6,7 +6,7 @@ import reversi.game.Game;
 import reversi.game.Match;
 import reversi.game.Player;
 import reversi.game.reversi.Reversi;
-import reversi.game.reversi.ReversiEvaluator2;
+import reversi.game.reversi.ReversiEvaluator;
 
 
 
@@ -21,7 +21,7 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        Player minimaxAI = new MinimaxAI(new ReversiEvaluator2(), 5);
+        Player minimaxAI = new MinimaxAI(new ReversiEvaluator(), 5);
         Game reversi = new Reversi();
         Match timingMatch = new Match(reversi, minimaxAI, minimaxAI);
         timingMatch.playMatch();

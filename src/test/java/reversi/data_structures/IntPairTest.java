@@ -62,5 +62,18 @@ public class IntPairTest {
         assertEquals(false, normalPair.equals((Object) weirdoPair));
     }
     
+    @Test
+    public void hashGivesSameHashForSimilarPairs() {
+        IntPair pair1 = new IntPair(1,3);
+        IntPair pair2 = new IntPair(1,3);
+        assertEquals(pair1.hashCode(), pair2.hashCode());
+    }
+    
+    @Test
+    public void toStringWorks() {
+        IntPair pair = new IntPair(1,2);
+        assertEquals("[1,2]", pair.toString());
+    }
+    
     
 }

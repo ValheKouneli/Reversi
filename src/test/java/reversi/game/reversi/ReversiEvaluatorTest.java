@@ -8,12 +8,12 @@ import org.junit.rules.ExpectedException;
 import reversi.AI.minimax.Nim;
 import reversi.game.Game;
 
-/** This test tests if ReversiEvaluator2 gives sensible estimates
- * to certain board situations relative to each other.
+/** This test tests if ReversiEvaluator gives sensible estimates
+ to certain board situations relative to each other.
  *
  * @author Valhe Kouneli
  */
-public class ReversiEvaluator2Test {
+public class ReversiEvaluatorTest {
     
     private Reversi game1;
     private Reversi game2;
@@ -21,14 +21,14 @@ public class ReversiEvaluator2Test {
     private Reversi game4;
     private Reversi game5;
     private Reversi game6;
-    private ReversiEvaluator2 eval;
+    private ReversiEvaluator eval;
     
     @Rule
     public ExpectedException exception = ExpectedException.none();
     
     @Before
     public void setUp() {
-        eval = new ReversiEvaluator2();
+        eval = new ReversiEvaluator();
         //very good for black
         game1 = new Reversi();
         game1.setBoard(BoardFactory.makeBoard(  
