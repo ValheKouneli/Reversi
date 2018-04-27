@@ -1,6 +1,6 @@
 package reversi.application;
 
-import reversi.AI.MCTS.MCTSbot;
+import reversi.AI.MCTS.MCTSBot;
 import reversi.AI.minimax.MinimaxAI;
 import reversi.game.Game;
 import reversi.game.Match;
@@ -17,11 +17,11 @@ public class ScoreKeeper {
     private long timePerMoveTotalMinimax;
     private long timePerMoveTotalMCTS;
     private final MinimaxAI minimaxAI;
-    private final MCTSbot mctsBot;
+    private final MCTSBot mctsBot;
     private final String minimaxAIName;
     private final String mctsBotName;
     
-    public ScoreKeeper(MinimaxAI minimaxAI, MCTSbot mctsBot) {
+    public ScoreKeeper(MinimaxAI minimaxAI, MCTSBot mctsBot) {
         minimaxWins = 0;
         mctsBotWins = 0;
         totalMatches = 0;
@@ -96,14 +96,20 @@ public class ScoreKeeper {
             switch (winner) {
                 case "minimax" :
                     minimaxWins++;
-                    System.out.println("Match #" + totalMatches + ", minimaxai won.");
+                    if (print) {
+                        System.out.println("Match #" + totalMatches + ", minimaxai won.");
+                    }
                     break;
                 case "mcts":
                     mctsBotWins++;
-                    System.out.println("Match #" + totalMatches + ", mctsbot won.");
+                    if (print) {
+                        System.out.println("Match #" + totalMatches + ", mctsbot won.");
+                    }
                     break;
                 default:
-                    System.out.println("Match #" + totalMatches + ", tied.");
+                    if (print) {
+                        System.out.println("Match #" + totalMatches + ", tied.");
+                    }
                     break;
             }
     }

@@ -11,11 +11,11 @@ import reversi.game.reversi.Reversi;
  */
 public class MCTSbotTest {
     
-    MCTSbot bot;
+    MCTSBot bot;
     
     @Before
     public void setUp() {
-        bot = new MCTSbot(2000);
+        bot = new MCTSBot(2000);
     }
     
     @Test
@@ -44,7 +44,7 @@ public class MCTSbotTest {
     
     @Test
     public void botDoesNotTakeSignificantlyMoreTimeToThinkThanAllowed() {
-        bot = new MCTSbot(500);
+        bot = new MCTSBot(500);
         Reversi game = new Reversi();
         long timeNow = System.currentTimeMillis();
         bot.getNextMove(game);

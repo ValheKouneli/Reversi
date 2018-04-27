@@ -258,6 +258,7 @@ public class ReversiTest {
                                                     "5 |○|○|●|●|●|●| | |\n" +
                                                     "6 |○| |●| | | | | |\n" +
                                                     "7 |○|○|○|○|○| | | |\n" +
+                                                    "Turn #34\n" +
                                                     "It's black's turn.\n";
         assertEquals(correct, game.toString());
         

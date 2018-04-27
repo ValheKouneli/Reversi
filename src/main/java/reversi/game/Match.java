@@ -46,8 +46,9 @@ public class Match {
             System.out.println(game.toString());
         }
         while (!game.gameIsOver()) {
-
-            System.out.println(game.toString());
+            if (print) {
+                System.out.println(game.toString());
+            }
             int turn = game.getTurn();
             Player playerInTurn = turn == 1 ? player1 : player2;
             

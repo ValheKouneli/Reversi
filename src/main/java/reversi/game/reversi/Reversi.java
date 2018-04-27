@@ -220,6 +220,11 @@ public class Reversi implements Game {
     public boolean move(Object move) {
         IntPair pair = (IntPair) move;
         if (pair == null) {
+            if (getMoves().size() != 0) {
+                throw new java.lang.IllegalArgumentException(
+                        "Null move given " +
+                        "when there are legal moves available.");
+            }
             turnNumber++;
             turn *= -1;
             return true;

@@ -11,18 +11,18 @@ import reversi.game.Player;
  *
  * @author Valhe Kouneli
  */
-public class MCTSbot implements Player {
+public class MCTSBot implements Player {
     
     private final Random random = new Random(System.currentTimeMillis());
     private final MCTShelper MCTShelper;
     private final int timeToThink;
     
-    public MCTSbot() {
+    public MCTSBot() {
         timeToThink = 1000;
         MCTShelper = new MCTShelper(random);
     }
     
-    public MCTSbot(int timeToThink) {
+    public MCTSBot(int timeToThink) {
         this.timeToThink = timeToThink;
         MCTShelper = new MCTShelper(random);
     }
@@ -30,7 +30,7 @@ public class MCTSbot implements Player {
     /**
      * Chooses a move to play in the given game situation
      * based on Monte Carlo Tree Search algorithm.
-     * @param game some game situation where it's the MCTSbot's turn
+     * @param game some game situation where it's the MCTSBot's turn
      * @return 
      */
     @Override

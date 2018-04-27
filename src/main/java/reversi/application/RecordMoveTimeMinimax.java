@@ -25,7 +25,7 @@ public class RecordMoveTimeMinimax {
         avgTime = 0;
     }
     
-    public int avgMoveTime() {
+    public int record() {
         Reversi game = new Reversi();
         Match match = new Match(game, minimax, minimax);
         match.playMatch();
