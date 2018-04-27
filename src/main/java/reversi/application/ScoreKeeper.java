@@ -118,9 +118,9 @@ public class ScoreKeeper {
     public String toString() {
         if (totalMatches != 0) {
             return "Victories out of " + totalMatches + " matches:\n" +
-                    mctsBot.name() + " : " + (int) (mctsBotWins / totalMatches) + 
+                    mctsBot.name() + " : " + (int) (mctsBotWins * 100 / totalMatches) + 
                     "%\n" +
-                    minimaxAI.name() + " : " + (int) (minimaxWins / totalMatches) + 
+                    minimaxAI.name() + " : " + (int) (minimaxWins * 100 / totalMatches) + 
                     "%\n";
         } else {
             return "Bots " + mctsBot.name() + " and " + minimaxAI.name() +
