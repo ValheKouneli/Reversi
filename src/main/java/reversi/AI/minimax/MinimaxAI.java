@@ -35,6 +35,10 @@ public class MinimaxAI implements Player {
         this.depth = depth;
     }
     
+    public int getDepth() {
+        return depth;
+    }
+    
     /**
      * Chooses a move in the given game situation based on a minimax algorithm.
      * @param game 
