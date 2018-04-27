@@ -49,7 +49,7 @@ public class MCTSbotTest {
         long timeNow = System.currentTimeMillis();
         bot.getNextMove(game);
         long spentTime = System.currentTimeMillis() - timeNow;
-        assertEquals(true, spentTime < 501);
+        assertEquals(true, spentTime < 505);
         /* 
         Notice that this measure might need adjusting
         */
