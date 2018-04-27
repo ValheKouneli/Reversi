@@ -6,13 +6,12 @@ Reversi
 
 Command line Java application, Reversi AI. Comparing MinimaxAI and MCTSBot against each other, playing Reversi, in a way that both bots have about equal amount of time.
 
-## Bugs (26.4.2018)
+## Bugs (27.4.2018)
 
-* Match does not print the last scene of the game (the scene where game is finished)
 
 ## TODO (at least)
 
-* Fix bugs (see bugs)
+* MCTSBot time limit has to be adjusted to match MinimaxAI time usage better
 * Make checks for input (that they are of the right type)
 * Unit tests
 * Statistics
