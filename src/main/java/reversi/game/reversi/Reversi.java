@@ -159,6 +159,7 @@ public class Reversi implements Game {
     public String toString() {
         String temp = board.toString();
         if (!gameIsOver()) {
+            temp += "Turn #" + turnNumber + "\n";
             temp += "It's " + getPlayer(getTurn()) + "'s turn.\n";
         } else {
             int score = getScore();
