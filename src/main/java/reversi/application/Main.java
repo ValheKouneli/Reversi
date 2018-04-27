@@ -18,7 +18,7 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        for (int depth = 3; depth<5; depth++) {
+        for (int depth = 3; depth<=5; depth++) {
             MinimaxAI minimax = new MinimaxAI(new ReversiEvaluator(), depth);
             RecordMoveTimeMinimax timing = new RecordMoveTimeMinimax(minimax);
             int avgTime = timing.record();
