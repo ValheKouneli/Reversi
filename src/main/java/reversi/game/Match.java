@@ -42,14 +42,16 @@ public class Match {
         long moveTime;
         long timeAfterMove;
         if (print) {
-            System.out.println("______________________________________");
+            System.out.println("====================================\n");
             System.out.println("Black player: " + player2.name());
             System.out.println("White player: " + player1.name());
-            System.out.println(game.toString());
+            System.out.println("\n");
+            System.out.println("____________________________");
         }
         while (!game.gameIsOver()) {
             if (print) {
                 System.out.println(game.toString());
+                System.out.println("____________________________");
             }
             int turn = game.getTurn();
             Player playerInTurn = turn == 1 ? player1 : player2;
@@ -68,9 +70,6 @@ public class Match {
             }
             
             game.move(move);
-            if (print) {
-                System.out.println(game.toString());
-            }
         }
         long timeAfterMatch = System.currentTimeMillis();
         matchFinished = true;
