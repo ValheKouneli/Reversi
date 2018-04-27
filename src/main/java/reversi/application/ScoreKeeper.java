@@ -108,4 +108,20 @@ public class ScoreKeeper {
             }
     }
     
+    @Override
+    public String toString() {
+        if (totalMatches != 0) {
+            return "Victories out of " + totalMatches + " matches:\n" +
+                    mctsBot.name() + " : " + (int) (mctsBotWins / totalMatches) + 
+                    "%\n" +
+                    minimaxAI.name() + " : " + (int) (minimaxWins / totalMatches) + 
+                    "%\n";
+        } else {
+            return "Bots " + mctsBot.name() + " and " + minimaxAI.name() +
+                    " have not been played any matches " +
+                    "against each other yet.\n" +
+                    "No score has yet been calculated.";
+        }
+    }
+    
 }

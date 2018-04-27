@@ -50,4 +50,14 @@ public class RecordMoveTimeMinimax {
         return minimax.getDepth();
     }
     
+    @Override
+    public String toString() {
+        if (recordingDone) {
+            return minimax.name() + " has an average move time of " + 
+                    avgTime + " ms.";
+        } else {
+            return "Recording average move time has not yet been done to " + 
+                    minimax.name() + ".";
+        }
+    }
 }
