@@ -18,6 +18,7 @@ After that, the program makes bots using these algorithms play ten Reversi match
 ### Instructions On How To Use
 
 To simply run the project, download the Reversi.jar file. In the repository where the .jar file is located, run command
+
 ```java -cp Reversi.jar reversi.application.Main```
 
 ### Altering the program
