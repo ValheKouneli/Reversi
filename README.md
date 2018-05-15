@@ -33,10 +33,14 @@ Different search depths can be tested. Deeper searches results in a longer run t
 ### Developing
 
 The project uses Gradle. Assuming you have Gradle installed, after cloning the project and possibly making changes, in the project depository, run
+
 ```gradle build```
+
 ```gradle jar```
+
 and an updated Reversi.jar file will appear in ```/build/lib/```.
 The file can be run by in the root repository by typing
+
 ```java -cp ./build/lib/Reversi.jar reversi.application.Main```
 
 For more help, see the files under /documentation.
