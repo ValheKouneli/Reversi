@@ -2,7 +2,9 @@ package reversi.AI.MCTS;
 import testData.TestData;
 import static org.junit.Assert.*;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import reversi.game.reversi.BoardFactory;
 import reversi.game.reversi.Reversi;
 /**
@@ -12,6 +14,9 @@ import reversi.game.reversi.Reversi;
 public class MCTSbotTest {
     
     MCTSBot bot;
+    
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
     
     @Before
     public void setUp() {
@@ -58,5 +63,13 @@ public class MCTSbotTest {
     @Test
     public void nameReturnsTheRightName() {
         assertEquals("MCTS Bot, 2000 ms time/move", bot.name());
+    }
+    
+    @Test
+    public void botDoesNotCrashEvenIfItIsGivenSuperLittleTime() {
+        bot = new MCTSBot(1);
+        Reversi game = new Reversi();
+        //should not produce exception
+        bot.getNextMove(game);
     }
 }

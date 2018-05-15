@@ -44,8 +44,10 @@ public class MCTSBot implements Player {
         MCTSState rootState = new MCTSState(game);
         Node root = new Node(rootState);
         Tree tree = new Tree(root);
+        boolean whileEntered = false;
         
         while (System.currentTimeMillis() < end) {
+            whileEntered = true;
             
             Node promisingNode = tree.getRoot();
             
@@ -68,10 +70,12 @@ public class MCTSBot implements Player {
             
             MCTShelper.backPropagation(nodeToExplore, playoutResult);
         }
-        
+        if (!whileEntered) { //in case of ridicilously short timeToThink times
+            MCTShelper.expandNode(root);
+        }
         Node winnerNode = MCTShelper.getChildWithMaxScore(tree.getRoot());
         MCTSState state = (MCTSState) winnerNode.getState();
-        Object move = state.getLatestMove(); //null pointer exception
+        Object move = state.getLatestMove();
         return move;
     }
     
