@@ -24,9 +24,13 @@ To simply run the project, download the Reversi.jar file. In the repository wher
 
 The program can be easily altered (by an adequately skilled programmer) to do other things besides comparing the Minimax and MCTS algorithms in the game of Othello.
 The project includes Player, Game, and Evaluator interfaces.
-    *Using the Evaluator interface, excisting Minimax bot can be made to use a different evaluation method for the game situation.
-    *Using the Game interface, excisting bots can be made to play other games besides Othello. New Evalutor must be made for Minimax Bot, as Evaluators are Game-dependent.
-    *Using the Player interface, new bots can be made, or a human user can play against excisting bots.
+
+* Using the Evaluator interface, excisting Minimax bot can be made to use a different evaluation method for the game situation.
+
+* Using the Game interface, excisting bots can be made to play other games besides Othello. New Evalutor must be made for Minimax Bot, as Evaluators are Game-dependent.
+
+* Using the Player interface, new bots can be made, or a human user can play against excisting bots.
+
 Different search depths can be tested. Deeper searches results in a longer run time, of course.
 
 ### Developing
