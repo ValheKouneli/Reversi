@@ -43,4 +43,4 @@ The file can be run by in the root repository by typing
 
 ```java -cp ./build/lib/Reversi.jar reversi.application.Main```
 
-For more help, see the files under /documentation.
+For more help, see the files under ```/documentation```.
