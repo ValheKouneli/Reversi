@@ -27,6 +27,7 @@ The project includes Player, Game, and Evaluator interfaces.
 * Using the Evaluator interface, excisting Minimax bot can be made to use a different evaluation method for the game situation.
 * Using the Game interface, excisting bots can be made to play other games besides Othello. New Evalutor must be made for Minimax Bot, as Evaluators are Game-dependent.
 * Using the Player interface, new bots can be made, or a human user can play against excisting bots.
+
 Different search depths can be tested. Deeper searches results in a longer run time, of course.
 
 ### Developing
