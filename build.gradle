@@ -1,4 +1,6 @@
 apply plugin: 'java'
+apply plugin: 'application'
+mainClassName = 'reversi.application.Main'
 
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
@@ -41,3 +43,14 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
+
+//sourceSets {
+//    main {
+//        java {
+//            srcDirs = ['src/main/java']
+//        }
+//        resources {
+//            srcDirs = ['src/mainresources']
+//        }
+//    }
+//}
