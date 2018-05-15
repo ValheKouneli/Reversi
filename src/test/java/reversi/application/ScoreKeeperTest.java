@@ -76,10 +76,15 @@ public class ScoreKeeperTest {
     
     @Test
     public void toStringWorks() {
-        String pattern = "Victories out of \\d+ matches:\n" +
+        String pattern2 = "Victories out of \\d+ matches:\n" +
                 ".* : \\d+%\n" +
                 ".* : \\d+%\n";
-        assertEquals(true, Pattern.matches(pattern, scores2.toString()));
+        assertEquals(true, Pattern.matches(pattern2, scores2.toString()));
+        
+        String pattern = "Bots .+ and .+ have not been played any matches " +
+                    "against each other yet.\n" +
+                    "No score has yet been calculated.";
+        assertEquals(true, Pattern.matches(pattern, scores.toString()));
     }
     
 
