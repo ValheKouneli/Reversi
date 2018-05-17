@@ -1,5 +1,5 @@
 .gradle/
 .nb-gradle/
-/build/
+/build/*
 !/build/lib/Reversi.jar
 /raw_data/latest_results.txt
