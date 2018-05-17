@@ -1,4 +1,4 @@
 .gradle/
 .nb-gradle/
 /build/
-/raw_data/
+/raw_data/latest_results.txt
