@@ -8,8 +8,12 @@ Command line Java application, Reversi AI.
 
 Program compares the Minimax algorithm and the Monte Carlo Tree Search (MCTS) algorithm against each other when using them to play the game of Reversi (Othello).
 
-For three different search depths, program first measures how long the Minimax algorithm takes to decide a move. Then, it sets that time as a time limit to the MCTS algorithm.
-After that, the program makes bots using these algorithms play ten Reversi matches against each other, alternating the player colors, and shows statistics of wins and losses and used time.
+For given range of search depths, program first measures how long the Minimax algorithm takes to decide a move. Then, it sets that time as a time limit to the MCTS algorithm.
+After that, the program makes bots using these algorithms play given number of Reversi matches against each other, alternating the player colors, and prints statistics of wins and losses and used time.
+
+After that, the program shows a chart showing how often MCTS Bot wins against Minimax AI for given depths. For this, the program uses data collected over several runs.
+
+You can give the search depth limits as an arguments to the program. You can also give the number of game simulations per depths as a third argument. Giving only one argument sets the upper limit only.
 
 ***
 <span style="background-color: #FFFF00">Note that these instruction assume you are using the Linux Operating System!</span>
