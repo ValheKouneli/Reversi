@@ -22,13 +22,28 @@ public class Main {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
 
+        final int DEFAULT_MAX_DEPTH = 3;
+        final int DEFAULT_MIN_DEPTH = 2;
+        int maxDepth = DEFAULT_MAX_DEPTH;
+        int minDepth = DEFAULT_MIN_DEPTH;
         
+        if (args.length >= 2) {
+            try {
+                maxDepth = Integer.parseInt(args[1]);
+                if (maxDepth<DEFAULT_MIN_DEPTH) {
+                    maxDepth = DEFAULT_MIN_DEPTH;
+                }
+            } catch (NumberFormatException e) {
+                
+            }
+        }
         List<IntPair> record = new List<>();
         
-        for (int depth = 3; depth<=3; depth++) {
+        for (int depth = DEFAULT_MIN_DEPTH; depth<=maxDepth; depth++) {
             MinimaxAI minimax = new MinimaxAI(new ReversiEvaluator(), depth);
             RecordMoveTimeMinimax timing = new RecordMoveTimeMinimax(minimax);
             int avgTime = timing.record(true);
@@ -55,6 +70,9 @@ public class Main {
         }
   
         try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("raw_data/results.txt", false)));) {
+            writer.print(Integer.toString(minDepth));
+            writer.println("\n");
+            
             for (int i=0; i<record.size(); i++) {
                 writer.print(Integer.toString(record.get(i).getX()));
                 writer.print(" ");
