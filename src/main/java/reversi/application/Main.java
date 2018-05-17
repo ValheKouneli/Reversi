@@ -154,7 +154,8 @@ public class Main {
             writerAppend.close();
         } catch (IOException e) {
             System.out.println("Writing to file did not succeed.\n +"
-                    + " e.toString()");
+                    + e.toString());
+            System.exit(1);
         } 
     }
     
