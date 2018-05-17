@@ -68,14 +68,20 @@ public class ScoreKeeper {
     }
     
     public void playSwitchingColors(boolean print) {
-        Match matchA = new Match((Game) new Reversi(), minimaxAI, mctsBot);
+        Match matchA = new Match("Match no " + (totalMatches + 1) +
+                " comparing MCTS Bot and Minimax AI, depth " +
+                + minimaxAI.getDepth(), (Game) new Reversi(), 
+                minimaxAI, mctsBot);
         matchA.playMatch(print);
         timePerMoveTotalMinimax += matchA.averageTimePerMovePlayer1();
         timePerMoveTotalMCTS += matchA.averageTimePerMovePlayer2();
         totalMatches++;
         keepScore(matchA.returnWinnerName(), print);
                 
-        Match matchB = new Match((Game) new Reversi(), mctsBot, minimaxAI);
+        Match matchB = new Match("Match no " + (totalMatches + 1) +
+                " comparing MCTS Bot and Minimax AI, depth " +
+                + minimaxAI.getDepth(), (Game) new Reversi(), 
+                mctsBot, minimaxAI);
         matchB.playMatch(print);
         timePerMoveTotalMinimax += matchA.averageTimePerMovePlayer2();
         timePerMoveTotalMCTS += matchA.averageTimePerMovePlayer1();
