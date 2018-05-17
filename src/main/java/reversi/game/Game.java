@@ -15,5 +15,7 @@ public interface Game {
     public int getTurnNumber();
     public Game getCopy();
     public boolean gameIsOver();
+    @Override
+    public String toString();
     
 }
