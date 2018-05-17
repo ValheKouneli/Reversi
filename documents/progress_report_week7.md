@@ -8,6 +8,7 @@ Time spent: 3h
 
 Thursday:  Got the chart drawing working. It was hard, because I haven't used javafx before and because I was so tired I kept making stupid mistakes without noticing them right away.
 I spend a lot of time reading stuff about the javafx elements I was using, trying to make them display data better. Made a things where win percentages are written into a file.
+Tested that things are working 'manually'.
 
-Time spent: 6h
+Time spent: 7h
 
