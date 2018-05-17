@@ -14,8 +14,6 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import reversi.AI.MCTS.MCTSBot;
 import reversi.AI.minimax.MinimaxAI;
-import reversi.data_structures.IntPair;
-import reversi.data_structures.List;
 import reversi.game.reversi.ReversiEvaluator;
 
 
