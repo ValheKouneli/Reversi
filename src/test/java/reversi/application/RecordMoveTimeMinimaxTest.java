@@ -38,14 +38,6 @@ public class RecordMoveTimeMinimaxTest {
     }
     
     @Test
-    public void recordDoesNotPrintAnything() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        record.record();
-        assertEquals(true, outContent.toString().length() == 0);
-    }
-    
-    @Test
     public void getMinimaxDepthWorks() {
         assertEquals(depth, record.getMinimaxDepth());
     }

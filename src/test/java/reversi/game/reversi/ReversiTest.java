@@ -249,7 +249,10 @@ public class ReversiTest {
                                                     "6 |○| |●| | | | | |\n" +
                                                     "7 |○|○|○|○|○| | | |\n"));
         
-        String correct =                            "   0 1 2 3 4 5 6 7 \n" +
+        String correct =                            "Turn #34\n" +
+                                                    "It's black's turn.\n" +
+                                                    "\n" +
+                                                    "   0 1 2 3 4 5 6 7 \n" +
                                                     "0 |○|○|○|○| | | | |\n" +
                                                     "1 |○|○|○|●| | | | |\n" +
                                                     "2 |○|○|●|○|●| | | |\n" +
@@ -257,9 +260,7 @@ public class ReversiTest {
                                                     "4 |○| |●|○|●| | | |\n" +
                                                     "5 |○|○|●|●|●|●| | |\n" +
                                                     "6 |○| |●| | | | | |\n" +
-                                                    "7 |○|○|○|○|○| | | |\n" +
-                                                    "Turn #34\n" +
-                                                    "It's black's turn.\n";
+                                                    "7 |○|○|○|○|○| | | |\n";
         assertEquals(correct, game.toString());
         
         game.setBoard(BoardFactory.makeBoard(  
