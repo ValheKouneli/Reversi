@@ -18,8 +18,24 @@ public class Match {
     private long timeSpentTotal;
     private boolean matchFinished;
     private Player winner;
+    private String matchName;
     
     public Match(Game game, Player player1, Player player2) {
+        this.matchName = "Match no 1";
+        this.game = game;
+        timeSpentTotal = 0;
+        winner = null;
+        this.player1 = player1;
+        this.player2 = player2;
+        timeSpentPlayer1 = 0;
+        timeSpentPlayer2 = 0;
+        movesPlayedPlayer1 = 0;
+        movesPlayedPlayer2 = 0;
+        matchFinished = false;
+    }
+    
+    public Match(String matchName, Game game, Player player1, Player player2) {
+        this.matchName = matchName;
         this.game = game;
         timeSpentTotal = 0;
         winner = null;
@@ -37,12 +53,17 @@ public class Match {
     }
     
     public void playMatch(boolean print) {
-        long timeBeforeMatch = System.currentTimeMillis();
+        playMatch(print, false);
+    }
+    
+    public void playMatch(boolean print, boolean printProgress) {
+         long timeBeforeMatch = System.currentTimeMillis();
         long timeBeforeMove;
         long moveTime;
         long timeAfterMove;
         if (print) {
             System.out.println("====================================\n");
+            System.out.println("STARTING: " + matchName);
             System.out.println("Black player: " + player2.name());
             System.out.println("White player: " + player1.name());
             System.out.println("\n");
@@ -50,12 +71,18 @@ public class Match {
         }
         while (!game.gameIsOver()) {
             if (print) {
+                System.out.println("PLAYING: " + matchName);
+                System.out.println();
                 System.out.println(game.toString());
                 System.out.println("____________________________");
             }
             int turn = game.getTurn();
             Player playerInTurn = turn == 1 ? player1 : player2;
             
+            if (printProgress) {
+                System.out.println("Turn " + (game.getTurnNumber()+1) +
+                        " in progress.");
+            }
             timeBeforeMove = System.currentTimeMillis();
             Object move = playerInTurn.getNextMove(game);
             timeAfterMove = System.currentTimeMillis();
