@@ -21,7 +21,7 @@ You can give the search depth limits as an arguments to the program. You can als
 
 ### Instructions On How To Use
 
-To simply run the project, download the Reversi.jar file. In the repository where the .jar file is located, run command
+To simply run the project, download the Reversi.jar file found under ```/build/libs```. In the repository where the .jar file is located, run command
 
 ```java -cp Reversi.jar reversi.application.Main```
 
