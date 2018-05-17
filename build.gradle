@@ -46,6 +46,6 @@ check.dependsOn jacocoTestReport
 
 jar {
     manifest {
-        attributes 'Main-Class': 'com.foo.bar.MainClass'
+        attributes 'Main-Class': 'src.main.java.reversi.application.Main'
     }
 }
