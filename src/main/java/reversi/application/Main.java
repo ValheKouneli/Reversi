@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import reversi.AI.MCTS.MCTSBot;
 import reversi.AI.minimax.MinimaxAI;
 import reversi.game.reversi.ReversiEvaluator;
@@ -29,7 +31,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         final int DEFAULT_MAX_DEPTH = 5;
-        final int DEFAULT_MIN_DEPTH = 4;
+        final int DEFAULT_MIN_DEPTH = 3;
         final int DEFAULT_MATCH_NUMBER = 10;
         int maxDepth = DEFAULT_MAX_DEPTH;
         int minDepth = DEFAULT_MIN_DEPTH;
@@ -96,6 +98,13 @@ public class Main {
                 break;
         }
         
+        System.out.println("Playing " + matchNumber + " matches " +
+                "for each depth between [" + minDepth + ", " + maxDepth + "]");
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
         playBotsAgainstEachOtherAndRecord(minDepth, maxDepth, matchNumber);
             
         printLatestResults();
