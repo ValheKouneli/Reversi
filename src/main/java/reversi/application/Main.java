@@ -54,7 +54,7 @@ public class Main {
             System.out.println("depth " + depth + ": " + winPercentage + "%");
         }
   
-        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("results.txt", false)));) {
+        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("raw_data/results.txt", false)));) {
             for (int i=0; i<record.size(); i++) {
                 writer.print(Integer.toString(record.get(i).getX()));
                 writer.print(" ");

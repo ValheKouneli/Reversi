@@ -47,7 +47,7 @@ public class Chart extends Application {
         XYChart.Series series = new XYChart.Series();
         series.setName("Test run results read from file");
         
-        File results = new File("results.txt");
+        File results = new File("raw_data/results.txt");
         try (Scanner input = new Scanner(results)) {
             input.useDelimiter("\\s+");
             int x;
