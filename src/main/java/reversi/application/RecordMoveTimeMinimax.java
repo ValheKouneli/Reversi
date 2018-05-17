@@ -30,7 +30,7 @@ public class RecordMoveTimeMinimax {
     }
     
     public int record(boolean print) {
-        return record(print, true);
+        return record(print, false);
     }
     
     public int record(boolean print, boolean printProgress) {
