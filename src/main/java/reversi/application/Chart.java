@@ -48,7 +48,7 @@ public class Chart extends Application {
         collectedData = new HashMap<>();
         
         try {
-            File results = new File("raw_data/legacy_results.txt");
+            File results = new File("raw_data_legacy_results.txt");
             
             try {
                 Scanner input = new Scanner(results);

@@ -113,9 +113,9 @@ public class Main {
 
         try {
             PrintWriter writerNew = new PrintWriter(new BufferedWriter(
-                new FileWriter("raw_data/latest_results.txt", false)));
+                new FileWriter("raw_data_latest_results.txt", false)));
             PrintWriter writerAppend = new PrintWriter(new BufferedWriter(
-                new FileWriter("raw_data/legacy_results.txt", true)));
+                new FileWriter("raw_data_legacy_results.txt", true)));
             
             for (int depth = minDepth; depth<=maxDepth; depth++) {
                 //create MinimaxBot
@@ -163,7 +163,7 @@ public class Main {
         System.out.println("MCTS Bot win percentages\n" +
                 "against Minimax Bot with\n");
         
-        File results = new File("raw_data/latest_results.txt");
+        File results = new File("raw_data_latest_results.txt");
         if(results.isFile()) { 
             try {
                 Scanner input = new Scanner(results);
