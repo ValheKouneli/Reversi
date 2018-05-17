@@ -26,9 +26,21 @@ public class RecordMoveTimeMinimax {
     }
     
     public int record() {
+        return record(false);
+    }
+    
+    public int record(boolean print) {
+        return record(print, true);
+    }
+    
+    public int record(boolean print, boolean printProgress) {
+        if (print) {
+            System.out.println("Minimax is playing against itself. This might take a while.");
+        }
         Reversi game = new Reversi();
-        Match match = new Match(game, minimax, minimax);
-        match.playMatch();
+        Match match = new Match("Minimax with depth " +
+                minimax.getDepth() + " against itself", game, minimax, minimax);
+        match.playMatch(print, printProgress);
         avgTime = (int) match.averageTimePerMove();
         recordingDone = true;
         return avgTime;
