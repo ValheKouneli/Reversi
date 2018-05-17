@@ -160,6 +160,9 @@ public class Main {
     }
     
     private static void printLatestResults() {
+        System.out.println();
+        System.out.println("======================================");
+        System.out.println();
         System.out.println("MCTS Bot win percentages\n" +
                 "against Minimax Bot with\n");
         
