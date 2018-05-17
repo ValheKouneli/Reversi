@@ -11,11 +11,7 @@ import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 import java.util.concurrent.CountDownLatch;
 import javafx.application.Platform;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.chart.Axis;
-import javafx.scene.image.WritableImage;
 import javafx.stage.WindowEvent;
-import javax.imageio.ImageIO;
  
  
 public class Chart extends Application {
@@ -108,13 +104,5 @@ public class Chart extends Application {
             System.out.println("Could not create a file.\\n"
                     + e.toString());
         }
-        
-        
-
-        
-//        lineChart.setAnimated(true);
-//        WritableImage snapShot = scene.snapshot(null);
-//        ImageIO.write(SwingFXUtils.fromFXImage(snapShot, null), "png", new File("test.png"));
-        
     }
 }
