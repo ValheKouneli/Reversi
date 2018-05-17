@@ -33,8 +33,8 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
 
-        final int DEFAULT_MAX_DEPTH = 3;
-        final int DEFAULT_MIN_DEPTH = 1;
+        final int DEFAULT_MAX_DEPTH = 5;
+        final int DEFAULT_MIN_DEPTH = 4;
         final int DEFAULT_MATCH_NUMBER = 10;
         int maxDepth = DEFAULT_MAX_DEPTH;
         int minDepth = DEFAULT_MIN_DEPTH;
