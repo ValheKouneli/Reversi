@@ -4,6 +4,7 @@ import reversi.data_structures.List;
 
 /**
  * Represents a game
+ * Players of the game are represented as different arbitrary integers
  * @author Valhe Kouneli
  */
 public interface Game {
