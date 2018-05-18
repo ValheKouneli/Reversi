@@ -100,6 +100,12 @@ public class MCTShelper {
         }
     }
 
+    /**
+     * Updates the state's of the nodeToExplore and it's ancestrial nodes
+     * according to who was winner
+     * @param nodeToExplore
+     * @param winner of the simulation that was made starting from nodeToExplore
+     */
     protected void backPropagation(Node nodeToExplore, int winner) {
         Node tempNode = nodeToExplore;
         while (tempNode != null) {
