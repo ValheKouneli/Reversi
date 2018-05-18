@@ -62,3 +62,7 @@ The file can be run by in the root repository by typing
 ```java -cp ./build/lib/Reversi.jar reversi.application.Main```
 
 For more help, see the files under ```/documentation``` and ```/build/docs```
+
+### Bugs and Critique
+
+Reversi caches List<Move> moves and returns it. It does not cache a copy of the returned list. The problem is that if the returned list is modified, the cached list changes as well. The program, in its current state however, does not modify the list it gets from Reversi.
