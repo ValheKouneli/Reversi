@@ -13,5 +13,8 @@ public interface Player {
      * @return next move in game
      */
     public Object getNextMove(Game game);
+    /**
+     * @return name of this player
+     */
     public String name();
 }
