@@ -5,7 +5,8 @@ import reversi.data_structures.IntPair;
 import reversi.data_structures.List;
 
 /**
- * Represents a game of Reversi and its status
+ * Represents a game of Reversi and its status.
+ * Takes care of the rules with the help of ReverseHelper.
  * @author Valhe Kouneli
  */
 public class Reversi implements Game {
