@@ -7,7 +7,7 @@ Unit test are made with JUnit. They don't cover package reversi.application, bec
 
 You can see the test resulsts and coverage report in ```/build/reports```.
 
-(Download the build to view the reports on your browser.)
+(Download the ```program_and_documents.zip``` to view the reports on your browser.)
 
 The test will take relatively long time to run (~ 1 min).
 
