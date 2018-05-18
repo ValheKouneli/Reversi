@@ -10,3 +10,13 @@ After each depth, the program asks the results from the ScoreKeeper and writes t
 After doing all this for all the depths, the program reads the resuls from the new file and prints them. After that, it creates a line chart about the win percentages of mcts bot agaist minimax AI for different depths. The line chart data is read from the file that contains the old results too.
 
 See the class diagrams and javadoc for more detailed information about the implementation.
+
+
+## Sources
+
+* [http://www.flyordie.com/games/help/reversi/en/games_rules_reversi.html](http://www.flyordie.com/games/help/reversi/en/games_rules_reversi.html)
+* [http://www.baeldung.com/java-monte-carlo-tree-search](http://www.baeldung.com/java-monte-carlo-tree-search) ERRONOUS!
+* [https://en.wikipedia.org/wiki/Computer_Othello](https://en.wikipedia.org/wiki/Computer_Othello)
+* [https://en.wikipedia.org/wiki/Monte_Carlo_tree_search](https://en.wikipedia.org/wiki/Monte_Carlo_tree_search)
+* [https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/](https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/)
+[https://www.cs.swarthmore.edu/~bryce/cs63/s16/slides/2-15_MCTS.pdf](https://www.cs.swarthmore.edu/~bryce/cs63/s16/slides/2-15_MCTS.pdf)
