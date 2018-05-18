@@ -2,4 +2,5 @@
 .nb-gradle/
 /build/*
 !/build/libs/Reversi.jar
+!/build/docs/
 raw_data_latest_results.txt
