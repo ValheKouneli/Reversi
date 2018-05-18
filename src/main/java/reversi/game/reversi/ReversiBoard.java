@@ -2,10 +2,11 @@ package reversi.game.reversi;
 
 
 /**
- * Represents a reversi board state
- * 1 for white
- * -1 for black
- * 0 for empty
+ * Represents a reversi board state;
+ * bumb class, does not understand the game rules;
+ * 1 stands for white
+ * -1 stands for black
+ * 0 stands for empty
  * @author Valhe Kouneli
  */
 public class ReversiBoard {
