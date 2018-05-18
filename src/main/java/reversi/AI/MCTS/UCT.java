@@ -34,7 +34,7 @@ public class UCT {
     /**
      * @param node
      * @return node's UCT value
-     * @throws IllegalArgumentException if node has no parent
+     * @throws IllegalArgumentException if node has no parent or if its state is not MCTSState
      */
     public static double uctValue(Node node) {
         Node parent;
@@ -43,9 +43,18 @@ public class UCT {
         } catch (NullPointerException e) {
             throw new java.lang.IllegalArgumentException("Node has no parent.");
         }
-        int parentVisitCount = ((MCTSState) parent.getState()).getVisitCount();
-        double nodeWinScore = ((MCTSState) node.getState()).getWinScore();
-        int nodeVisitCount = ((MCTSState) node.getState()).getVisitCount();
+        int parentVisitCount;
+        double nodeWinScore;
+        int nodeVisitCount;
+        try {
+            parentVisitCount = ((MCTSState) parent.getState()).getVisitCount();
+            nodeWinScore = ((MCTSState) node.getState()).getWinScore();
+            nodeVisitCount = ((MCTSState) node.getState()).getVisitCount();
+        } catch (ClassCastException e) {
+            throw new java.lang.IllegalArgumentException(
+                    "Node has to have MTSState as state");
+        }
+
         return uctValue(parentVisitCount, nodeWinScore, nodeVisitCount);
     }
     
