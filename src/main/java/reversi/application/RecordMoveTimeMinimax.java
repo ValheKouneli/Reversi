@@ -6,7 +6,6 @@
 package reversi.application;
 
 import reversi.AI.minimax.MinimaxAI;
-import reversi.game.Match;
 import reversi.game.reversi.Reversi;
 
 /**

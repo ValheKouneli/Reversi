@@ -3,7 +3,6 @@ package reversi.application;
 import reversi.AI.MCTS.MCTSBot;
 import reversi.AI.minimax.MinimaxAI;
 import reversi.game.Game;
-import reversi.game.Match;
 import reversi.game.reversi.Reversi;
 /**
  *

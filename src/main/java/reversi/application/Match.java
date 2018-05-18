@@ -1,11 +1,9 @@
-package reversi.game;
+package reversi.application;
 
+import reversi.game.Game;
+import reversi.game.Player;
 import reversi.game.reversi.Reversi;
 
-/**
- *
- * @author Valhe Kouneli
- */
 public class Match {
     
     private final Player player1;
@@ -18,7 +16,7 @@ public class Match {
     private long timeSpentTotal;
     private boolean matchFinished;
     private Player winner;
-    private String matchName;
+    private final String matchName;
     
     public Match(Game game, Player player1, Player player2) {
         this.matchName = "Match no 1";

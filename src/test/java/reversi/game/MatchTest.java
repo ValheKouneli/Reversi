@@ -1,5 +1,6 @@
 package reversi.game;
 
+import reversi.application.Match;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.Before;
