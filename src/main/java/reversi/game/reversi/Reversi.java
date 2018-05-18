@@ -45,6 +45,9 @@ public class Reversi implements Game {
         turn = turnNumber % 2 == 0 ? -1 : 1;
     }
     
+    /**
+     * @return 1 for white, -1 for black
+     */
     @Override
     public int getTurn() {
         return turn;
@@ -239,7 +242,7 @@ public class Reversi implements Game {
     }
 
     /**
-     * @return winner of the game
+     * @return winner of the game, 1 for white, -1 for black
      * @throws IllegalStateException if called before the game is over
      */
     @Override
