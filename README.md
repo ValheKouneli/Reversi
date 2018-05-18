@@ -25,6 +25,19 @@ To simply run the project, download the Reversi.jar file found under ```/build/l
 
 ```java -cp Reversi.jar reversi.application.Main```
 
+You can give number parameters to the program, either:
+* maxDepth
+* minDepth maxDepth
+* minDepth maxDepth matchesPerDepth
+
+The default values are minDepth=3, maxDepth=5 and matchesPerDepth=10
+
+Notice that by using the default values, the program will take quite a while to run (~ 15 mins).
+
+For the shortest run time, use
+
+```java -cp Reversi.jar reversi.application.Main 2 2 2```
+
 ### Altering the program
 
 The program can be easily altered (by an adequately skilled programmer) to do other things besides comparing the Minimax and MCTS algorithms in the game of Othello.
@@ -48,4 +61,4 @@ The file can be run by in the root repository by typing
 
 ```java -cp ./build/lib/Reversi.jar reversi.application.Main```
 
-For more help, see the files under ```/documentation```.
+For more help, see the files under ```/documentation``` and ```/build/docs```
