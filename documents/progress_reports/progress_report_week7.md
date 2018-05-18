@@ -1,3 +1,12 @@
+Overview
+========
+
+I spent time making statistics and adding documentation.
+
+***Total time spent: 23 h***
+
+## Daily reports
+
 Monday: made tests for classes under application. The project was running on Netbeans but was not runnable on command line. Spent a lot of the time studying things about gradle and was finally able to make both gradle run work and gradle independent running on command line work.
 
 Time spent: 4h
@@ -11,4 +20,12 @@ I spend a lot of time reading stuff about the javafx elements I was using, tryin
 Tested that things are working 'manually'.
 
 Time spent: 7h
+
+Friday: Spent time peer-reviewing other projects.
+
+Time spent: 6h
+
+Friday: Added javadoc and comments, updated all kinds of documents.
+
+Time spent: 3h
 
