@@ -17,11 +17,18 @@ public class MCTSBot implements Player {
     private final MCTShelper MCTShelper;
     private final int timeToThink;
     
+    /**
+     * Time to think is set to 1000 milliseconds
+     */
     public MCTSBot() {
         timeToThink = 1000;
         MCTShelper = new MCTShelper(random);
     }
     
+    /**
+     * Creates a MCTSBot instance with given time to think
+     * @param timeToThink per move in milliseconds
+     */
     public MCTSBot(int timeToThink) {
         this.timeToThink = timeToThink;
         MCTShelper = new MCTShelper(random);
@@ -79,6 +86,9 @@ public class MCTSBot implements Player {
         return move;
     }
     
+    /**
+     * @return name of this bot
+     */
     @Override
     public String name() {
         return "MCTS Bot, " + timeToThink + " ms time/move";

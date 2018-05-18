@@ -7,6 +7,7 @@ import reversi.data_structures.List;
 /**
  * Stores information about nodes used in Monte Carlo Tree Search
  * in class MCTSbot.
+ * Has a game, visitCount, winScore and latestMove.
  *
  * @author Valhe Kouneli
  */
@@ -23,6 +24,10 @@ public class MCTSState {
         visitCount = 0;
         winScore = 0;
     }
+    
+    /**
+     * @param game related to this state
+     */
     public MCTSState(Game game) {
         latestMove = null;
         this.game = game;
@@ -30,6 +35,10 @@ public class MCTSState {
         winScore = 0;
     }
     
+    /**
+     * @param game related to this state
+     * @param latestMove related to this state
+     */
     public MCTSState(Game game, Object latestMove) {
         this.latestMove = latestMove;
         this.game = game;
@@ -72,6 +81,10 @@ public class MCTSState {
         return game;
     }
     
+    /**
+     * @return all possible game situations that can follow the game situation
+     * related to this state, represented as states
+     */
     public List<MCTSState> getAllPossibleStates() {
         List<MCTSState> nextStates = new List<>();
         List<Object> moves = game.getMoves();
@@ -91,6 +104,10 @@ public class MCTSState {
         return nextStates;
     }
     
+    /**
+     * Plays a random move in the game related to this state.
+     * If there are no legal moves, does nothing.
+     */
     public void randomPlay() {
         List<Object> moves = game.getMoves();
         if (moves.size() == 0) {
