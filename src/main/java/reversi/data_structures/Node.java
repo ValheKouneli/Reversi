@@ -1,7 +1,7 @@
 package reversi.data_structures;
 
 /**
- *
+ * Represents a node in a Tree
  * @author Valhe Kouneli
  */
 public class Node {

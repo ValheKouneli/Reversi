@@ -5,7 +5,7 @@ import java.util.Random;
 import reversi.data_structures.List;
 
 /**
- *
+ * Helper class for MCSTBot
  * @author Valhe Kouneli
  */
 public class MCTShelper {
@@ -20,17 +20,26 @@ public class MCTShelper {
         this.random = new Random(System.currentTimeMillis());
     }
     
+    /**
+     * @param node
+     * @return node's random child
+     * @throws IllegalArgumentException of node has no children
+     */
     protected Node getRandomChildNode(Node node) {
         int size = node.getChildren().size();
         if (size > 0) {
             int i = random.nextInt(size);
             return node.getChildren().get(i);
         } else {
-            throw new java.lang.IllegalArgumentException(
-                    "random child node asked from a node without childen");
+            throw new java.lang.IllegalArgumentException("node has no childen");
         }
     }
 
+    /**
+     * @param node
+     * @return node's child with the best score
+     * @throws IllegalArgumentException if node has no children
+     */
     protected Node getChildWithMaxScore(Node node) {
         List<Node> children = node.getChildren();
         double bestScore = Integer.MIN_VALUE;
@@ -45,6 +54,7 @@ public class MCTShelper {
         }
         if (bestChild == null) {
             return getRandomChildNode(node);
+            //throws an exception if node has no children
         }
         return bestChild;
     }
@@ -54,13 +64,20 @@ public class MCTShelper {
      * @return if node has children, child with best UCT value; else node itself
      */
     protected Node selectPromisingBranch(Node rootNode) {
-        Node node = rootNode;
-        if (!node.getChildren().isEmpty()) {
-            node = UCT.getChildWithBestUCTValue(node);
+        if (rootNode.getChildren().isEmpty()) {
+            return rootNode;
         }
+        Node node = UCT.getChildWithBestUCTValue(rootNode);
+        //can not be null, because node has children
         return node;
     }
 
+    /**
+     * Plays a random game starting from the game situation
+     * specified in the node's state.
+     * @param node to start the simulation from
+     * @return winner of the simulated game
+     */
     protected int simulateRandomPlayout(Node node) {
         if (node == null) {
             throw new java.lang.NullPointerException("node was null");
@@ -96,6 +113,11 @@ public class MCTShelper {
         }
     }
 
+    /**
+     * Creates all the child nodes (following game situations after one move)
+     * for the given node
+     * @param node 
+     */
     protected void expandNode(Node node) {
         if (node.getChildren().isEmpty()) {
             List<MCTSState> possibleStates = ((MCTSState)node.getState()).getAllPossibleStates();

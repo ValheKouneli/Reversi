@@ -6,8 +6,8 @@ import reversi.AI.minimax.Evaluator;
  * This evaluator evaluates the Reversi game situation by giving values to one's
  * own pieces based on their position on the board. Corners are most valuable,
  * and places next to corners have negative value. Sides are the second best
- * place to be. If the game is has continued over 40 moves, all positions have
- * equal value.
+ * place to be. After certain amount of moves are played, does not give
+ * different weights to different positions anymore.
  * 
  * @author Valhe Kouneli
  */
@@ -19,15 +19,19 @@ public class ReversiEvaluator implements Evaluator {
      * that player.
      *
      * @param game  object of the type Game
-     * @return  evaluated value of the game situation
+     * @return evaluated value of the game situation
+     * @throw IllegalArgumentException if the given game is not type Reversi
      */
     @Override
     public int eval(Object game) {
-        if (!Reversi.class.isInstance(game)) {
+        Reversi reversi;
+        try {
+            reversi = (Reversi) game;
+        } catch (ClassCastException e) {            
             throw new java.lang.IllegalArgumentException(
                     "This evaluator evaluates only Reversi games.");
         }
-        Reversi reversi = (Reversi) game;
+        
         ReversiBoard board = reversi.getBoardCopy();
         int turnNumber = reversi.getTurnNumber();
         int piece;

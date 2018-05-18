@@ -4,7 +4,7 @@ import reversi.data_structures.IntPair;
 
 
 /**
- *
+ * Helper class for Reversi
  * @author Valhe Kouneli
  */
 public class ReverseHelper {

@@ -7,7 +7,7 @@ import reversi.data_structures.Node;
 import reversi.data_structures.List;
 
 /**
- *
+ * Helper class for the MCTSBot
  * @author Valhe Kouneli
  */
 public class UCT {
@@ -31,11 +31,19 @@ public class UCT {
         }
     }
     
+    /**
+     * @param node
+     * @return node's UCT value
+     * @throws IllegalArgumentException if node has no parent
+     */
     public static double uctValue(Node node) {
-        if (node.getParent() == null) {
-            throw new java.lang.NullPointerException("Node has no parent.");
+        Node parent;
+        try {
+            parent = node.getParent();
+        } catch (NullPointerException e) {
+            throw new java.lang.IllegalArgumentException("Node has no parent.");
         }
-        int parentVisitCount = ((MCTSState) node.getParent().getState()).getVisitCount();
+        int parentVisitCount = ((MCTSState) parent.getState()).getVisitCount();
         double nodeWinScore = ((MCTSState) node.getState()).getWinScore();
         int nodeVisitCount = ((MCTSState) node.getState()).getVisitCount();
         return uctValue(parentVisitCount, nodeWinScore, nodeVisitCount);
@@ -44,11 +52,12 @@ public class UCT {
     /** Returns the child with the best UCT value for the given node.
      * 
      * @param node  a node
-     * @return node's child node with the best UCT value out of all child nodes
+     * @return node's child node with the best UCT value out of all child nodes, null if node has no children
      */
     public static Node getChildWithBestUCTValue(Node node) {
         int parentVisitCount = ((MCTSState) node.getState()).getVisitCount();
         List<Node> children = node.getChildren();
+
         Node bestChild = null;
         double bestUCTvalue = Integer.MIN_VALUE;
         Node child;

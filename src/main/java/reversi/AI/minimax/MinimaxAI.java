@@ -41,8 +41,9 @@ public class MinimaxAI implements Player {
     
     /**
      * Chooses a move in the given game situation based on a minimax algorithm.
-     * @param game 
-     * @return  
+     * @param game where a move should be suggested
+     * @return a legal move in the given game
+     * @throws IllegalArgumentException if the given game is not of the type this bot plays
      */
     @Override
     public Object getNextMove(Game game) {
@@ -55,7 +56,7 @@ public class MinimaxAI implements Player {
                                 + "of the given type.");
             }
         }
-        minimax.minmax(game, 0, depth, eval);
+        minimax.minimax(game, 0, depth, eval);
         return minimax.getBestMove();
     }
     

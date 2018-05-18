@@ -1,7 +1,7 @@
 package reversi.data_structures;
 
 /**
- *
+ * Represents an ordered pair of two integers
  * @author Valhe Kouneli
  */
 public class IntPair {
@@ -29,7 +29,7 @@ public class IntPair {
     /**
      *
      * @param o
-     * @return
+     * @return if o is IntPair with the same values
      */
     @Override
     public boolean equals(Object o) {

@@ -24,27 +24,27 @@ public class MinimaxTest {
     
     @Test
     public void minMaxWithoutLimitWorks() {
-        int result = minimax.minmax(nim);
+        int result = minimax.minimax(nim);
         assertEquals(Integer.MIN_VALUE, result);
     }
     
     @Test
     public void minMaxWithLimitWorks() {
-        int result = minimax.minmax(nim, 0, 5, eval);
+        int result = minimax.minimax(nim, 0, 5, eval);
         assertEquals(Integer.MIN_VALUE, result);
     }
     
     @Test
     public void bestMoveIsSavedWhenNoLimit() {
         nim = new Nim(4);
-        minimax.minmax(nim);
+        minimax.minimax(nim);
         assertEquals(3, minimax.getBestMove());
     }
     
     @Test
     public void bestMoveIsSavedWhenLimitIsUsed() {
         nim = new Nim(4);
-        minimax.minmax(nim, 0, 3, eval);
+        minimax.minimax(nim, 0, 3, eval);
         assertEquals(3, minimax.getBestMove());
     }
     

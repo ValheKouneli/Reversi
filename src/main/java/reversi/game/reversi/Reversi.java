@@ -5,7 +5,7 @@ import reversi.data_structures.IntPair;
 import reversi.data_structures.List;
 
 /**
- *
+ * Represents a game of Reversi and its status
  * @author Valhe Kouneli
  */
 public class Reversi implements Game {
@@ -70,15 +70,8 @@ public class Reversi implements Game {
         return score;
     }
     
-    public int getWinner() {
-        if (getScore() > 0) {
-            return 1;
-        } else if (getScore() < 0 ){
-            return -1;
-        } else {
-            return 0;
-        }
-    }
+
+
     
     /**
      * Returns whether game is over or not.
@@ -113,6 +106,9 @@ public class Reversi implements Game {
         return copy;
     }
     
+    /**
+     * @return all legal moves in the current game situation
+     */
     @Override
     public List<Object> getMoves() {
         return getMoves(true);
@@ -187,8 +183,8 @@ public class Reversi implements Game {
     /**
      * Makes the suggested move and changes turn if it is legal;
      * returns whether the move is legal.
-     * @param x row number of the move
-     * @param y column number of the move
+     * @param x is the row number of the move
+     * @param y is the column number of the move
      * @return true if move is legal, false if not
      */
     public boolean move(int x, int y){
@@ -220,6 +216,11 @@ public class Reversi implements Game {
         return board.getCopy();
     }
 
+    /**
+     * Makes the given move in the game if it's legal
+     * @param move in the game
+     * @return if the moves was legal and it was made
+     */
     @Override
     public boolean move(Object move) {
         IntPair pair = (IntPair) move;
@@ -236,13 +237,23 @@ public class Reversi implements Game {
         return move(pair.getX(), pair.getY());
     }
 
+    /**
+     * @return winner of the game
+     * @throws IllegalStateException if called before the game is over
+     */
     @Override
     public int winner() {
         if (!gameIsOver()) {
             throw new java.lang.IllegalStateException(
                     "Winner asked but game is not over.");
         }
-        return getScore() > 0 ? 1 : -1;
+        if (getScore() > 0) {
+            return 1;
+        } else if (getScore() < 0 ){
+            return -1;
+        } else {
+            return 0;
+        }
     }
     
  

@@ -2,7 +2,7 @@ package reversi.data_structures;
 
 
 /**
- *
+ * Represents an array list of objects of the type E
  * @author Valhe Kouneli
  * @param <E>
  */
@@ -36,6 +36,10 @@ public class List<E> {
         return size;
     }
 
+    /**
+     * @param i index starting from 0
+     * @return object in the list in position i
+     */
     public E get(int i) {
         if (0<= i && i<size) {
             return (E) list[i];
@@ -48,6 +52,10 @@ public class List<E> {
         return size == 0;
     }
     
+    /**
+     * @param item
+     * @return if, in the list, there is an object equal to the given item
+     */
     public boolean contains(E item) {
         boolean contains = false;
         for (int i=0; i<size; i++) {

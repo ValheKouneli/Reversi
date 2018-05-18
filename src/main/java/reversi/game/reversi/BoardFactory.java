@@ -1,7 +1,7 @@
 package reversi.game.reversi;
 
 /**
- *
+ * Creates ReversiBoards
  * @author aepiiroi
  */
 public class BoardFactory {

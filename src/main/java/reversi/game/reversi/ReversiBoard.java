@@ -2,27 +2,60 @@ package reversi.game.reversi;
 
 
 /**
- *
+ * Represents a reversi board state
+ * 1 for white
+ * -1 for black
+ * 0 for empty
  * @author Valhe Kouneli
  */
 public class ReversiBoard {
     
-    private final int[][] board;
+    private final int[][] board; //board state
     
     public ReversiBoard() {
         board = new int[8][8];
+        //setting the starting position
         board[3][3] = 1;
         board[4][4] = 1;
         board[3][4] = -1;
         board[4][3] = -1;
     }
     
+    /**
+     * Returns the state of the specified place on the board
+     * @param x is row number stating from 0
+     * @param y is column number stating from 0
+     * @return 1 for white, -1 for black, 0 for empty
+     * @throws ArrayIndexOutOfBoundsException if the specified place is not on the board
+     */
     public int getBoardXY(int x, int y) {
-        return board[x][y];
+        try {
+            return board[x][y];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new java.lang.IllegalArgumentException(
+                    "Bad coordinates.");
+        }
     }
     
+    /**
+     * Sets a piece on the board
+     * @param x is row number stating from 0
+     * @param y is columns number starting from 0
+     * @param value 1 for white, -1 for black, 0 for empty
+     * @throws IllegalArgumentException if value is not 0, 1, or -1 or if the specified place is not on the board
+     */
     public void setBoardXY(int x, int y, int value) {
-        board[x][y] = value;
+        if (value != 1 && value != -1 && value != 0) {
+            throw new java.lang.IllegalArgumentException(
+                    "Only values 0, 1, and -1 allowed.");
+        }
+        try {
+            board[x][y] = value;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new java.lang.IllegalArgumentException(
+                    "Bad coordinates.");
+        }
+        
     }
     
     

@@ -8,7 +8,7 @@ import reversi.game.Game;
 import reversi.game.Player;
 
 /**
- *
+ * A MCTS bot that chooses moves to a given game
  * @author Valhe Kouneli
  */
 public class MCTSBot implements Player {
@@ -31,7 +31,7 @@ public class MCTSBot implements Player {
      * Chooses a move to play in the given game situation
      * based on Monte Carlo Tree Search algorithm.
      * @param game some game situation where it's the MCTSBot's turn
-     * @return 
+     * @return the chosen move
      */
     @Override
     public Object getNextMove(Game game) {
