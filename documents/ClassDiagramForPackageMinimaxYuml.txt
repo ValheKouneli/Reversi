@@ -1,4 +1,0 @@
-<img src="http:%2F%2Fyuml.me%2Fdiagram%2Fscruffy%2Fclass%2F
-[<<AI>>;+makeNextMove]^-.-[MinimaxAI], [<<AI>>;+makeNextMove]uses -.->[<<Game>>],
-[<<Evaluator>>;+eval]^-.-[ReversiEvaluator], [MinimaxAI]uses -.->[Minimax],
-[MinimaxAI]++-0..1[<<Evaluator>>;+eval], [<<Evaluator>>;+eval]uses -.->[<<Game>>]">
