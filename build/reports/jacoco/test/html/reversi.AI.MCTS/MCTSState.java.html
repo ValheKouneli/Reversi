@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MCTSState.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Reversi</a> &gt; <a href="index.source.html" class="el_package">reversi.AI.MCTS</a> &gt; <span class="el_source">MCTSState.java</span></div><h1>MCTSState.java</h1><pre class="source lang-java linenums">package reversi.AI.MCTS;
+
+import java.util.Random;
+import reversi.game.Game;
+import reversi.data_structures.List;
+
+/**
+ * Stores information about nodes used in Monte Carlo Tree Search
+ * in class MCTSbot.
+ *
+ * @author Valhe Kouneli
+ */
+public class MCTSState {
+    private final Game game;
+    private int visitCount;
+    private int winScore;
+    private Object latestMove;
+<span class="fc" id="L18">    private static final Random RANDOM = new Random(System.currentTimeMillis());</span>
+    
+<span class="fc" id="L20">    public MCTSState() {</span>
+<span class="fc" id="L21">        latestMove = null;</span>
+<span class="fc" id="L22">        game = null;</span>
+<span class="fc" id="L23">        visitCount = 0;</span>
+<span class="fc" id="L24">        winScore = 0;</span>
+<span class="fc" id="L25">    }</span>
+<span class="fc" id="L26">    public MCTSState(Game game) {</span>
+<span class="fc" id="L27">        latestMove = null;</span>
+<span class="fc" id="L28">        this.game = game;</span>
+<span class="fc" id="L29">        visitCount = 0;</span>
+<span class="fc" id="L30">        winScore = 0;</span>
+<span class="fc" id="L31">    }</span>
+    
+<span class="fc" id="L33">    public MCTSState(Game game, Object latestMove) {</span>
+<span class="fc" id="L34">        this.latestMove = latestMove;</span>
+<span class="fc" id="L35">        this.game = game;</span>
+<span class="fc" id="L36">        visitCount = 0;</span>
+<span class="fc" id="L37">        winScore = 0;</span>
+<span class="fc" id="L38">    }</span>
+    
+    public void incrementVisit() {
+<span class="fc" id="L41">        visitCount++;</span>
+<span class="fc" id="L42">    }</span>
+    
+    public int getVisitCount() {
+<span class="fc" id="L45">        return visitCount;</span>
+    }
+    
+    public Object getLatestMove() {
+<span class="fc" id="L49">        return latestMove;</span>
+    }
+    
+    public void setLatestMove(Object move) {
+<span class="fc" id="L53">        latestMove = move;</span>
+<span class="fc" id="L54">    }</span>
+    public void addScore(int score) {
+<span class="fc" id="L56">        this.winScore += score;</span>
+<span class="fc" id="L57">    }</span>
+    
+    public int getWinScore() {
+<span class="fc" id="L60">        return winScore;</span>
+    }
+    
+    public void setWinScore(int winScore) {
+<span class="fc" id="L64">        this.winScore = winScore;</span>
+<span class="fc" id="L65">    }</span>
+    
+    public void setVisitCount(int visitCount) {
+<span class="fc" id="L68">        this.visitCount = visitCount;</span>
+<span class="fc" id="L69">    }</span>
+    
+    public Game getGame() {
+<span class="fc" id="L72">        return game;</span>
+    }
+    
+    public List&lt;MCTSState&gt; getAllPossibleStates() {
+<span class="fc" id="L76">        List&lt;MCTSState&gt; nextStates = new List&lt;&gt;();</span>
+<span class="fc" id="L77">        List&lt;Object&gt; moves = game.getMoves();</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        if (moves.isEmpty()) {</span>
+<span class="fc" id="L79">            Game copy = game.getCopy();</span>
+<span class="fc" id="L80">            copy.move(null);</span>
+<span class="fc" id="L81">            MCTSState state = new MCTSState(copy, null);</span>
+<span class="fc" id="L82">            nextStates.add(state);</span>
+<span class="fc" id="L83">        } else {</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">            for (int i=0; i&lt;moves.size(); i++) {</span>
+<span class="fc" id="L85">                Game copy = game.getCopy();</span>
+<span class="fc" id="L86">                copy.move(moves.get(i));</span>
+<span class="fc" id="L87">                MCTSState state = new MCTSState(copy, moves.get(i));</span>
+<span class="fc" id="L88">                nextStates.add(state);</span>
+            }
+        }
+<span class="fc" id="L91">        return nextStates;</span>
+    }
+    
+    public void randomPlay() {
+<span class="fc" id="L95">        List&lt;Object&gt; moves = game.getMoves();</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        if (moves.size() == 0) {</span>
+<span class="fc" id="L97">            game.move(null);</span>
+        } else {       
+<span class="fc" id="L99">            int i = RANDOM.nextInt(moves.size());</span>
+<span class="fc" id="L100">            game.move(moves.get(i));</span>
+        }
+<span class="fc" id="L102">    }</span>
+    
+    public MCTSState getCopy() {
+<span class="fc" id="L105">        MCTSState copy = new MCTSState(game.getCopy());</span>
+<span class="fc" id="L106">        copy.setVisitCount(visitCount);</span>
+<span class="fc" id="L107">        copy.setWinScore(winScore);</span>
+<span class="fc" id="L108">        copy.setLatestMove(latestMove);</span>
+<span class="fc" id="L109">        return copy;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

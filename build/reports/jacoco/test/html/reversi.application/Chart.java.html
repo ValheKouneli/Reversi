@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Chart.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Reversi</a> &gt; <a href="index.source.html" class="el_package">reversi.application</a> &gt; <span class="el_source">Chart.java</span></div><h1>Chart.java</h1><pre class="source lang-java linenums">package reversi.application;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.stage.Stage;
+import java.util.concurrent.CountDownLatch;
+import javafx.application.Platform;
+import javafx.stage.WindowEvent;
+import reversi.data_structures.IntPair;
+ 
+ 
+<span class="nc" id="L21">public class Chart extends Application {</span>
+    
+<span class="nc" id="L23">    public static final CountDownLatch LATCH = new CountDownLatch(1);</span>
+<span class="nc" id="L24">    public static Chart chart = null;</span>
+ 
+    @Override public void start(Stage stage) throws Exception {
+
+        //set title
+<span class="nc" id="L29">        stage.setTitle(&quot;MCTS Bot vs. Minimax Ai&quot;);</span>
+
+        //defining the axises
+<span class="nc" id="L32">        final NumberAxis xAxis = new NumberAxis();</span>
+<span class="nc" id="L33">        final NumberAxis yAxis = new NumberAxis();</span>
+<span class="nc" id="L34">        xAxis.setLabel(&quot;Minimax AI search depth&quot;);</span>
+<span class="nc" id="L35">        yAxis.setLabel(&quot;MCTS Bot win %&quot;);</span>
+
+        //creating the chart
+<span class="nc" id="L38">        final LineChart&lt;Number,Number&gt; lineChart = </span>
+                new LineChart&lt;&gt;(xAxis,yAxis);
+<span class="nc" id="L40">        lineChart.setTitle(&quot;MCTS Bot vs. Minimax Ai&quot;);</span>
+
+        //initialize data series
+<span class="nc" id="L43">        XYChart.Series series = new XYChart.Series();</span>
+<span class="nc" id="L44">        series.setName(&quot;MCTS Bot win percentage against &quot;</span>
+                + &quot;Minimax AI related to minimax search depth&quot;);
+        
+        HashMap&lt;Integer, IntPair&gt; collectedData;
+<span class="nc" id="L48">        collectedData = new HashMap&lt;&gt;();</span>
+        
+        try {
+<span class="nc" id="L51">            File results = new File(&quot;raw_data/legacy_results.txt&quot;);</span>
+            
+            try {
+<span class="nc" id="L54">                Scanner input = new Scanner(results);</span>
+<span class="nc" id="L55">                input.useDelimiter(&quot;\\s+&quot;);</span>
+
+                /*
+                * Read actual data from file. Chart data
+                */
+
+                int weight;
+                int depth;
+                int winPercentage;
+
+                try {
+<span class="nc bnc" id="L66" title="All 2 branches missed.">                    while(input.hasNextInt()) {</span>
+                        //System.out.println(&quot;Reading data...&quot;);
+<span class="nc" id="L68">                        weight = input.nextInt();</span>
+<span class="nc" id="L69">                        depth = input.nextInt();</span>
+<span class="nc" id="L70">                        winPercentage = input.nextInt();</span>
+                        //System.out.println(&quot;Read weight &quot; + weight + &quot;, &quot; +
+                        //        depth + &quot;, &quot; + winPercentage + &quot;%&quot;);
+<span class="nc bnc" id="L73" title="All 2 branches missed.">                        if (!collectedData.keySet().contains(depth)) {</span>
+                            //System.out.println(&quot;Inserting new depth&quot;);
+<span class="nc" id="L75">                            IntPair data = </span>
+<span class="nc" id="L76">                                    new IntPair((Integer) weight, weight*winPercentage);</span>
+<span class="nc" id="L77">                            collectedData.put(depth, data);</span>
+<span class="nc" id="L78">                        } else {</span>
+                            //System.out.println(&quot;Updating new depth&quot;);
+<span class="nc" id="L80">                            IntPair data = collectedData.get(depth);</span>
+<span class="nc" id="L81">                            collectedData.put((Integer) depth, </span>
+<span class="nc" id="L82">                                    new IntPair((int)data.getX()+weight, </span>
+<span class="nc" id="L83">                                            data.getY()+weight*winPercentage));</span>
+<span class="nc" id="L84">                        }</span>
+                    }
+<span class="nc" id="L86">                } catch (NoSuchElementException e) {</span>
+<span class="nc" id="L87">                    System.out.println(&quot;Result file formatting is corrupted.\n&quot;</span>
+                            + &quot;No chart is being drawn.&quot;);
+<span class="nc" id="L89">                    System.exit(1);</span>
+<span class="nc" id="L90">                }</span>
+
+
+<span class="nc" id="L93">            } catch (FileNotFoundException e) {</span>
+<span class="nc" id="L94">                System.out.println(&quot;Result file was not found.\n&quot; + </span>
+<span class="nc" id="L95">                        e.toString());</span>
+<span class="nc" id="L96">                System.exit(1);</span>
+<span class="nc" id="L97">            }</span>
+        
+<span class="nc" id="L99">        } catch (Exception e) {</span>
+<span class="nc" id="L100">            System.out.println(&quot;Could not create a file.\\n&quot;</span>
+<span class="nc" id="L101">                    + e.toString());</span>
+<span class="nc" id="L102">            System.exit(1);</span>
+<span class="nc" id="L103">        }</span>
+        
+        int avgPercentage;
+       
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        for (Integer key : collectedData.keySet()) {</span>
+<span class="nc" id="L108">            avgPercentage = collectedData.get(key).getY() /</span>
+<span class="nc" id="L109">                    collectedData.get(key).getX();</span>
+            //System.out.println(&quot;Charting value pair x: &quot; + key +
+            //       &quot;, y: &quot; + avgPercentage);
+<span class="nc" id="L112">            series.getData().add(new XYChart.Data(key, avgPercentage));</span>
+<span class="nc" id="L113">        }</span>
+
+
+<span class="nc" id="L116">        Scene scene  = new Scene(lineChart,800,600);</span>
+<span class="nc" id="L117">        lineChart.getData().add(series);</span>
+
+<span class="nc" id="L119">        stage.setScene(scene);</span>
+<span class="nc" id="L120">        stage.setOnCloseRequest((WindowEvent t) -&gt; {</span>
+<span class="nc" id="L121">            Platform.exit();</span>
+<span class="nc" id="L122">            System.exit(0);</span>
+<span class="nc" id="L123">        });</span>
+<span class="nc" id="L124">        stage.show();</span>
+<span class="nc" id="L125">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

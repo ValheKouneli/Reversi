@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MCTSbot.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Reversi</a> &gt; <a href="index.source.html" class="el_package">reversi.AI.MCTS</a> &gt; <span class="el_source">MCTSbot.java</span></div><h1>MCTSbot.java</h1><pre class="source lang-java linenums">package reversi.AI.MCTS;
+
+
+import reversi.data_structures.Node;
+import reversi.data_structures.Tree;
+import java.util.Random;
+import reversi.game.Game;
+import reversi.game.Player;
+
+/**
+ *
+ * @author Valhe Kouneli
+ */
+public class MCTSbot implements Player {
+    
+<span class="pc" id="L16">    private final Random random = new Random(System.currentTimeMillis());</span>
+    private final MCTShelper MCTShelper;
+    private final int timeToThink;
+    
+<span class="nc" id="L20">    public MCTSbot() {</span>
+<span class="nc" id="L21">        timeToThink = 1000;</span>
+<span class="nc" id="L22">        MCTShelper = new MCTShelper(random);</span>
+<span class="nc" id="L23">    }</span>
+    
+<span class="fc" id="L25">    public MCTSbot(int timeToThink) {</span>
+<span class="fc" id="L26">        this.timeToThink = timeToThink;</span>
+<span class="fc" id="L27">        MCTShelper = new MCTShelper(random);</span>
+<span class="fc" id="L28">    }</span>
+    
+    /**
+     * Chooses a move to play in the given game situation
+     * based on Monte Carlo Tree Search algorithm.
+     * @param game some game situation where it's the MCTSbot's turn
+     * @return 
+     */
+    @Override
+    public Object getNextMove(Game game) {
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (game.getMoves().isEmpty()) {</span>
+<span class="fc" id="L39">            return null;</span>
+        }
+        
+<span class="fc" id="L42">        long end = System.currentTimeMillis() + timeToThink;</span>
+        //how long to continue before selecting final move
+<span class="fc" id="L44">        MCTSState rootState = new MCTSState(game);</span>
+<span class="fc" id="L45">        Node root = new Node(rootState);</span>
+<span class="fc" id="L46">        Tree tree = new Tree(root);</span>
+        
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        while (System.currentTimeMillis() &lt; end) {</span>
+            
+<span class="fc" id="L50">            Node promisingNode = tree.getRoot();</span>
+            
+<span class="fc bfc" id="L52" title="All 2 branches covered.">            while (!promisingNode.getChildren().isEmpty()) {</span>
+<span class="fc" id="L53">                promisingNode = MCTShelper</span>
+<span class="fc" id="L54">                        .selectPromisingBranch(promisingNode);</span>
+            }
+
+            int playoutResult;
+            Node nodeToExplore;
+            
+<span class="fc bfc" id="L60" title="All 2 branches covered.">            if (!((MCTSState) promisingNode.getState()).getGame().gameIsOver()) {</span>
+<span class="fc" id="L61">                MCTShelper.expandNode(promisingNode);</span>
+<span class="fc" id="L62">                nodeToExplore = MCTShelper.getRandomChildNode(promisingNode);</span>
+<span class="fc" id="L63">                playoutResult = MCTShelper.simulateRandomPlayout(nodeToExplore);</span>
+            } else {
+<span class="fc" id="L65">                nodeToExplore = promisingNode;</span>
+<span class="fc" id="L66">                playoutResult = ((MCTSState) promisingNode.getState()).getGame().winner();</span>
+            }
+            
+<span class="fc" id="L69">            MCTShelper.backPropagation(nodeToExplore, playoutResult);</span>
+<span class="fc" id="L70">        }</span>
+        
+<span class="fc" id="L72">        Node winnerNode = MCTShelper.getChildWithMaxScore(tree.getRoot());</span>
+<span class="fc" id="L73">        MCTSState state = (MCTSState) winnerNode.getState();</span>
+<span class="fc" id="L74">        Object move = state.getLatestMove(); //null pointer exception</span>
+<span class="fc" id="L75">        return move;</span>
+    }
+    
+    @Override
+    public String name() {
+<span class="fc" id="L80">        return &quot;MCTS Bot, &quot; + timeToThink + &quot; ms time/move&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

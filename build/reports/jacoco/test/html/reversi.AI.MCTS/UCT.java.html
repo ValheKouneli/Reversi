@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UCT.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Reversi</a> &gt; <a href="index.source.html" class="el_package">reversi.AI.MCTS</a> &gt; <span class="el_source">UCT.java</span></div><h1>UCT.java</h1><pre class="source lang-java linenums">/*
+ * Implemented following the tutorial on http://www.baeldung.com/java-monte-carlo-tree-search
+ */
+package reversi.AI.MCTS;
+
+import reversi.data_structures.Node;
+import reversi.data_structures.List;
+
+/**
+ *
+ * @author Valhe Kouneli
+ */
+<span class="nc" id="L13">public class UCT {</span>
+    
+    /** Returns the UCT (Upper Confidence bound applied to Trees)
+     * value for the node whose information is given as parameter.
+     * 
+     * @param parentVisitCount  the node's parent's visitCount
+     * @param nodeWinScore the node's winScore
+     * @param nodeVisitCount the node's visitCount
+     * @return UCT value for the node calculated according to the UCT formula
+     */
+    public static double uctValue(int parentVisitCount,
+            double nodeWinScore, int nodeVisitCount) {
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (nodeVisitCount == 0) {</span>
+<span class="fc" id="L26">            return Integer.MAX_VALUE;</span>
+        } else {
+<span class="fc" id="L28">            return ((double) nodeWinScore / (double) nodeVisitCount) +</span>
+<span class="fc" id="L29">                    1.41 * Math.sqrt(Math.log(parentVisitCount) / </span>
+                            (double) nodeVisitCount);
+        }
+    }
+    
+    public static double uctValue(Node node) {
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        if (node.getParent() == null) {</span>
+<span class="nc" id="L36">            throw new java.lang.NullPointerException(&quot;Node has no parent.&quot;);</span>
+        }
+<span class="fc" id="L38">        int parentVisitCount = ((MCTSState) node.getParent().getState()).getVisitCount();</span>
+<span class="fc" id="L39">        double nodeWinScore = ((MCTSState) node.getState()).getWinScore();</span>
+<span class="fc" id="L40">        int nodeVisitCount = ((MCTSState) node.getState()).getVisitCount();</span>
+<span class="fc" id="L41">        return uctValue(parentVisitCount, nodeWinScore, nodeVisitCount);</span>
+    }
+    
+    /** Returns the child with the best UCT value for the given node.
+     * 
+     * @param node  a node
+     * @return node's child node with the best UCT value out of all child nodes
+     */
+    public static Node getChildWithBestUCTValue(Node node) {
+<span class="fc" id="L50">        int parentVisitCount = ((MCTSState) node.getState()).getVisitCount();</span>
+<span class="fc" id="L51">        List&lt;Node&gt; children = node.getChildren();</span>
+<span class="fc" id="L52">        Node bestChild = null;</span>
+<span class="fc" id="L53">        double bestUCTvalue = Integer.MIN_VALUE;</span>
+        Node child;
+        double uctValue;
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        for (int i=0; i&lt;children.size(); i++) {</span>
+<span class="fc" id="L57">            child = children.get(i);</span>
+<span class="fc" id="L58">            uctValue = uctValue(parentVisitCount, ((MCTSState) child.getState()).getWinScore(), ((MCTSState) child.getState()).getVisitCount());</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            if (uctValue &gt; bestUCTvalue) {</span>
+<span class="fc" id="L60">                bestUCTvalue = uctValue;</span>
+<span class="fc" id="L61">                bestChild = child;</span>
+            }
+        }
+<span class="fc" id="L64">        return bestChild;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

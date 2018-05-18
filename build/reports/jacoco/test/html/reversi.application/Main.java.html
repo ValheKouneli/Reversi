@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Reversi</a> &gt; <a href="index.source.html" class="el_package">reversi.application</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package reversi.application;
+
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+import reversi.AI.MCTS.MCTSBot;
+import reversi.AI.minimax.MinimaxAI;
+import reversi.game.reversi.ReversiEvaluator;
+
+
+
+
+/**
+ *
+ * @author Valhe Kouneli
+ */
+<span class="nc" id="L23">public class Main {</span>
+
+    /**
+     * @param args the command line arguments
+     * @throws java.io.IOException
+     */
+    public static void main(String[] args) throws IOException {
+
+<span class="nc" id="L31">        final int DEFAULT_MAX_DEPTH = 5;</span>
+<span class="nc" id="L32">        final int DEFAULT_MIN_DEPTH = 4;</span>
+<span class="nc" id="L33">        final int DEFAULT_MATCH_NUMBER = 10;</span>
+<span class="nc" id="L34">        int maxDepth = DEFAULT_MAX_DEPTH;</span>
+<span class="nc" id="L35">        int minDepth = DEFAULT_MIN_DEPTH;</span>
+<span class="nc" id="L36">        int matchNumber = DEFAULT_MATCH_NUMBER;</span>
+        
+        /*
+        * Handle args
+        */
+        
+<span class="nc bnc" id="L42" title="All 5 branches missed.">        switch (args.length) {</span>
+        //currently set minDepth, maxDepth and matchNumber are ok
+            case 0:
+<span class="nc" id="L45">                break;</span>
+            case 1:
+                try {
+<span class="nc" id="L48">                    maxDepth = Integer.parseInt(args[0]);</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">                    if (maxDepth&lt;DEFAULT_MIN_DEPTH) {</span>
+<span class="nc" id="L50">                        throw new IllegalArgumentException(&quot;Max depth (given &quot;</span>
+                                + &quot;argument) must be at least &quot; +
+                                DEFAULT_MIN_DEPTH + &quot;.&quot;);
+                    }
+<span class="nc" id="L54">                } catch (NumberFormatException e) {</span>
+<span class="nc" id="L55">                    respondToBadArguments();</span>
+<span class="nc" id="L56">                }   break;</span>
+            case 2:
+                try {
+<span class="nc" id="L59">                    minDepth = Integer.parseInt(args[0]);</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">                    if (minDepth&lt;1 ) {</span>
+<span class="nc" id="L61">                        throw new IllegalArgumentException(&quot;Min depth (1st &quot;</span>
+                                + &quot;argument) must be at least 1.&quot;);
+                    }
+<span class="nc" id="L64">                    maxDepth = Integer.parseInt(args[1]);</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">                    if (maxDepth&lt;minDepth) {</span>
+<span class="nc" id="L66">                        throw new IllegalArgumentException(&quot;Max depth (2rd &quot;</span>
+                                + &quot;argument) must be greater than min depth &quot;
+                                + &quot;(1st argument).&quot;);
+                    }
+<span class="nc" id="L70">                } catch (NumberFormatException e) {</span>
+<span class="nc" id="L71">                    respondToBadArguments();</span>
+<span class="nc" id="L72">                }   break;</span>
+            case 3:
+                try {
+<span class="nc" id="L75">                    minDepth = Integer.parseInt(args[0]);</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">                    if (minDepth&lt;1 ) {</span>
+<span class="nc" id="L77">                        throw new IllegalArgumentException(&quot;Min depth (1st &quot;</span>
+                                + &quot;argument) must be at least 1.&quot;);
+                    }
+<span class="nc" id="L80">                    maxDepth = Integer.parseInt(args[1]);</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">                    if (maxDepth&lt;minDepth) {</span>
+<span class="nc" id="L82">                        throw new IllegalArgumentException(&quot;Max depth (2rd &quot;</span>
+                                + &quot;argument) must be greater than min depth &quot;
+                                + &quot;(1st argument).&quot;);
+                    }
+<span class="nc" id="L86">                    matchNumber = Integer.parseInt(args[2]);</span>
+<span class="nc bnc" id="L87" title="All 4 branches missed.">                    if (matchNumber &lt; 2 || matchNumber%2 == 1) {</span>
+<span class="nc" id="L88">                        throw new IllegalArgumentException(&quot;Match number (3rd &quot;</span>
+                                + &quot;argument) must be even and at least 2.&quot;);
+                    }
+<span class="nc" id="L91">                } catch (NumberFormatException e) {</span>
+<span class="nc" id="L92">                    respondToBadArguments();</span>
+<span class="nc" id="L93">                }   break;</span>
+            default:
+<span class="nc" id="L95">                respondToBadArguments();</span>
+                break;
+        }
+        
+<span class="nc" id="L99">        playBotsAgainstEachOtherAndRecord(minDepth, maxDepth, matchNumber);</span>
+            
+<span class="nc" id="L101">        printLatestResults();</span>
+        
+<span class="nc" id="L103">        javafx.application.Application.launch(Chart.class);</span>
+
+<span class="nc" id="L105">    }</span>
+    
+    /*
+    * Go through all different depths and make Minimax AI and MCTS Bot
+    * play against each other 'matchNumber' amount of times.
+    */
+    private static void playBotsAgainstEachOtherAndRecord(int minDepth, 
+            int maxDepth, int matchNumber) {
+
+        try {
+<span class="nc" id="L115">            PrintWriter writerNew = new PrintWriter(new BufferedWriter(</span>
+                new FileWriter(&quot;raw_data/latest_results.txt&quot;, false)));
+<span class="nc" id="L117">            PrintWriter writerAppend = new PrintWriter(new BufferedWriter(</span>
+                new FileWriter(&quot;raw_data/legacy_results.txt&quot;, true)));
+            
+<span class="nc bnc" id="L120" title="All 2 branches missed.">            for (int depth = minDepth; depth&lt;=maxDepth; depth++) {</span>
+                //create MinimaxBot
+<span class="nc" id="L122">                MinimaxAI minimax = new MinimaxAI(new ReversiEvaluator(), depth);</span>
+                //create 'timing' to record MinimaxBot's average move time
+<span class="nc" id="L124">                RecordMoveTimeMinimax timing = new RecordMoveTimeMinimax(minimax);</span>
+
+<span class="nc" id="L126">                int avgTime = timing.record(true);</span>
+                //print Minimax Bot's avg move time
+<span class="nc" id="L128">                System.out.println(timing.toString());</span>
+
+                //create MCTS Bot
+<span class="nc" id="L131">                MCTSBot mcts = new MCTSBot(avgTime);</span>
+
+                //create 'score' for keeping score on
+                //how the bots perform against each other
+<span class="nc" id="L135">                ScoreKeeper score = new ScoreKeeper(minimax, mcts);</span>
+
+                //play 'matchNumber' of matches
+<span class="nc bnc" id="L138" title="All 2 branches missed.">                for (int i=0; i&lt;matchNumber/2; i++) {</span>
+<span class="nc" id="L139">                    score.playSwitchingColors(true);</span>
+                }
+
+                //prints the results for this depth
+<span class="nc" id="L143">                System.out.println(score.toString());</span>
+                
+                //writes the results in file
+<span class="nc" id="L146">                int winPercentage = score.getMctsBotWins() * 100 / </span>
+<span class="nc" id="L147">                        score.getTotalMatches();</span>
+                
+<span class="nc" id="L149">                record(writerNew, matchNumber, depth, winPercentage);</span>
+<span class="nc" id="L150">                record(writerAppend, matchNumber, depth, winPercentage);</span>
+            }
+            
+<span class="nc" id="L153">            writerNew.close();</span>
+<span class="nc" id="L154">            writerAppend.close();</span>
+<span class="nc" id="L155">        } catch (IOException e) {</span>
+<span class="nc" id="L156">            System.out.println(&quot;Writing to file did not succeed.\n +&quot;</span>
+                    + &quot; e.toString()&quot;);
+<span class="nc" id="L158">        } </span>
+<span class="nc" id="L159">    }</span>
+    
+    private static void printLatestResults() {
+<span class="nc" id="L162">        System.out.println(&quot;MCTS Bot win percentages\n&quot; +</span>
+                &quot;against Minimax Bot with\n&quot;);
+        
+<span class="nc" id="L165">        File results = new File(&quot;raw_data/latest_results.txt&quot;);</span>
+<span class="nc bnc" id="L166" title="All 2 branches missed.">        if(results.isFile()) { </span>
+            try {
+<span class="nc" id="L168">                Scanner input = new Scanner(results);</span>
+<span class="nc" id="L169">                input.useDelimiter(&quot;\\s+&quot;);</span>
+
+                try {
+<span class="nc bnc" id="L172" title="All 2 branches missed.">                    while(input.hasNextInt()) {</span>
+<span class="nc" id="L173">                        input.nextInt();</span>
+<span class="nc" id="L174">                        System.out.println(&quot;depth &quot; + input.nextInt() + &quot;: &quot; +</span>
+<span class="nc" id="L175">                        &quot;win percentage &quot; + input.nextInt() + &quot;%&quot;);</span>
+                    }
+<span class="nc" id="L177">                } catch (NoSuchElementException e) {</span>
+<span class="nc" id="L178">                    System.out.println(&quot;Result file formatting is corrupted.&quot;);</span>
+<span class="nc" id="L179">                }</span>
+ 
+<span class="nc" id="L181">            } catch (FileNotFoundException e) {</span>
+<span class="nc" id="L182">                System.out.println(&quot;Could not find the result file.\n&quot; +</span>
+<span class="nc" id="L183">                        e.toString());</span>
+<span class="nc" id="L184">            }</span>
+        } else {
+<span class="nc" id="L186">            throw new java.lang.IllegalStateException(&quot;There should be a &quot;</span>
+                    + &quot;result file to read.&quot;);
+        }
+<span class="nc" id="L189">    }</span>
+    
+    private static void respondToBadArguments() {
+<span class="nc" id="L192">        String instructions = &quot;Program takes 0-3 arguments. &quot;</span>
+                        + &quot;Arguments must be integers.&quot;;
+<span class="nc" id="L194">        throw new IllegalArgumentException(instructions);</span>
+    }
+
+    /*
+    * writes results to file with given writer
+    */
+    private static void record(PrintWriter writer, 
+            int matchNumber, int depth, int winPercentage) {
+<span class="nc" id="L202">        writer.print(Integer.toString(matchNumber));</span>
+<span class="nc" id="L203">        writer.print(&quot; &quot;);</span>
+<span class="nc" id="L204">        writer.print(Integer.toString((depth)));</span>
+<span class="nc" id="L205">        writer.print(&quot; &quot;);</span>
+<span class="nc" id="L206">        writer.print(Integer.toString(winPercentage));</span>
+<span class="nc" id="L207">        writer.print(&quot;\n&quot;);</span>
+<span class="nc" id="L208">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

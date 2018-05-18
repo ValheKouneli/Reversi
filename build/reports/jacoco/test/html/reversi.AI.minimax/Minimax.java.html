@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Minimax.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Reversi</a> &gt; <a href="index.source.html" class="el_package">reversi.AI.minimax</a> &gt; <span class="el_source">Minimax.java</span></div><h1>Minimax.java</h1><pre class="source lang-java linenums">package reversi.AI.minimax;
+
+import reversi.game.Game;
+import reversi.data_structures.List;
+
+
+/**
+ *
+ * @author aepiiroi
+ */
+public class Minimax {
+    
+    private Object bestMove;
+    
+<span class="fc" id="L15">    public Minimax() {</span>
+<span class="fc" id="L16">        bestMove = null;</span>
+<span class="fc" id="L17">    }</span>
+    
+    public Object getBestMove() {
+<span class="fc" id="L20">        return bestMove;</span>
+    }
+    
+    public int minmax(Game game) {
+<span class="fc" id="L24">        return minmax(game, 0, Integer.MAX_VALUE, null);</span>
+    }
+    
+    public int minmax(Game game, int depth, int max_depth, Evaluator eval) {
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        if (game.gameIsOver()) {</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">            return (game.winner() == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE);</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        } else if (depth == max_depth) {</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">            if (eval == null) {</span>
+<span class="nc" id="L32">                throw new NullPointerException(&quot;Evaluator not set.&quot;);</span>
+            }
+<span class="fc" id="L34">            return eval.eval(game);</span>
+        } else {
+<span class="fc" id="L36">            List&lt;Object&gt; moves = game.getMoves();</span>
+<span class="fc" id="L37">            int bestSoFar =</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">                    (game.getTurn() == 1 ? Integer.MIN_VALUE : Integer.MAX_VALUE);</span>
+<span class="fc" id="L39">            Object bestMoveSoFar = null;</span>
+            
+<span class="fc bfc" id="L41" title="All 2 branches covered.">            for (int i=0; i&lt;moves.size(); i++) {</span>
+<span class="fc" id="L42">                Game copy = game.getCopy();</span>
+<span class="fc" id="L43">                copy.move(moves.get(i));</span>
+<span class="fc" id="L44">                int value = minmax(copy, depth+1, max_depth, eval);</span>
+<span class="fc bfc" id="L45" title="All 6 branches covered.">                if (game.getTurn() == 1 ? value&gt;bestSoFar : value&lt;bestSoFar) {</span>
+<span class="fc" id="L46">                    bestSoFar = value;</span>
+<span class="fc" id="L47">                    bestMoveSoFar = moves.get(i);</span>
+                }
+            }
+<span class="fc bfc" id="L50" title="All 2 branches covered.">            if (depth==0) {</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">                if (bestMoveSoFar == null) {</span>
+<span class="fc" id="L52">                    bestMoveSoFar = moves.get(0);</span>
+                }
+<span class="fc" id="L54">                bestMove = bestMoveSoFar;</span>
+            }
+<span class="fc" id="L56">            return bestSoFar;</span>
+        }
+    }
+    
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

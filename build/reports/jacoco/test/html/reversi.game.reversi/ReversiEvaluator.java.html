@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReversiEvaluator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Reversi</a> &gt; <a href="index.source.html" class="el_package">reversi.game.reversi</a> &gt; <span class="el_source">ReversiEvaluator.java</span></div><h1>ReversiEvaluator.java</h1><pre class="source lang-java linenums">
+package reversi.game.reversi;
+import reversi.AI.minimax.Evaluator;
+
+/**
+ * This evaluator evaluates the Reversi game situation by giving values to one's
+ * own pieces based on their position on the board. Corners are most valuable,
+ * and places next to corners have negative value. Sides are the second best
+ * place to be. If the game is has continued over 40 moves, all positions have
+ * equal value.
+ * 
+ * @author Valhe Kouneli
+ */
+<span class="fc" id="L14">public class ReversiEvaluator implements Evaluator {</span>
+
+    /** Returns positive number value for game situations that are good for
+     * white and negative values for situations that are good for black.
+     * The bigger the absolute value of the number is, the better it is for
+     * that player.
+     *
+     * @param game  object of the type Game
+     * @return  evaluated value of the game situation
+     */
+    @Override
+    public int eval(Object game) {
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        if (!Reversi.class.isInstance(game)) {</span>
+<span class="fc" id="L27">            throw new java.lang.IllegalArgumentException(</span>
+                    &quot;This evaluator evaluates only Reversi games.&quot;);
+        }
+<span class="fc" id="L30">        Reversi reversi = (Reversi) game;</span>
+<span class="fc" id="L31">        ReversiBoard board = reversi.getBoardCopy();</span>
+<span class="fc" id="L32">        int turnNumber = reversi.getTurnNumber();</span>
+        int piece;
+<span class="fc" id="L34">        int eval = 0;</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        for (int i=0; i&lt;8; i++) {</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">            for (int j=0; j&lt;8; j++) {</span>
+<span class="fc" id="L37">                piece = board.getBoardXY(i, j);</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">                if (turnNumber &lt; 58) {</span>
+<span class="fc bfc" id="L39" title="All 8 branches covered.">                    if ((i==0 || i==7) &amp;&amp; (j==0 || j==7)) { //corner</span>
+<span class="fc" id="L40">                        eval += piece * 1000;</span>
+//                    } else if (((i==0 || i==7) &amp;&amp; (j==1 || j==6)) ||//next to corner
+//                               ((i==1 &amp;&amp; i==6) &amp;&amp; (j==0 || j==1 || j==6 || j==7))) {
+//                        eval += piece * (-90); 
+<span class="fc bfc" id="L44" title="All 8 branches covered.">                    } else if (i==0 || i==7 || j==0 || j==7) { //side</span>
+<span class="fc" id="L45">                        eval += piece * 50;</span>
+                    } else { //middle
+<span class="fc" id="L47">                        eval += piece * 1;</span>
+                    }
+                } else {
+<span class="fc" id="L50">                    eval += piece;</span>
+                }
+                
+            }
+        }
+<span class="fc" id="L55">        return eval;</span>
+    }
+    
+    @Override
+    public String name() {
+<span class="fc" id="L60">        return &quot;GoodEvaluator&quot;;</span>
+    }
+
+    @Override
+    public Class getGameType() {
+<span class="fc" id="L65">        return Reversi.class;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

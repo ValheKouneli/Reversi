@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ScoreKeeper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Reversi</a> &gt; <a href="index.source.html" class="el_package">reversi.application</a> &gt; <span class="el_source">ScoreKeeper.java</span></div><h1>ScoreKeeper.java</h1><pre class="source lang-java linenums">package reversi.application;
+
+import reversi.AI.MCTS.MCTSBot;
+import reversi.AI.minimax.MinimaxAI;
+import reversi.game.Game;
+import reversi.game.Match;
+import reversi.game.reversi.Reversi;
+/**
+ *
+ * @author Valhe Kouneli
+ */
+public class ScoreKeeper {
+    
+    private int minimaxWins;
+    private int mctsBotWins;
+    private int totalMatches;
+    private long timePerMoveTotalMinimax;
+    private long timePerMoveTotalMCTS;
+    private final MinimaxAI minimaxAI;
+    private final MCTSBot mctsBot;
+    private final String minimaxAIName;
+    private final String mctsBotName;
+    
+<span class="fc" id="L24">    public ScoreKeeper(MinimaxAI minimaxAI, MCTSBot mctsBot) {</span>
+<span class="fc" id="L25">        minimaxWins = 0;</span>
+<span class="fc" id="L26">        mctsBotWins = 0;</span>
+<span class="fc" id="L27">        totalMatches = 0;</span>
+<span class="fc" id="L28">        this.minimaxAI = minimaxAI;</span>
+<span class="fc" id="L29">        this.mctsBot = mctsBot;</span>
+<span class="fc" id="L30">        minimaxAIName = minimaxAI.name();</span>
+<span class="fc" id="L31">        mctsBotName = mctsBot.name();</span>
+<span class="fc" id="L32">    }</span>
+    
+    public int getMinimaxWins() {
+<span class="nc" id="L35">        return minimaxWins;</span>
+    }
+    
+    public int getMctsBotWins() {
+<span class="nc" id="L39">        return mctsBotWins;</span>
+    }
+    
+    public int getTotalMatches() {
+<span class="nc" id="L43">        return totalMatches;</span>
+    }
+    
+    public String getMinimaxAIName() {
+<span class="nc" id="L47">        return minimaxAIName;</span>
+    }
+    
+    public String getMctsBotName() {
+<span class="nc" id="L51">        return mctsBotName;</span>
+    }
+    
+    public int getTimePerMoveMinimax() {
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (totalMatches == 0) {</span>
+<span class="fc" id="L56">            throw new java.lang.IllegalStateException(</span>
+                    &quot;Avg time/move asked before any matches are played.&quot;);
+        }
+<span class="fc" id="L59">        return (int) timePerMoveTotalMinimax / totalMatches;</span>
+    }
+    
+    public int getTimePerMoveMCTS() {
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (totalMatches == 0) {</span>
+<span class="fc" id="L64">            throw new java.lang.IllegalStateException(</span>
+                    &quot;Avg time/move asked before any matches are played.&quot;);
+        }
+<span class="fc" id="L67">        return (int) timePerMoveTotalMCTS / totalMatches;</span>
+    }
+    
+    public void playSwitchingColors(boolean print) {
+<span class="fc" id="L71">        Match matchA = new Match(&quot;Match no &quot; + (totalMatches + 1) +</span>
+                &quot; comparing MCTS Bot and Minimax AI, depth &quot; +
+<span class="fc" id="L73">                + minimaxAI.getDepth(), (Game) new Reversi(), </span>
+                minimaxAI, mctsBot);
+<span class="fc" id="L75">        matchA.playMatch(print);</span>
+<span class="fc" id="L76">        timePerMoveTotalMinimax += matchA.averageTimePerMovePlayer1();</span>
+<span class="fc" id="L77">        timePerMoveTotalMCTS += matchA.averageTimePerMovePlayer2();</span>
+<span class="fc" id="L78">        totalMatches++;</span>
+<span class="fc" id="L79">        keepScore(matchA.returnWinnerName(), print);</span>
+                
+<span class="fc" id="L81">        Match matchB = new Match(&quot;Match no &quot; + (totalMatches + 1) +</span>
+                &quot; comparing MCTS Bot and Minimax AI, depth &quot; +
+<span class="fc" id="L83">                + minimaxAI.getDepth(), (Game) new Reversi(), </span>
+                mctsBot, minimaxAI);
+<span class="fc" id="L85">        matchB.playMatch(print);</span>
+<span class="fc" id="L86">        timePerMoveTotalMinimax += matchA.averageTimePerMovePlayer2();</span>
+<span class="fc" id="L87">        timePerMoveTotalMCTS += matchA.averageTimePerMovePlayer1();</span>
+<span class="fc" id="L88">        totalMatches++;</span>
+<span class="fc" id="L89">        keepScore(matchB.returnWinnerName(), print);</span>
+<span class="fc" id="L90">    }</span>
+    
+    private void keepScore(String winnerName, boolean print) {
+        String winner;
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        if (winnerName.equals(minimaxAIName)) {</span>
+<span class="fc" id="L95">            winner = &quot;minimax&quot;;</span>
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">        } else if (winnerName.equals(mctsBotName)) {</span>
+<span class="fc" id="L97">            winner = &quot;mcts&quot;;</span>
+        } else {
+<span class="nc" id="L99">            winner = &quot;no winner&quot;;</span>
+        }
+        
+<span class="pc bpc" id="L102" title="4 of 10 branches missed.">            switch (winner) {</span>
+                case &quot;minimax&quot; :
+<span class="fc" id="L104">                    minimaxWins++;</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">                    if (print) {</span>
+<span class="fc" id="L106">                        System.out.println(&quot;Match #&quot; + totalMatches + &quot;, minimaxai won.&quot;);</span>
+                    }
+                    break;
+                case &quot;mcts&quot;:
+<span class="fc" id="L110">                    mctsBotWins++;</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">                    if (print) {</span>
+<span class="fc" id="L112">                        System.out.println(&quot;Match #&quot; + totalMatches + &quot;, mctsbot won.&quot;);</span>
+                    }
+                    break;
+                default:
+<span class="nc bnc" id="L116" title="All 2 branches missed.">                    if (print) {</span>
+<span class="nc" id="L117">                        System.out.println(&quot;Match #&quot; + totalMatches + &quot;, tied.&quot;);</span>
+                    }
+                    break;
+            }
+<span class="fc" id="L121">    }</span>
+    
+    @Override
+    public String toString() {
+<span class="fc bfc" id="L125" title="All 2 branches covered.">        if (totalMatches != 0) {</span>
+<span class="fc" id="L126">            return &quot;Victories out of &quot; + totalMatches + &quot; matches:\n&quot; +</span>
+<span class="fc" id="L127">                    mctsBot.name() + &quot; : &quot; + (int) (mctsBotWins * 100 / totalMatches) + </span>
+                    &quot;%\n&quot; +
+<span class="fc" id="L129">                    minimaxAI.name() + &quot; : &quot; + (int) (minimaxWins * 100 / totalMatches) + </span>
+                    &quot;%\n&quot;;
+        } else {
+<span class="fc" id="L132">            return &quot;Bots &quot; + mctsBot.name() + &quot; and &quot; + minimaxAI.name() +</span>
+                    &quot; have not been played any matches &quot; +
+                    &quot;against each other yet.\n&quot; +
+                    &quot;No score has yet been calculated.&quot;;
+        }
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

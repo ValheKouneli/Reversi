@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MinimaxAI.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Reversi</a> &gt; <a href="index.source.html" class="el_package">reversi.AI.minimax</a> &gt; <span class="el_source">MinimaxAI.java</span></div><h1>MinimaxAI.java</h1><pre class="source lang-java linenums">package reversi.AI.minimax;
+
+import reversi.game.Game;
+import reversi.game.Player;
+
+/**
+ * Chooses move to play in the given game using minimax to the set depth.
+ * Evaluator GameType is given in constructor.
+ * 
+ * @author Valhe Kouneli
+ */
+public class MinimaxAI implements Player {
+    
+    private final Evaluator eval;
+    private int depth;
+    private final Minimax minimax;
+    
+    /**
+     *
+     * @param eval evaluator of the same game type as this Player
+     */
+<span class="nc" id="L22">    public MinimaxAI(Evaluator eval) {</span>
+<span class="nc" id="L23">        this.eval = eval;</span>
+<span class="nc" id="L24">        depth = 5;</span>
+<span class="nc" id="L25">        minimax = new Minimax();</span>
+<span class="nc" id="L26">    }</span>
+    
+<span class="fc" id="L28">    public MinimaxAI(Evaluator eval, int depth) {</span>
+<span class="fc" id="L29">        this.eval = eval;</span>
+<span class="fc" id="L30">        this.depth = depth;</span>
+<span class="fc" id="L31">        minimax = new Minimax();</span>
+<span class="fc" id="L32">    }</span>
+    
+    public void setDepth(int depth) {
+<span class="nc" id="L35">        this.depth = depth;</span>
+<span class="nc" id="L36">    }</span>
+    
+    public int getDepth() {
+<span class="fc" id="L39">        return depth;</span>
+    }
+    
+    /**
+     * Chooses a move in the given game situation based on a minimax algorithm.
+     * @param game 
+     * @return  
+     */
+    @Override
+    public Object getNextMove(Game game) {
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (game.getMoves().size() == 0) {</span>
+<span class="fc" id="L50">            return null;</span>
+        } else {
+<span class="fc bfc" id="L52" title="All 2 branches covered.">            if (game.getClass() != eval.getGameType()) {</span>
+<span class="fc" id="L53">                throw new java.lang.IllegalArgumentException(</span>
+                        &quot;This MinimaxAI does not play games &quot;
+                                + &quot;of the given type.&quot;);
+            }
+        }
+<span class="fc" id="L58">        minimax.minmax(game, 0, depth, eval);</span>
+<span class="fc" id="L59">        return minimax.getBestMove();</span>
+    }
+    
+    @Override
+    public String name() {
+<span class="fc" id="L64">        return &quot;MinimaxAI (depth &quot; + depth + &quot;) + &quot; + eval.name();</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

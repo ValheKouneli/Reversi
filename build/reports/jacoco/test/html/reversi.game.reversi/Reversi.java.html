@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Reversi.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Reversi</a> &gt; <a href="index.source.html" class="el_package">reversi.game.reversi</a> &gt; <span class="el_source">Reversi.java</span></div><h1>Reversi.java</h1><pre class="source lang-java linenums">package reversi.game.reversi;
+
+import reversi.game.Game;
+import reversi.data_structures.IntPair;
+import reversi.data_structures.List;
+
+/**
+ *
+ * @author Valhe Kouneli
+ */
+public class Reversi implements Game {
+    
+ 
+    
+    private ReversiBoard board;
+    private int turn; //black = 1, white = -1
+    private int turnNumber;
+    private List&lt;Object&gt; getMovesCache;
+    private int lastTurnToAskMoves;
+    private boolean gameIsOverCache;
+    private int lastTurnToAskGameIsOver;
+    
+<span class="fc" id="L23">    public Reversi() {</span>
+<span class="fc" id="L24">        board = new ReversiBoard();</span>
+<span class="fc" id="L25">        turn = -1;</span>
+<span class="fc" id="L26">        turnNumber = 0;</span>
+<span class="fc" id="L27">        lastTurnToAskMoves = -1;</span>
+<span class="fc" id="L28">        getMovesCache = null;</span>
+<span class="fc" id="L29">        gameIsOverCache = false;</span>
+<span class="fc" id="L30">        lastTurnToAskGameIsOver = -1;</span>
+<span class="fc" id="L31">    }</span>
+    
+    public void setBoard(ReversiBoard board) {
+<span class="fc" id="L34">        this.board = board;</span>
+<span class="fc" id="L35">        int piecesOnBoard = 0;</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        for (int i=0; i&lt;8; i++) {</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">            for (int j=0; j&lt;8; j++) {</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">                if (board.getBoardXY(i, j) != 0) {</span>
+<span class="fc" id="L39">                    piecesOnBoard++;</span>
+                }
+            }
+        }
+<span class="fc" id="L43">        turnNumber = piecesOnBoard;</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        turn = turnNumber % 2 == 0 ? -1 : 1;</span>
+<span class="fc" id="L45">    }</span>
+    
+    @Override
+    public int getTurn() {
+<span class="fc" id="L49">        return turn;</span>
+    }
+    
+    @Override
+    public int getTurnNumber() {
+<span class="fc" id="L54">        return turnNumber;</span>
+    }
+    
+    
+    /**
+     * Returns a negative number if black is winning
+     * and positive if white is winning.
+     * @return (-1)*(number of black pieces)+(number of white pieces)
+     */
+    public int getScore() {
+<span class="fc" id="L64">        int score = 0;</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        for (int i=0; i&lt;8; i++) {</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            for (int j=0; j&lt;8; j++) {</span>
+<span class="fc" id="L67">                score += board.getBoardXY(i, j);</span>
+            }
+        }
+<span class="fc" id="L70">        return score;</span>
+    }
+    
+    public int getWinner() {
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (getScore() &gt; 0) {</span>
+<span class="nc" id="L75">            return 1;</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        } else if (getScore() &lt; 0 ){</span>
+<span class="nc" id="L77">            return -1;</span>
+        } else {
+<span class="nc" id="L79">            return 0;</span>
+        }
+    }
+    
+    /**
+     * Returns whether game is over or not.
+     * According to the Reversi rules, game is over if both players do not have
+     * any legal moves left.
+     * @return  is this game over
+     */
+    @Override
+    public boolean gameIsOver() {
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        if (lastTurnToAskGameIsOver == turnNumber) {</span>
+<span class="fc" id="L92">            return gameIsOverCache;</span>
+        }
+<span class="fc" id="L94">        boolean currentPlayerCanNotMove = getMoves().isEmpty();</span>
+<span class="fc" id="L95">        turn *= -1; //change turn temporarily</span>
+<span class="fc" id="L96">        turnNumber++; //change turn number temporarily</span>
+<span class="fc" id="L97">        boolean nextPlayerCanNotMove = getMoves(false).isEmpty();</span>
+<span class="fc" id="L98">        turn *= -1; //change turn back</span>
+<span class="fc" id="L99">        turnNumber--; //change turn number back;</span>
+        
+        
+<span class="fc bfc" id="L102" title="All 4 branches covered.">        boolean gameIsOver = currentPlayerCanNotMove &amp;&amp; nextPlayerCanNotMove;</span>
+<span class="fc" id="L103">        lastTurnToAskGameIsOver = turnNumber;</span>
+<span class="fc" id="L104">        gameIsOverCache = gameIsOver;</span>
+<span class="fc" id="L105">        return gameIsOver;</span>
+    }
+    
+    @Override
+    public Reversi getCopy() {
+<span class="fc" id="L110">        Reversi copy = new Reversi();</span>
+<span class="fc" id="L111">        ReversiBoard boardCopy = board.getCopy();</span>
+<span class="fc" id="L112">        copy.setBoard(boardCopy);</span>
+<span class="fc" id="L113">        return copy;</span>
+    }
+    
+    @Override
+    public List&lt;Object&gt; getMoves() {
+<span class="fc" id="L118">        return getMoves(true);</span>
+    }
+    
+    /**
+     * Returns legal moves in this game situation
+     * and puts them in the getMovesCache if that option is chosen.
+     * @param cache whether to save result in the cache or not
+     * @return legal moves in this game situation
+     */
+    protected List&lt;Object&gt; getMoves(boolean cache) {
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        if (cache) {</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">            if (lastTurnToAskMoves == turnNumber) {</span>
+<span class="fc" id="L130">                return getMovesCache;</span>
+            }
+        }
+
+<span class="fc" id="L134">        List&lt;Object&gt; availableMoves = new List&lt;&gt;();</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">        for (int i=0; i&lt;8; i++) {</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">            for (int j=0; j&lt;8; j++) {</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">                if (moveIsLegal(board, turn, i, j)) {</span>
+<span class="fc" id="L138">                    availableMoves.add(new IntPair(i, j));</span>
+                }
+            }
+        }
+        
+<span class="fc bfc" id="L143" title="All 2 branches covered.">        if (cache) {</span>
+<span class="fc" id="L144">            getMovesCache = availableMoves;</span>
+<span class="fc" id="L145">            lastTurnToAskMoves = turnNumber;</span>
+        }
+        
+<span class="fc" id="L148">        return availableMoves;</span>
+    }
+    
+    protected boolean moveIsLegal(ReversiBoard board, int turn, int x, int y) {
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        if (board.getBoardXY(x, y) != 0) {</span>
+<span class="fc" id="L153">            return false;</span>
+        }
+<span class="fc" id="L155">        return ReverseHelper.reverse(board, turn, x, y, true);</span>
+    }
+    
+    @Override
+    public String toString() {
+<span class="fc" id="L160">        String temp = &quot;&quot;;</span>
+<span class="fc" id="L161">        String boardString = board.toString();</span>
+<span class="fc bfc" id="L162" title="All 2 branches covered.">        if (!gameIsOver()) {</span>
+<span class="fc" id="L163">            temp += &quot;Turn #&quot; + turnNumber + &quot;\n&quot;;</span>
+<span class="fc" id="L164">            temp += &quot;It's &quot; + getPlayer(getTurn()) + &quot;'s turn.\n&quot;;</span>
+<span class="fc" id="L165">            temp += &quot;\n&quot;;</span>
+<span class="fc" id="L166">            temp += boardString;</span>
+        } else {
+<span class="fc" id="L168">            int score = getScore();</span>
+<span class="fc bfc" id="L169" title="All 2 branches covered.">            int points = score &lt; 0 ? score*-1 : score;</span>
+<span class="fc" id="L170">            temp += boardString;</span>
+<span class="fc" id="L171">            temp += &quot;Winner is &quot; + getPlayer(score) + </span>
+                    &quot; with &quot; + points + &quot; points.\n&quot;;
+        }
+<span class="fc" id="L174">        return temp;</span>
+    }
+    
+    private static String getPlayer(int i) {
+<span class="fc bfc" id="L178" title="All 2 branches covered.">        if (i&lt;0) {</span>
+<span class="fc" id="L179">            return &quot;black&quot;;</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">        } else if (i&gt;0) {</span>
+<span class="fc" id="L181">            return &quot;white&quot;;</span>
+        } else {
+<span class="fc" id="L183">            return &quot;no one&quot;;</span>
+        }
+    }
+    
+    /**
+     * Makes the suggested move and changes turn if it is legal;
+     * returns whether the move is legal.
+     * @param x row number of the move
+     * @param y column number of the move
+     * @return true if move is legal, false if not
+     */
+    public boolean move(int x, int y){
+        /**
+         * It's not allowed to play on an occupied space.
+         */
+<span class="pc bpc" id="L198" title="1 of 2 branches missed.">        if (board.getBoardXY(x, y) != 0) {</span>
+<span class="nc" id="L199">            return false;</span>
+        }
+        
+        /**
+         * If the move does not reverse any pieces of the opposing color,
+         * the move is not legal.
+         */
+
+<span class="fc" id="L207">        boolean moveFlips = ReverseHelper.reverse(board, turn, x, y, false);</span>
+         
+<span class="fc bfc" id="L209" title="All 2 branches covered.">        if (moveFlips) {</span>
+<span class="fc" id="L210">            board.setBoardXY(x, y, turn);</span>
+<span class="fc" id="L211">            turnNumber++;</span>
+<span class="fc" id="L212">            turn *= -1;</span>
+<span class="fc" id="L213">            return true;</span>
+        } else {
+<span class="fc" id="L215">            return false;</span>
+        }   
+    }
+    
+    public ReversiBoard getBoardCopy() {
+<span class="fc" id="L220">        return board.getCopy();</span>
+    }
+
+    @Override
+    public boolean move(Object move) {
+<span class="fc" id="L225">        IntPair pair = (IntPair) move;</span>
+<span class="fc bfc" id="L226" title="All 2 branches covered.">        if (pair == null) {</span>
+<span class="pc bpc" id="L227" title="1 of 2 branches missed.">            if (getMoves().size() != 0) {</span>
+<span class="nc" id="L228">                throw new java.lang.IllegalArgumentException(</span>
+                        &quot;Null move given &quot; +
+                        &quot;when there are legal moves available.&quot;);
+            }
+<span class="fc" id="L232">            turnNumber++;</span>
+<span class="fc" id="L233">            turn *= -1;</span>
+<span class="fc" id="L234">            return true;</span>
+        }
+<span class="fc" id="L236">        return move(pair.getX(), pair.getY());</span>
+    }
+
+    @Override
+    public int winner() {
+<span class="fc bfc" id="L241" title="All 2 branches covered.">        if (!gameIsOver()) {</span>
+<span class="fc" id="L242">            throw new java.lang.IllegalStateException(</span>
+                    &quot;Winner asked but game is not over.&quot;);
+        }
+<span class="fc bfc" id="L245" title="All 2 branches covered.">        return getScore() &gt; 0 ? 1 : -1;</span>
+    }
+    
+ 
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

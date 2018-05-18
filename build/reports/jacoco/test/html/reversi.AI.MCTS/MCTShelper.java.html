@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MCTShelper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Reversi</a> &gt; <a href="index.source.html" class="el_package">reversi.AI.MCTS</a> &gt; <span class="el_source">MCTShelper.java</span></div><h1>MCTShelper.java</h1><pre class="source lang-java linenums">package reversi.AI.MCTS;
+
+import reversi.data_structures.Node;
+import java.util.Random;
+import reversi.data_structures.List;
+
+/**
+ *
+ * @author Valhe Kouneli
+ */
+public class MCTShelper {
+    
+    private final Random random;
+    
+<span class="fc" id="L15">    public MCTShelper(Random random) {</span>
+<span class="fc" id="L16">        this.random = random;</span>
+<span class="fc" id="L17">    }</span>
+    
+<span class="fc" id="L19">    public MCTShelper() {</span>
+<span class="fc" id="L20">        this.random = new Random(System.currentTimeMillis());</span>
+<span class="fc" id="L21">    }</span>
+    
+    protected Node getRandomChildNode(Node node) {
+<span class="fc" id="L24">        int size = node.getChildren().size();</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (size &gt; 0) {</span>
+<span class="fc" id="L26">            int i = random.nextInt(size);</span>
+<span class="fc" id="L27">            return node.getChildren().get(i);</span>
+        } else {
+<span class="fc" id="L29">            throw new java.lang.IllegalArgumentException(</span>
+                    &quot;random child node asked from a node without childen&quot;);
+        }
+    }
+
+    protected Node getChildWithMaxScore(Node node) {
+<span class="fc" id="L35">        List&lt;Node&gt; children = node.getChildren();</span>
+<span class="fc" id="L36">        double bestScore = Integer.MIN_VALUE;</span>
+<span class="fc" id="L37">        Node bestChild = null;</span>
+        Node child;
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        for (int i = 0; i &lt; children.size(); i++) {</span>
+<span class="fc" id="L40">            child = children.get(i);</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">            if (((MCTSState)child.getState()).getWinScore() &gt; bestScore) {</span>
+<span class="fc" id="L42">                bestScore = ((MCTSState) child.getState()).getWinScore();</span>
+<span class="fc" id="L43">                bestChild = child;</span>
+            }
+        }
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (bestChild == null) {</span>
+<span class="fc" id="L47">            return getRandomChildNode(node);</span>
+        }
+<span class="fc" id="L49">        return bestChild;</span>
+    }
+
+    /**
+     * @param rootNode a node
+     * @return if node has children, child with best UCT value; else node itself
+     */
+    protected Node selectPromisingBranch(Node rootNode) {
+<span class="fc" id="L57">        Node node = rootNode;</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        if (!node.getChildren().isEmpty()) {</span>
+<span class="fc" id="L59">            node = UCT.getChildWithBestUCTValue(node);</span>
+        }
+<span class="fc" id="L61">        return node;</span>
+    }
+
+    protected int simulateRandomPlayout(Node node) {
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (node == null) {</span>
+<span class="nc" id="L66">            throw new java.lang.NullPointerException(&quot;node was null&quot;);</span>
+        }
+<span class="fc" id="L68">        boolean gameIsOver = ((MCTSState) node.getState()).getGame().gameIsOver();</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        if (gameIsOver &amp;&amp;</span>
+<span class="fc" id="L70">                ((MCTSState) node.getState()).getGame().getTurn()*(-1) ==</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">                ((MCTSState) node.getState()).getGame().winner()) {</span>
+<span class="fc" id="L72">            ((MCTSState) node.getParent().getState()).setWinScore(Integer.MIN_VALUE);</span>
+            //if the last move was made by the player who won,
+            //the previous move was indefinitely bad
+<span class="fc" id="L75">            return ((MCTSState) node.getState()).getGame().winner();</span>
+        } else {
+<span class="fc" id="L77">            MCTSState tempState = ((MCTSState) node.getState()).getCopy();</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">            while (!gameIsOver) {</span>
+<span class="fc" id="L79">                tempState.randomPlay();</span>
+<span class="fc" id="L80">                gameIsOver = tempState.getGame().gameIsOver();</span>
+            }
+<span class="fc" id="L82">            return tempState.getGame().winner();</span>
+        }
+    }
+
+    protected void backPropagation(Node nodeToExplore, int winner) {
+<span class="fc" id="L87">        Node tempNode = nodeToExplore;</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        while (tempNode != null) {</span>
+<span class="fc" id="L89">            ((MCTSState) tempNode.getState()).incrementVisit();</span>
+            //if node's turn is different from who won a game following it,
+            //increment winScore
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            if (((MCTSState) tempNode.getState()).getGame().getTurn() * (-1) == winner) {</span>
+<span class="fc" id="L93">                ((MCTSState) tempNode.getState()).addScore(1);</span>
+            }
+<span class="fc" id="L95">            tempNode = tempNode.getParent();</span>
+        }
+<span class="fc" id="L97">    }</span>
+
+    protected void expandNode(Node node) {
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        if (node.getChildren().isEmpty()) {</span>
+<span class="fc" id="L101">            List&lt;MCTSState&gt; possibleStates = ((MCTSState)node.getState()).getAllPossibleStates();</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">            for (int i = 0; i &lt; possibleStates.size(); i++) {</span>
+<span class="fc" id="L103">                MCTSState state = possibleStates.get(i).getCopy();</span>
+<span class="fc" id="L104">                Node newNode = new Node(state);</span>
+<span class="fc" id="L105">                newNode.setParent(node);</span>
+<span class="fc" id="L106">                node.addChild(newNode);</span>
+            }
+        }
+<span class="fc" id="L109">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

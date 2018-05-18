@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>List.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Reversi</a> &gt; <a href="index.source.html" class="el_package">reversi.data_structures</a> &gt; <span class="el_source">List.java</span></div><h1>List.java</h1><pre class="source lang-java linenums">package reversi.data_structures;
+
+
+/**
+ *
+ * @author Valhe Kouneli
+ * @param &lt;E&gt;
+ */
+public class List&lt;E&gt; {
+    private int size;
+    private int internalSize;
+    private Object[] list;
+    
+<span class="fc" id="L14">    public List() {</span>
+<span class="fc" id="L15">        list = new Object[2];</span>
+<span class="fc" id="L16">        internalSize = 2;</span>
+<span class="fc" id="L17">        size = 0;</span>
+<span class="fc" id="L18">    }</span>
+    
+    public void add(E point){
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        if (internalSize == size) {</span>
+<span class="fc" id="L22">            internalSize *= 2;</span>
+            Object[] newList;
+<span class="fc" id="L24">            newList = new Object[internalSize];</span>
+<span class="fc" id="L25">            System.arraycopy(list, 0, newList, 0, size);</span>
+<span class="fc" id="L26">            newList[size] = point;</span>
+<span class="fc" id="L27">            size++;</span>
+<span class="fc" id="L28">            list = newList;</span>
+<span class="fc" id="L29">        } else {</span>
+<span class="fc" id="L30">            list[size] = point;</span>
+<span class="fc" id="L31">            size++;</span>
+        }
+<span class="fc" id="L33">    }</span>
+    
+    public int size() {
+<span class="fc" id="L36">        return size;</span>
+    }
+
+    public E get(int i) {
+<span class="pc bpc" id="L40" title="2 of 4 branches missed.">        if (0&lt;= i &amp;&amp; i&lt;size) {</span>
+<span class="fc" id="L41">            return (E) list[i];</span>
+        } else {
+<span class="nc" id="L43">            throw new IndexOutOfBoundsException(&quot;for index &quot; + i);</span>
+        }
+    }
+    
+    public boolean isEmpty() {
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        return size == 0;</span>
+    }
+    
+    public boolean contains(E item) {
+<span class="fc" id="L52">        boolean contains = false;</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (int i=0; i&lt;size; i++) {</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">            if (list[i].equals(item)) {</span>
+<span class="fc" id="L55">                return true;</span>
+            }
+        }
+<span class="fc" id="L58">        return contains;</span>
+    }
+
+  
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RecordMoveTimeMinimax.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Reversi</a> &gt; <a href="index.source.html" class="el_package">reversi.application</a> &gt; <span class="el_source">RecordMoveTimeMinimax.java</span></div><h1>RecordMoveTimeMinimax.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package reversi.application;
+
+import reversi.AI.minimax.MinimaxAI;
+import reversi.game.Match;
+import reversi.game.reversi.Reversi;
+
+/**
+ *
+ * @author Valhe Kouneli
+ */
+public class RecordMoveTimeMinimax {
+    
+    private final MinimaxAI minimax;
+    private boolean recordingDone;
+    private int avgTime;
+            
+<span class="fc" id="L22">    public RecordMoveTimeMinimax(MinimaxAI minimax) {</span>
+<span class="fc" id="L23">        this.minimax = minimax;</span>
+<span class="fc" id="L24">        recordingDone = false;</span>
+<span class="fc" id="L25">        avgTime = 0;</span>
+<span class="fc" id="L26">    }</span>
+    
+    public int record() {
+<span class="fc" id="L29">        return record(false);</span>
+    }
+    
+    public int record(boolean print) {
+<span class="fc" id="L33">        return record(print, true);</span>
+    }
+    
+    public int record(boolean print, boolean printProgress) {
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        if (print) {</span>
+<span class="nc" id="L38">            System.out.println(&quot;Minimax is playing against itself. This might take a while.&quot;);</span>
+        }
+<span class="fc" id="L40">        Reversi game = new Reversi();</span>
+<span class="fc" id="L41">        Match match = new Match(&quot;Minimax with depth &quot; +</span>
+<span class="fc" id="L42">                minimax.getDepth() + &quot; against itself&quot;, game, minimax, minimax);</span>
+<span class="fc" id="L43">        match.playMatch(print, printProgress);</span>
+<span class="fc" id="L44">        avgTime = (int) match.averageTimePerMove();</span>
+<span class="fc" id="L45">        recordingDone = true;</span>
+<span class="fc" id="L46">        return avgTime;</span>
+    }
+    
+    public int avgTime() {
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (!recordingDone) {</span>
+<span class="fc" id="L51">            throw new java.lang.IllegalStateException(</span>
+                    &quot;Recording has not been done yet.&quot;);
+        }
+<span class="fc" id="L54">        return avgTime;</span>
+    }
+    
+    public String getMinimaxName() {
+<span class="nc" id="L58">        return minimax.name();</span>
+    }
+    
+    public int getMinimaxDepth() {
+<span class="fc" id="L62">        return minimax.getDepth();</span>
+    }
+    
+    @Override
+    public String toString() {
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (recordingDone) {</span>
+<span class="fc" id="L68">            return minimax.name() + &quot; has an average move time of &quot; + </span>
+                    avgTime + &quot; ms.&quot;;
+        } else {
+<span class="fc" id="L71">            return &quot;Recording average move time has not yet been done to &quot; + </span>
+<span class="fc" id="L72">                    minimax.name() + &quot;.&quot;;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
