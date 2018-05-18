@@ -8,7 +8,7 @@ public interface Evaluator {
     /**
      *
      * @param game
-     * @return
+     * @return number evaluation of the game situation
      */
     public int eval(Object game);
     public String name();

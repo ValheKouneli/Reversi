@@ -20,7 +20,7 @@ public class ReversiEvaluator implements Evaluator {
      *
      * @param game  object of the type Game
      * @return evaluated value of the game situation
-     * @throw IllegalArgumentException if the given game is not type Reversi
+     * @throws IllegalArgumentException if the given game is not type Reversi
      */
     @Override
     public int eval(Object game) {

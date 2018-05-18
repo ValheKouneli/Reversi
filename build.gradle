@@ -49,3 +49,8 @@ jar {
         attributes 'Main-Class': 'reversi.application.Main'
     }
 }
+
+javadoc {
+    source = sourceSets.main.allJava
+    classpath = configurations.compile
+}
