@@ -9,7 +9,7 @@ import reversi.AI.minimax.MinimaxAI;
 import reversi.game.reversi.Reversi;
 
 /**
- *
+ * Records how long the given Minimax Bot will take per move.
  * @author Valhe Kouneli
  */
 public class RecordMoveTimeMinimax {
@@ -24,14 +24,29 @@ public class RecordMoveTimeMinimax {
         avgTime = 0;
     }
     
+    /**
+     * Plays a match between between the bot and itself.
+     * @return average time the bot took per move
+     */
     public int record() {
         return record(false);
     }
     
+    /**
+     * Plays a match between between the bot and itself.
+     * @param print the match or not
+     * @return average time the bot took per move
+     */
     public int record(boolean print) {
         return record(print, false);
     }
     
+    /**
+     * Plays a match between between the bot and itself.
+     * @param print the match or not
+     * @param printProgress of the match or not
+     * @return average time the bot took per move
+     */
     public int record(boolean print, boolean printProgress) {
         if (print) {
             System.out.println("Minimax is playing against itself. This might take a while.");
@@ -61,6 +76,9 @@ public class RecordMoveTimeMinimax {
         return minimax.getDepth();
     }
     
+    /**
+     * @return the results of playing minimax against itself, represented as a string
+     */
     @Override
     public String toString() {
         if (recordingDone) {

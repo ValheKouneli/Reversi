@@ -5,7 +5,9 @@ import reversi.AI.minimax.MinimaxAI;
 import reversi.game.Game;
 import reversi.game.reversi.Reversi;
 /**
- *
+ * Makes minimax AI an MCTS bot play matches against each other
+ * and keeps record of how the matches went and how long they took per move
+ * on average.
  * @author Valhe Kouneli
  */
 public class ScoreKeeper {
@@ -66,6 +68,12 @@ public class ScoreKeeper {
         return (int) timePerMoveTotalMCTS / totalMatches;
     }
     
+    /**
+     * Plays two matches between the minimax AI and the MCTS bot;
+     * one where minimax AI is white and one where MCTS bot is white;
+     * saves results.
+     * @param print the matches or not
+     */
     public void playSwitchingColors(boolean print) {
         Match matchA = new Match("Match no " + (totalMatches + 1) +
                 " comparing MCTS Bot and Minimax AI, depth " +
@@ -119,6 +127,9 @@ public class ScoreKeeper {
             }
     }
     
+    /**
+     * @return the statistics and results of the matches played between the bots, represented as a string
+     */
     @Override
     public String toString() {
         if (totalMatches != 0) {

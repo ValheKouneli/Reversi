@@ -19,7 +19,9 @@ import reversi.game.reversi.ReversiEvaluator;
 
 
 /**
- *
+ * The program makes two bots play against each other with different
+ * search depths and prints the games and shows a graph about the collected
+ * statistics.
  * @author Valhe Kouneli
  */
 public class Main {

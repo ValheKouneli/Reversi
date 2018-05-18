@@ -4,6 +4,10 @@ import reversi.game.Game;
 import reversi.game.Player;
 import reversi.game.reversi.Reversi;
 
+/**
+ * Represents a single match between two players.
+ * @author Valhe Kouneli
+ */
 public class Match {
     
     private final Player player1;
@@ -46,14 +50,26 @@ public class Match {
         matchFinished = false;
     }
     
+    /**
+     * Plays a match between the two players.
+     */
     public void playMatch() {
         playMatch(false);
     }
     
+    /**
+     * Plays a match between the two players.
+     * @param print the match or not
+     */
     public void playMatch(boolean print) {
         playMatch(print, false);
     }
     
+    /**
+     * Plays a match between the two players.
+     * @param print the match or not
+     * @param printProgress of the match or not
+     */
     public void playMatch(boolean print, boolean printProgress) {
          long timeBeforeMatch = System.currentTimeMillis();
         long timeBeforeMove;
