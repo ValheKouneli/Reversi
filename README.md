@@ -67,6 +67,6 @@ For more help, see the files under ```/documentation``` and ```/build/docs```
 
 Reversi's method getMoves caches the moves into getMovesCache and returns it. It does not cache a copy of the returned list. The problem is that if the returned list is modified, the cached list changes as well. The program, in its current state however, does not modify the list it gets from Reversi.
 
-This could be fixed easily if List had a clone or getCopy method. Implementation is not easy, however, because the list would have to clone its contents; I have named my other cloning methods as getCopy and not clonable.
+This could be fixed easily if List had a clone or getCopy method. Implementation is not easy, however, because the list would have to clone its contents; I have named my other cloning methods as getCopy and not clone.
 
 Everything in package ```application``` is terrible, because I had so little time to implement them.
