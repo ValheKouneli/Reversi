@@ -17,17 +17,17 @@ public class List<E> {
         size = 0;
     }
     
-    public void add(E point){
+    public void add(E object){
         if (internalSize == size) {
             internalSize *= 2;
             Object[] newList;
             newList = new Object[internalSize];
             System.arraycopy(list, 0, newList, 0, size);
-            newList[size] = point;
+            newList[size] = object;
             size++;
             list = newList;
         } else {
-            list[size] = point;
+            list[size] = object;
             size++;
         }
     }
