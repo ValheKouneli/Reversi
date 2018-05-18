@@ -7,6 +7,8 @@ Unit test are made with JUnit. They don't cover package reversi.application, bec
 
 You can see the test resulsts and coverage report in ```/build/reports```.
 
+(Download the build to view the reports on your browser.)
+
 The test will take relatively long time to run (~ 1 min).
 
 Run tests with gradle test and (assuming the build is succesful) and check the coverage report in /build/reports/jacoco/test/html/index.html.

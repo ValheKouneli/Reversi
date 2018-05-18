@@ -9,7 +9,7 @@ After each depth, the program asks the results from the ScoreKeeper and writes t
 
 After doing all this for all the depths, the program reads the resuls from the new file and prints them. After that, it creates a line chart about the win percentages of mcts bot agaist minimax AI for different depths. The line chart data is read from the file that contains the old results too.
 
-See the class diagrams and javadoc for more detailed information about the implementation.
+Download the build to see the class diagrams and javadoc for more detailed information about the implementation.
 
 
 ## Sources
